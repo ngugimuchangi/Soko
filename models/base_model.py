@@ -31,35 +31,41 @@ class BaseModel:
                     setattr(key, value, self)
 
     def __str__(self):
-        """Returns a string representation of the instance
-        q
+        """ String representation method
+            Args: none
+            Return: string representation of the
+                    BaseModel instance
         """
-        cls = 
-        dictionary = self.__dict__.copy()
-        if '_sa_instance_state' in dictionary.keys():
-            del dictionary['_sa_instance_state']
-        return '[{}] ({}) {}'.format(cls, self.id, dictionary)
+        cls = self.__class__.__name__
+        obj_dict = self.__dict__.copy()
+        if '_sa_instance_state' in obj_dict.keys():
+            del obj_dict['_sa_instance_state']
+        return '[{}] ({}) {}'.format(cls, self.id, obj_dict)
 
     def save(self):
-        """Updates updated_at with current time when instance is changed"""
+        """ Method to update updated_at attribute
+            Args: none
+            Return: nothing
+        """
         from models import storage
         self.updated_at = datetime.now()
         storage.new(self)
         storage.save()
 
     def to_dict(self):
-        """Convert instance into dict format"""
-        dictionary = {}
-        dictionary.update(self.__dict__)
-        dictionary.update({'__class__':
-                          (str(type(self)).split('.')[-1]).split('\'')[0]})
-        dictionary['created_at'] = self.created_at.isoformat()
-        dictionary['updated_at'] = self.updated_at.isoformat()
-
+        """ Dictionary representation method
+            Args: none
+            Return: dictionary representation of
+                    instance
+        """
+        my_dict = self.__dict__.copy()
+        my_dict["__class__"] = self.__class__.__name__
+        my_dict["created_at"] = self.created_at.isoformat()
+        my_dict["updated_at"] = self.updated_at.isoformat()
         # delete _sa_instance_state from dictionary
-        if '_sa_instance_state' in dictionary.keys():
-            del dictionary['_sa_instance_state']
-        return dictionary
+        if '_sa_instance_state' in my_dict.keys():
+            del my_dict['_sa_instance_state']
+        return my_dict
 
     def delete(self):
         """Delete current instance from storage"""
