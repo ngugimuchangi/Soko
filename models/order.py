@@ -3,5 +3,8 @@
         Definition of Order class, it attributes,
         and methods
 """
-class Order:
+from models.base_model import Base, BaseModel
+
+
+class Order(Base, BaseModel):
     pass

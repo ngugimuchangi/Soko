@@ -5,5 +5,6 @@
 """
 from models.base_model import Base, BaseModel
 
+
 class SavedItem(Base, BaseModel):
     pass

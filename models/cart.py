@@ -3,5 +3,8 @@
         Definition of Cart class, it attributes,
         and methods
 """
-class Cart:
+from models.base_model import Base, BaseModel
+
+
+class Cart(Base, BaseModel):
     pass

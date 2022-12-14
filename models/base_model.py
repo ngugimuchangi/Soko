@@ -10,6 +10,7 @@ from uuid import uuid4
 
 Base = declarative_base()
 
+
 class BaseModel:
     """ Base Model
         Public instance attributes:
@@ -74,7 +75,7 @@ class BaseModel:
         my_dict["__class__"] = self.__class__.__name__
         my_dict["created_at"] = self.created_at.isoformat()
         my_dict["updated_at"] = self.updated_at.isoformat()
-        
+
         # delete _sa_instance_state from dictionary
         if '_sa_instance_state' in my_dict.keys():
             del my_dict['_sa_instance_state']

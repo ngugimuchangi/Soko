@@ -3,5 +3,8 @@
         Definition of PaymentDetail class, it attributes,
         and methods
 """
-class PaymentDetail:
+from models.base_model import Base, BaseModel
+
+
+class PaymentDetail(Base, BaseModel):
     pass

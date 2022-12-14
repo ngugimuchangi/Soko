@@ -5,5 +5,6 @@
 """
 from models.base_model import Base, BaseModel
 
+
 class Chat(Base, BaseModel):
     pass

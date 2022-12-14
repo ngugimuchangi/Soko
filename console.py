@@ -109,8 +109,10 @@ class HBNBCommand(Cmd):
         """
         classes = {'Base': BaseModel, 'Buyer': Buyer, 'Cart': Cart,
                    'Category': Category, 'Chat': Chat, 'Order': Order,
-                   'PaymentDetail': PaymentDetail, 'ProductImage': ProductImage,
-                   'Product': Product, 'Review': Review, 'SavedItem': SavedItem,
+                   'PaymentDetail': PaymentDetail,
+                   'ProductImage': ProductImage,
+                   'Product': Product, 'Review': Review,
+                   'SavedItem': SavedItem,
                    'Seller': Seller, 'ShippingAddress': ShippingAddress,
                    'SubCategory': SubCategory, 'Transaction': Transaction
                    }
@@ -149,7 +151,7 @@ class HBNBCommand(Cmd):
             obj_id = line.split()[1]
             for key in storage._FileStorage__objects.keys():
                 if storage._FileStorage__objects[key].id == obj_id:
-                    del(storage._FileStorage__objects[key])
+                    del storage._FileStorage__objects[key]
                     storage.save()
                     break
 

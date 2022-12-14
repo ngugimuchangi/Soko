@@ -3,5 +3,8 @@
         Definition of Category class, it attributes,
         and methods
 """
-class Category:
+from models.base_model import Base, BaseModel
+
+
+class Category(Base, BaseModel):
     pass
