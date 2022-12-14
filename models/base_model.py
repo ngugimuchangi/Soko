@@ -11,7 +11,19 @@ from uuid import uuid4
 Base = declarative_base()
 
 class BaseModel:
-    """Base model for all Soko classes"""
+    """ Base Model
+        Public instance attributes:
+            id (str): universally unique identifier (UUID) of the object
+            created_at (datetime): when the object was created
+            update_at (datetime): when the object was last updated
+
+        Public instance methods:
+            __init__: instantiation method
+            __str__: string representation method
+            save: update method
+            to_dict: dictionary conversion method
+            delete: deletes object from database storage
+    """
 
     # Common fields across tables
     id = Column(String(60), unique=True, nullable=False, primary_key=True)
@@ -62,12 +74,16 @@ class BaseModel:
         my_dict["__class__"] = self.__class__.__name__
         my_dict["created_at"] = self.created_at.isoformat()
         my_dict["updated_at"] = self.updated_at.isoformat()
+        
         # delete _sa_instance_state from dictionary
         if '_sa_instance_state' in my_dict.keys():
             del my_dict['_sa_instance_state']
         return my_dict
 
     def delete(self):
-        """Delete current instance from storage"""
+        """Delete current instance from storage
+           Args: None
+           Return: nothing
+        """
         from models import storage
         storage.delete(self)
