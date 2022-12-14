@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Database storage engine module
 """
-
+from dotenv import load_dotenv
 from models.base_model import Base, BaseModel
 from models.buyer import Buyer
 from models.cart import Cart
@@ -21,6 +21,7 @@ from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 
+load_dotenv()
 
 class DBStorage():
     """ Database engine class for interacting with the msql database"""
