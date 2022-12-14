@@ -46,6 +46,8 @@ class DBStorage():
 
     def all(self, cls=None):
         """ Queries current database session for all objects
+            belonging to a specific class if provided, else
+            all objects for every class
             Args:
                 cls: class of objects to return
             Return: dictionary of objects
