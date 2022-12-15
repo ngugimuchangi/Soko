@@ -38,9 +38,7 @@ class BaseModel:
         self.updated_at = datetime.now()
         if kwargs:
             for key, value in kwargs.items():
-                if key == 'updated_at' or key == 'created_at':
-                    value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-                if key != '__class__':
+                if key not in ['__class__', 'created_at', 'updated_at']:
                     setattr(key, value, self)
 
     def __str__(self):
@@ -53,7 +51,7 @@ class BaseModel:
         obj_dict = self.__dict__.copy()
         if '_sa_instance_state' in obj_dict.keys():
             del obj_dict['_sa_instance_state']
-        return '[{}] ({}) {}'.format(cls, self.id, obj_dict)
+        return "[{}] ({}) {}".format(cls, self.id, obj_dict)
 
     def save(self):
         """ Method to update updated_at attribute

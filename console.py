@@ -2,7 +2,6 @@
 """ Console Module """
 from cmd import Cmd
 from models import storage
-from models.base_model import BaseModel
 from models.buyer import Buyer
 from models.cart import Cart
 from models.category import Category
@@ -20,12 +19,12 @@ from models.transaction import Transaction
 import re
 
 
-class HBNBCommand(Cmd):
+class SokoConsole(Cmd):
     """ Command line interpreter class
         Private attributes:
             __classes: list of classes
         Public class attributes:
-            cmd.Comd.prompt: prompt to display for interactive mode
+            Cmd.prompt: prompt to display for interactive mode
         Public instance methods:
             Command methods:
                 do_create, do_show, do_destroy, do_upate, do_all, do_EOF,
@@ -33,99 +32,125 @@ class HBNBCommand(Cmd):
             Help methods:
                 help_create, help_show, help_destroy,help_update,
                 help_all, help_EOF, help_quit, help_help
+            static methods:
     """
 
-    Cmd.prompt = '(hbnb) '
-    __classes = ["BaseModel", "User", "State", "City",
-                 "Amenity", "Place", "Review"]
+    Cmd.prompt = '(soko) '
+
+    classes = {'Buyer': Buyer, 'Cart': Cart,
+               'Category': Category, 'Chat': Chat, 'Order': Order,
+               'PaymentDetail': PaymentDetail,
+               'ProductImage': ProductImage,
+               'Product': Product, 'Review': Review,
+               'SavedItem': SavedItem,
+               'Seller': Seller, 'ShippingAddress': ShippingAddress,
+               'SubCategory': SubCategory, 'Transaction': Transaction
+              }
 
     def default(self, line):
         """ Parse line to establish the command to exectue
             Args:
-                lien(str)
+                line(str): user input
             Return: execution method for command if it exists
         """
         cmds = {'all': self.do_all, 'create': self.do_create, 'show':
                 self.do_show, 'destroy': self.do_destroy, 'update':
                 self.do_update, 'count': self.do_count}
-        args = line.split()[1:]
-        cmd = line.split()[0].split('.')
-        if len(cmd) > 1:
-            my_cmd = cmd[1]
-            my_args = cmd[0]
-            if 'all' in my_cmd or 'create' in my_cmd:
-                my_match = re.search(r'\(\)$', cmd[1])
-                if my_match is not None:
-                    for i in range(len(args)):
-                        my_args += f" {args[i]}"
-                    return cmds[my_cmd.strip('()')](my_args)
-                else:
-                    print(f"** Unknown syntax: {line}")
-                    return
-            else:
-                my_match = re.search(r'\(.*\)', line)
-                if my_match is not None:
-                    my_args += f" {my_match.group().strip('()')}"
-                    my_args = re.sub(', ', ' ', my_args)
-                    my_args = re.sub('"', '', my_args)
-                    my_args = re.sub("'", '', my_args)
-                    my_cmd = my_cmd.split('(')[0]
-                else:
-                    print(f"** Unknown syntax: {line}")
-                    return
+        input = line.split()
+        cmd = input[0]
+        cmd = cmd.split('.')
+
+        if len(cmd) == 1:
+            cmd = cmd[0]
+            args = input[1:]
         else:
-            my_cmd = cmd[0]
-            my_args = ""
-            for i in range(len(args)):
-                my_args += f"{args[i]}"
-            my_args.split()
-        if my_cmd in cmds.keys():
-            return cmds[my_cmd](my_args)
-        else:
-            print(f"** Unknown syntax: {line}")
+            cmd_args = cmd[1]
+            match = re.search(r"\(.*\)$", cmd_args)
+            if not match:
+                print("**{} {}**".format("unknown syntax:", line))
+                return
+            cmd_args = cmd.replace("(", '').replace(")", '').split()
+            cmd = cmd_args[0]
+            args = cmd_args[1:]
+
+        if cmd not in cmds.keys():
+            print("**{} {}**".format("unknown syntax:", line))
+            return
+
+        args = ' '.join(args)
+        return cmds.get(cmd)(args)
 
     def do_count(self, line):
+        """ Count the number of saved instances
+            belonging to a specific class
+            Args:
+                line (str): class name of objects
+                            to count
         """
-        """
-        if line:
-            class_name = line.split()[0]
-            if class_name in HBNBCommand.__classes:
-                count = 0
-                for i in storage._FileStorage__objects.keys():
-                    if storage._FileStorage__objects[i].__class__.__name__ == \
-                       class_name:
-                        count += 1
-            else:
-                HBNBCommand.class_exists()
-                return
+        if not line:
+            print("** class name missing **")
+            return
+
+        class_name = line.split()[0]
+        if class_name in SokoConsole.__classes:
+            count = len(storage.all(SokoConsole.classes.get(class_name)))
             print(count)
+        else:
+            print("** class doesn't exist **")
+
 
     def do_create(self, line):
-        """ Creates new BaseModel instance,
-            saves it to JSON file and print its id
+        """ Creates new object instance belonging to 
+            derived classes of BaseModel
             Args:
-                line (str)
+                line (str): class name of of object
+                            to create
             Return: nothing
         """
-        classes = {'Base': BaseModel, 'Buyer': Buyer, 'Cart': Cart,
-                   'Category': Category, 'Chat': Chat, 'Order': Order,
-                   'PaymentDetail': PaymentDetail,
-                   'ProductImage': ProductImage,
-                   'Product': Product, 'Review': Review,
-                   'SavedItem': SavedItem,
-                   'Seller': Seller, 'ShippingAddress': ShippingAddress,
-                   'SubCategory': SubCategory, 'Transaction': Transaction
-                   }
-        if line:
-            class_name = line.split()[0]
-            if class_name in HBNBCommand.__classes:
-                new_object = classes[class_name]()
-                new_object.save()
-                print(new_object.id)
-            else:
-                HBNBCommand.class_exists()
+        if not line:
+            print("** class name missing **")
+            return
+
+        class_name = line.split()[0]
+        if class_name not in SokoConsole.classes.keys():
+            print("** class doesn't exist **")
+            return
+        
+        args = line.split()[1:]
+        if not args:
+            print("** missing arguments **")
+            return
+
+        kwargs = {}
+        for arg in args:
+            attr_name = args.split("=")[0]
+            if not hasattr(SokoConsole.classes.get(class_name), attr_name):
+                print("** {} {} {}**".format(attr_name,
+                      "is not an attribute of", class_name))
+                return
+
+            attr_value= args.split("=")[1:]
+            if not attr_value:
+                print ("** missing attribute value **")
+                return
+
+            attr_value = attr_value[0]
+            if attr_name in ['quantity', 'buyer_status', 'seller_status',
+                         'shop_status']:
+                attr_val = int(attr_value)
+            if attr_name in ['const_per_unit', 'amount']:
+                attr_val = float(attr_value)
+            kwargs.update({attr_name: attr_value})
+
+        try:
+            new_object = SokoConsole.classes[class_name](**kwargs)
+        except Exception:
+            print("** missing non-nullable field or relationship key not found **")
+            return
         else:
-            HBNBCommand.class_missing()
+            new_object.save()
+            print(new_object.id)
+            
 
     def do_show(self, line):
         """ Display string representation of an instance based
@@ -134,12 +159,9 @@ class HBNBCommand(Cmd):
                 line (str): instance's class name and id
             Return: nothing
         """
-        if HBNBCommand.validate(line):
-            obj_id = line.split()[1]
-            for key in storage._FileStorage__objects.keys():
-                if storage._FileStorage__objects[key].id == obj_id:
-                    print(storage._FileStorage__objects[key])
-                    break
+        obj = SokoConsole.validate(line)
+        if obj:
+            print(obj)
 
     def do_destroy(self, line):
         """ Search and destroy object using its class name and id
@@ -147,37 +169,32 @@ class HBNBCommand(Cmd):
                 line (str): object's class name and id
             Return: nothing
         """
-        if HBNBCommand.validate(line):
-            obj_id = line.split()[1]
-            for key in storage._FileStorage__objects.keys():
-                if storage._FileStorage__objects[key].id == obj_id:
-                    del storage._FileStorage__objects[key]
-                    storage.save()
-                    break
+        obj = SokoConsole.validate(line)
+        if obj:
+            storage.delete(obj)
+
 
     def do_all(self, line):
         """ Display a list of string representations of all objects
-            of a specific class
+            of a specific class or all objects if class is not
+            specified
             Args:
                 line (str): class name
             Return: nothing
         """
-        if line:
-            class_name = line.split()[0]
-            if class_name in HBNBCommand.__classes:
-                my_objects = []
-                for i in storage._FileStorage__objects.keys():
-                    if storage._FileStorage__objects[i].__class__.__name__ == \
-                       class_name:
-                        my_objects.append(str(
-                            storage._FileStorage__objects[i]))
-            else:
-                HBNBCommand.class_exists()
-                return
-        else:
-            my_objects = [str(storage._FileStorage__objects[i])
-                          for i in storage._FileStorage__objects.keys()]
-        print(my_objects)
+        objects = []
+        if not line:
+            objects = [str(obj) for obj in storage.all()]
+            print(objects)
+            return
+        
+        class_name = line.split()[0]
+        if class_name not in SokoConsole.classes.keys():
+            print(objects)
+        objects = [str(obj) for obj in storage.all(SokoConsole.classes.\
+                   get(class_name))]
+        print(objects)
+
 
     def do_update(self, line):
         """ Update an object's existing attribute or add new
@@ -187,49 +204,35 @@ class HBNBCommand(Cmd):
                             attribute value
             Return: nothing
         """
-        if HBNBCommand.validate(line) and \
-           HBNBCommand.validate_attr(line.split()):
-
-            class_name, obj_id, attr_name, attr_val = line.split()[:4]
-            for i in storage._FileStorage__objects.keys():
-                if storage._FileStorage__objects[i].id == obj_id:
-                    obj = storage._FileStorage__objects[i]
-                    my_dict = {}
-                    my_match = re.search(r'\{.*\}', line)
-                    if my_match is not None:
-                        items = my_match.group().strip('{}')
-                        items = re.sub(':', ' ', items).split()
-                        for i in range(len(items)):
-                            if i == 0 or i % 2 == 0:
-                                my_dict[items[i]] = items[i + 1]
-                    else:
-                        my_dict[attr_name] = attr_val
-                    for i in my_dict.keys():
-                        attr_val = my_dict[i]
-                        attr_name = i
-                        if attr_val.isdigit():
-                            attr_val = int(attr_val)
-                        else:
-                            try:
-                                attr_val = float(attr_val)
-                            except Exception:
-                                pass
-                        if obj.__class__.__name__ == 'Place' and \
-                                attr_name == 'amenity_ids':
-                            if attr_name in obj.__dict__:
-                                obj.amenity_ids.append(attr_val)
-                            else:
-                                setattr(obj, attr_name, [attr_val])
-                        else:
-                            setattr(obj, attr_name, attr_val)
-                    obj.save()
-                    break
+        obj = SokoConsole.validate(line)
+        if not obj:
+            return
+        if not SokoConsole.validate_attr(line.split()):
+            return
+        attr_name, attr_val = line.split()[2:4]
+        if attr_name in obj.to_dict().keys():
+            print("{} {}".format("**Cannot add new attributes.",
+                                 "Trying updating existing ones only**"))
+            return
+        if attr_name in ['created_at', 'updated_at']:
+            print("**Cannot update created and updated times manually")
+            return
+        if attr_name in ['quantity', 'buyer_status', 'seller_status',
+                         'shop_status']:
+            attr_val = int(attr_val)
+        if attr_name in ['const_per_unit', 'amount']:
+            attr_val = float(attr_val)
+        setattr(obj, attr_val, attr_name)
+        storage.save()
+        print("{} {} {}".format(obj.__class__.__name__, obj.id, "successfully updated"))
 
     def do_quit(self, line):
         """ Exit program gracefully
             Args: none
             Return: nothing
         """
+        storage.close()
+        print("Goodbye :-)")
         exit()
 
     def do_EOF(self, line):
@@ -237,7 +240,8 @@ class HBNBCommand(Cmd):
             Args: none
             Return: True
         """
-        print()
+        storage.close()
+        print("Goodbye :-)")
         return True
 
     def emptyline(self):
@@ -298,65 +302,39 @@ class HBNBCommand(Cmd):
               "information about a commands\n")
 
     @staticmethod
-    def class_exists():
-        """ Print error message when a class doesn't exist
-            Args: none
-            Return: nothing
-        """
-        print("** class doesn't exist **")
-
-    @staticmethod
-    def class_missing():
-        """ Display error message when user doesn't provide class name
-            Args: none
-            Return: nothing
-        """
-        print("** class name missing **")
-
-    @staticmethod
-    def id_missing():
-        """ Display error message when user doesn't provide object's id
-            Args: none
-            Return: nothing
-        """
-        print("** instance id missing **")
-
-    @staticmethod
-    def not_found():
-        """ Display error message an object's id is missing
-            Arg: none
-            Return: nothing
-        """
-        print("** no instance found **")
-
-    @staticmethod
     def validate(line):
-        """ Checks for errors in user input user input
+        """ Checks for errors in user input
+                1. Class name is specified
+                2. Object id is specified
+                3. Object with given id is present in storage
             Args:
                 line (str): user input
-            Return: True if input passes all validation
-                    False if input fails one of the checks
+            Return: Object if input passes all validation and
+                    object is found
+                    None if input fails one of the checks or
+                    object is not found
         """
-        if line:
-            args = line.split()
-            class_name = args[0]
-            if class_name in HBNBCommand.__classes:
-                if len(args) > 1:
-                    obj_id = args[1]
-                    if any(storage._FileStorage__objects[i].id == obj_id and
-                           storage._FileStorage__objects[i].__class__.__name__
-                           == class_name
-                           for i in storage._FileStorage__objects.keys()):
-                        return True
-                    else:
-                        HBNBCommand.not_found()
-                else:
-                    HBNBCommand.id_missing()
-            else:
-                HBNBCommand.class_exists()
-        else:
-            HBNBCommand.class_missing()
-        return False
+        if not line:
+            print("** class name missing **")
+            return
+
+        args = line.split()
+        class_name =args[0]
+        if class_name not in SokoConsole.__classes:
+            print("** class doesn't exist **")
+            return
+
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+
+        obj_id = args[1]
+        stored_objects = storage.all(SokoConsole.classes.get(class_name))
+        for stored_obj in stored_objects:
+            if stored_obj.id == obj_id:
+                return stored_obj
+        print("** no instance found **")
+        return
 
     @staticmethod
     def validate_attr(args):
@@ -377,4 +355,4 @@ class HBNBCommand(Cmd):
 
 
 if __name__ == "__main__":
-    HBNBCommand().cmdloop()
+    SokoConsole().cmdloop()
