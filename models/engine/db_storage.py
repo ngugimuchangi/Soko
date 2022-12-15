@@ -2,8 +2,9 @@
 """ Database storage engine module
 """
 from dotenv import load_dotenv
-from models.base_model import Base, BaseModel
+from models.base_model import Base
 from models.buyer import Buyer
+from models.buyer_notification import BuyerNotification
 from models.cart import Cart
 from models.category import Category
 from models.chat import Chat
@@ -13,6 +14,7 @@ from models.product import Product
 from models.product_image import ProductImage
 from models.review import Review
 from models.saved_item import SavedItem
+from models.seller_notification import SellerNotification
 from models.seller import Seller
 from models.shipping_address import ShippingAddress
 from models.subcategory import SubCategory
@@ -52,9 +54,10 @@ class DBStorage():
                 cls: class of objects to return
             Return: dictionary of objects
         """
-        class_list = [Buyer, Cart, Category, Chat, Order,
+        class_list = [Buyer, BuyerNotification, Cart, Category, Chat, Order,
                       PaymentDetail, Product, ProductImage,
-                      Review, SavedItem, ShippingAddress,
+                      Review, SavedItem, SellerNotification,
+                      Seller, ShippingAddress,
                       SubCategory, Transaction]
         objs = {}
 
