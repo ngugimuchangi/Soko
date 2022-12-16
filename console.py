@@ -45,7 +45,7 @@ class SokoConsole(Cmd):
                'SavedItem': SavedItem,
                'Seller': Seller, 'ShippingAddress': ShippingAddress,
                'SubCategory': SubCategory, 'Transaction': Transaction
-              }
+               }
 
     def default(self, line):
         """ Parse line to establish the command to exectue
@@ -98,9 +98,8 @@ class SokoConsole(Cmd):
         else:
             print("** class doesn't exist **")
 
-
     def do_create(self, line):
-        """ Creates new object instance belonging to 
+        """ Creates new object instance belonging to
             derived classes of BaseModel
             Args:
                 line (str): class name of of object
@@ -115,7 +114,7 @@ class SokoConsole(Cmd):
         if class_name not in SokoConsole.classes.keys():
             print("** class doesn't exist **")
             return
-        
+
         args = line.split()[1:]
         if not args:
             print("** missing arguments **")
@@ -129,14 +128,14 @@ class SokoConsole(Cmd):
                       "is not an attribute of", class_name))
                 return
 
-            attr_value= args.split("=")[1:]
+            attr_value = args.split("=")[1:]
             if not attr_value:
-                print ("** missing attribute value **")
+                print("** missing attribute value **")
                 return
 
             attr_value = attr_value[0]
             if attr_name in ['quantity', 'buyer_status', 'seller_status',
-                         'shop_status']:
+                             'shop_status']:
                 attr_val = int(attr_value)
             if attr_name in ['const_per_unit', 'amount']:
                 attr_val = float(attr_value)
@@ -145,12 +144,12 @@ class SokoConsole(Cmd):
         try:
             new_object = SokoConsole.classes[class_name](**kwargs)
         except Exception:
-            print("** missing non-nullable field or relationship key not found **")
+            print("** missing non-nullable field",
+                  "or relationship key not found **")
             return
         else:
             new_object.save()
             print(new_object.id)
-            
 
     def do_show(self, line):
         """ Display string representation of an instance based
@@ -173,7 +172,6 @@ class SokoConsole(Cmd):
         if obj:
             storage.delete(obj)
 
-
     def do_all(self, line):
         """ Display a list of string representations of all objects
             of a specific class or all objects if class is not
@@ -187,14 +185,13 @@ class SokoConsole(Cmd):
             objects = [str(obj) for obj in storage.all()]
             print(objects)
             return
-        
+
         class_name = line.split()[0]
         if class_name not in SokoConsole.classes.keys():
             print(objects)
-        objects = [str(obj) for obj in storage.all(SokoConsole.classes.\
+        objects = [str(obj) for obj in storage.all(SokoConsole.classes.
                    get(class_name))]
         print(objects)
-
 
     def do_update(self, line):
         """ Update an object's existing attribute or add new
@@ -224,7 +221,8 @@ class SokoConsole(Cmd):
             attr_val = float(attr_val)
         setattr(obj, attr_val, attr_name)
         storage.save()
-        print("{} {} {}".format(obj.__class__.__name__, obj.id, "successfully updated"))
+        print("{} {} {}".format(obj.__class__.__name__,
+                                obj.id, "successfully updated"))
 
     def do_quit(self, line):
         """ Exit program gracefully
@@ -319,7 +317,7 @@ class SokoConsole(Cmd):
             return
 
         args = line.split()
-        class_name =args[0]
+        class_name = args[0]
         if class_name not in SokoConsole.__classes:
             print("** class doesn't exist **")
             return

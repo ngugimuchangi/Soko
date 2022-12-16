@@ -25,6 +25,7 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 
 load_dotenv()
 
+
 class DBStorage():
     """ Database engine class for interacting with the msql database"""
     __engine = None
