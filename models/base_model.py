@@ -32,7 +32,7 @@ class BaseModel:
     updated_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
 
     def __init__(self, **kwargs):
-        """Instatntiates a new model"""
+        """Instantiates a new model"""
         self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
