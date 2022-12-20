@@ -6,5 +6,5 @@
 from models.base_model import Base, BaseModel
 
 
-class PaymentDetail(Base, BaseModel):
+class OrderDetail(Base, BaseModel):
     pass

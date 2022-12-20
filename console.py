@@ -93,7 +93,7 @@ class SokoConsole(Cmd):
 
         class_name = line.split()[0]
         if class_name in SokoConsole.__classes:
-            count = len(storage.all(SokoConsole.classes.get(class_name)))
+            count = len(storage.search(SokoConsole.classes.get(class_name)))
             print(count)
         else:
             print("** class doesn't exist **")
@@ -182,14 +182,15 @@ class SokoConsole(Cmd):
         """
         objects = []
         if not line:
-            objects = [str(obj) for obj in storage.all()]
+            objects = [str(obj) for obj in storage.search()]
             print(objects)
             return
 
         class_name = line.split()[0]
         if class_name not in SokoConsole.classes.keys():
-            print(objects)
-        objects = [str(obj) for obj in storage.all(SokoConsole.classes.
+            print("** class doesn't exist **")
+            return
+        objects = [str(obj) for obj in storage.search(SokoConsole.classes.
                    get(class_name))]
         print(objects)
 
@@ -327,10 +328,10 @@ class SokoConsole(Cmd):
             return
 
         obj_id = args[1]
-        stored_objects = storage.all(SokoConsole.classes.get(class_name))
-        for stored_obj in stored_objects:
-            if stored_obj.id == obj_id:
-                return stored_obj
+        obj = storage.search(SokoConsole.classes.get(class_name),
+                             obj_id)
+        if obj:
+            return obj
         print("** no instance found **")
         return
 

@@ -11,6 +11,7 @@ from sqlalchemy import Column, String, ForeignKey, Text
 from models.base_model import Base, BaseModel
 
 
+<<<<<<< HEAD
 class SubCategory(Base, BaseModel):
     """Creates a Subcategory table object."""
     category_id = Column(String(60), ForeignKey('categories.id'))
@@ -21,3 +22,7 @@ class SubCategory(Base, BaseModel):
         """Instantiates SubCategory object."""
 
         super().__init__(**kwargs)
+=======
+class Subcategory(Base, BaseModel):
+    pass
+>>>>>>> ngugi_dev
