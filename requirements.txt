@@ -1,0 +1,6 @@
+flasgger==0.9.5
+flask-cors==3.0.10
+flask-login==0.6.2
+flask-mail==0.9.1
+pip-chill==1.0.1
+sqlalchemy==1.4.45

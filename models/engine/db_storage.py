@@ -17,7 +17,7 @@ from models.saved_item import SavedItem
 from models.seller_notification import SellerNotification
 from models.seller import Seller
 from models.shipping_address import ShippingAddress
-from models.subcategory import SubCategory
+from models.subcategory import Subcategory
 from models.transaction import Transaction
 from os import getenv
 from sqlalchemy import create_engine
@@ -47,34 +47,47 @@ class DBStorage():
                 # delete all tables
                 Base.metadata.drop_all(bind=self.__engine)
 
-    def all(self, cls=None):
+    @property
+    def session(self):
+        """ Getter method for session
+        """
+        return self.__session
+
+    def search(self, cls=None, id=None):
         """ Queries current database session for all objects
             belonging to a specific class if provided, else
             all objects for every class
             Args:
                 cls: class of objects to return
-            Return: dictionary of objects
+            Return:  a list of objects found or obj itself if
+                     search criteria include obj id and class
+                     else None
         """
         class_list = [Buyer, BuyerNotification, Cart, Category, Chat, Order,
                       PaymentDetail, Product, ProductImage,
                       Review, SavedItem, SellerNotification,
                       Seller, ShippingAddress,
-                      SubCategory, Transaction]
-        objs = {}
+                      Subcategory, Transaction]
+        objs = []
 
-        if cls is not None:
+        if cls is not None and id is None:
             # query for all records in particular table
             # Add them to dictionary 'objs'
-            for obj in self.__session.query(cls).all():
-                key = ".".join([obj.__class__.__name__, obj.id])
-                objs.update({key: obj})
-        else:
+            
+            objs = list(self.__session.query(cls).all())
+            return objs
+        elif cls is None and id is None:
             # query for all objects in all tables
             # Add them to dictionary 'objs'
+            objs = []
             for cl in class_list:
                 for obj in self.__session.query(cl).all():
-                    key = ".".join([obj.__class__.__name__, obj.id])
-                    objs.update({key: obj})
+                    objs.append(obj)
+            return objs
+        else:
+            obj = self.__session.query(cls).filter_by(id=id).first()
+            return obj
+
         return objs
 
     def new(self, obj):

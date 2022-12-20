@@ -6,5 +6,5 @@
 from models.base_model import Base, BaseModel
 
 
-class SubCategory(Base, BaseModel):
+class Subcategory(Base, BaseModel):
     pass

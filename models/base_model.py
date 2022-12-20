@@ -38,7 +38,7 @@ class BaseModel:
         self.updated_at = datetime.now()
         if kwargs:
             for key, value in kwargs.items():
-                if key not in ['__class__', 'created_at', 'updated_at']:
+                if key not in ['id', '__class__', 'created_at', 'updated_at']:
                     setattr(key, value, self)
 
     def __str__(self):
@@ -70,13 +70,11 @@ class BaseModel:
                     instance
         """
         my_dict = self.__dict__.copy()
-        my_dict["__class__"] = self.__class__.__name__
         my_dict["created_at"] = self.created_at.isoformat()
         my_dict["updated_at"] = self.updated_at.isoformat()
 
         # delete _sa_instance_state from dictionary
-        if '_sa_instance_state' in my_dict.keys():
-            del my_dict['_sa_instance_state']
+        my_dict.pop("_sa_instance_state")
         return my_dict
 
     def delete(self):
