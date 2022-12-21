@@ -73,6 +73,18 @@ class BaseModel:
         my_dict["created_at"] = self.created_at.isoformat()
         my_dict["updated_at"] = self.updated_at.isoformat()
 
+        # Card expiring date
+        if my_dict.get("expiry_date"):
+            my_dict.update({"expiry_date": my_dict.get(
+                           "expiry_date").isofomart()})
+
+        # remove password and salt from dictionary
+        # representation if they exist
+        if my_dict.get("password"):
+            my_dict.pop("password")
+        if my_dict.get("salt"):
+            my_dict.pop("salt")
+
         # delete _sa_instance_state from dictionary
         my_dict.pop("_sa_instance_state")
         return my_dict

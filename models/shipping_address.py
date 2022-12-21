@@ -4,22 +4,26 @@
         and methods
 """
 from models.base_model import Base, BaseModel
-from sqlalchemy.orm import relationship
-
-import models
-from os import getenv
-from sqlalchemy import Column, String, Integer, Numeric, CheckConstraint, ForeignKey, Text
+from sqlalchemy import Column, String, ForeignKey, Text
 
 
 class ShippingAddress(Base, BaseModel):
-    """Creates a ShippingAddress table Object."""
-    buyer_id = Column(String(60), ForeignKey('buyers.id'))
+    """ ShippingAddress class representing shipping_address table
+        Attributes:
+            customer_id: foreign key to customer table's
+                         id field
+            first_name: first_name of person associated with address
+            last_name: last_name of person associated with address
+            phone_number: last_name of person associated with address
+            shipping_address: shipping address details
+    """
+
+    customer_id = Column(String(60), ForeignKey('customers.id'))
     first_name = Column(String(128), nullable=False)
     last_name = Column(String(128), nullable=False)
-    phone_number = Column(String(20), nullable=False)
+    phone_number = Column(String(60), nullable=False)
     shipping_address = Column(Text, nullable=False)
 
     def __init__(self, *args, **kwargs):
-        """Instantiate a ShippingAddress object."""
-
+        """Instantiates a ShippingAddress object."""
         super().__init__(*args, **kwargs)

@@ -21,5 +21,4 @@ class Chat(Base, BaseModel):
 
     def __init__(self, **kwargs):
         """Instantiates a Chat object."""
-
         super().__init__(**kwargs)
