@@ -9,7 +9,7 @@ from sqlalchemy import Column, ForeignKey, String, Date
 
 
 class CustomerCard(Base, BaseModel):
-    """ Customer class representing customer_cards table
+    """ CustomerCard class representing customer_cards table
         Attributes:
             customer_id (str): foreign key to customer table's
                                id field
@@ -30,8 +30,8 @@ class CustomerCard(Base, BaseModel):
     name_on_card = Column(String(128), nullable=False)
     card_type = Column(String(60), nullable=False)
 
-    def __init__(**kwargs):
-        """Instantiates a Card object"""
+    def __init__(self, **kwargs):
+        """Instantiates a CustomerCard object"""
         # Create date object for expiry date
         expiry_date = kwargs.get("expiry_date")
         month = expiry_date.get("month")

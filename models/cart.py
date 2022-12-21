@@ -14,13 +14,16 @@ class Cart(Base, BaseModel):
                                    id field
                 product_id (str):  product's id
                 product_name (str):  product's name
+                product_image (str) product's main image
                 quantity (int): quantity of a particular item in cart
     """
-    __table__= "cart"
+    __table__ = "cart"
 
-    customer_id = Column(String(60), ForeignKey("customers.id"), nullable=False)
+    customer_id = Column(String(60), ForeignKey("customers.id"),
+                         nullable=False)
     product_id = Column(String(60), nullable=False)
     product_name = Column(String(128), nullable=False)
+    product_image = Column(String(128), nullable=False)
     quantity = Column(Integer, nullable=False)
 
     def __init__(self, **kwargs):

@@ -19,10 +19,10 @@ class Customer(Base, BaseModel):
             phone_number (str): customer's phone number
             email (str): customer's email address
             password (str): customer's hashed password
-            salt (str): salt used to has password
-            a: relationship with cards table
+            salt (str): salt used to hash password
+            card: relationship with cards table
             cart: relationship with cart table
-            notifications: relationship with notifications table
+            notifications: relationship with customer_notifications table
             saved_items: relationship with saved_items table
             shipping_addresses: relationship with shipping address
                               table
@@ -35,26 +35,29 @@ class Customer(Base, BaseModel):
     email = Column(String(128), nullable=False, unique=True)
     password = Column(String(128), nullable=False)
     salt = Column(String(60))
-    card = relationship('CustomerCard', backref="customer", cascade="delete")
-    cart = relationship("Cart", backref="customer", cascade="delete")
+    card = relationship('CustomerCard',
+                        backref="customer",
+                        cascade="all,delete")
+    cart = relationship("Cart",
+                        backref="customer",
+                        cascade="all,delete")
     notifications = relationship("CustomerNotification",
-                                 backref="customer", cascade="delete")
-    saved_items = relationship("SavedItems", backref="customer",
-                               cascade="delete")
-    shipping_addresses = relationship("ShippingAddress", backref="customer",
-                                      cascade="delete")
+                                 backref="customer",
+                                 cascade="all,delete")
+    saved_items = relationship("SavedItems",
+                               backref="customer",
+                               cascade="all,delete")
+    shipping_addresses = relationship("ShippingAddress",
+                                      backref="customer",
+                                      cascade="all,delete")
 
     def __init__(self, **kwargs):
         """Instantiates the Customer object."""
-        # Call parent init class to created shared attributes
-        super().__init__()
-
         # Add salt and hash password
         salt = uuid4().hex
-        password = kwargs.get('password')
+        password = kwargs.get("password")
         password = sha256("{}{}".format(password, salt).
                           encode('utf-8')).hexdigest()
-
-        # Add other attributes
         kwargs.update({"password": password, "salt": salt})
+
         super().__init__(**kwargs)

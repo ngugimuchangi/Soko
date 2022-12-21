@@ -3,14 +3,10 @@
         Definition of Order class, it attributes,
         and methods
 """
-
-from sqlalchemy.orm import relationship
-
-import models
-from os import getenv
-from sqlalchemy import Column, String, Integer, Numeric, CheckConstraint, ForeignKey
-
 from models.base_model import Base, BaseModel
+from sqlalchemy import (Column, String, Integer, Numeric,
+                        CheckConstraint, ForeignKey)
+from sqlalchemy.orm import relationship
 
 
 class Order(Base, BaseModel):
@@ -19,7 +15,8 @@ class Order(Base, BaseModel):
     order_type = Column(String(60), nullable=False)
     order_status = Column(String(60), nullable=False)
     quantity = Column(Integer, nullable=False)
-    unit_cost = Column(Numeric(12, 2), nullable=False, CheckConstraint('unit_cost >= 0.00', name='unit_cost_positive'))
+    unit_cost = Column(Numeric(12, 2), CheckConstraint('unit_cost >= 0.00',
+                       name='unit_cost_positive'), nullable=False)
     payment_method = Column(String(60), nullable=False, unique=True)
     review_status = Column(String(60), nullable=True)
     product_id = Column(String(60), ForeignKey('products.id'))

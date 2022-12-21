@@ -24,6 +24,6 @@ class ShippingAddress(Base, BaseModel):
     phone_number = Column(String(60), nullable=False)
     shipping_address = Column(Text, nullable=False)
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs):
         """Instantiates a ShippingAddress object."""
-        super().__init__(*args, **kwargs)
+        super().__init__(**kwargs)

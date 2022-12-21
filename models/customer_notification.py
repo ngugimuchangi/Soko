@@ -13,9 +13,9 @@ class CustomerNotification(Base, BaseModel):
                 customer_id (str): foreign key to customer table's
                                    id field
                 message (str):  notification message
-                read_status (str):  product's name
+                read_status (int):  notification's status
     """
-    __table__ = "saved_items"
+    __table__ = "customer_notifications"
 
     customer_id = Column(String(60), ForeignKey("customers.id"),
                          nullable=False)
@@ -23,5 +23,5 @@ class CustomerNotification(Base, BaseModel):
     read_status = Column(Integer, default=0, nullable=False)
 
     def __init__(self, **kwargs):
-        """Instantiates a SavedItem object."""
+        """Instantiates a CustomerNotification object."""
         super().__init__(**kwargs)
