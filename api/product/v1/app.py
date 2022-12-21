@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Products RESTful API v.1
 """
-from api.products.v1.views import product_views
+from api.product.v1.views import product_views
 from dotenv import load_dotenv
 from flasgger import Swagger
 from flask import Flask, jsonify, make_response

@@ -3,17 +3,21 @@
 """
 from dotenv import load_dotenv
 from models.base_model import Base
-from models.buyer import Buyer
-from models.buyer_notification import BuyerNotification
 from models.cart import Cart
 from models.category import Category
 from models.chat import Chat
+from models.customer import Customer
+from models.customer_card import CustomerCard
+from models.customer_notification import CustomerNotification
+from models.customer import Customer
+from models.message import Message
+from models.order_detail import OrderDetail
 from models.order import Order
-from models.payment_detail import PaymentDetail
 from models.product import Product
 from models.product_image import ProductImage
 from models.review import Review
 from models.saved_item import SavedItem
+from models.seller_card import SellerCard
 from models.seller_notification import SellerNotification
 from models.seller import Seller
 from models.shipping_address import ShippingAddress
@@ -63,9 +67,10 @@ class DBStorage():
                      search criteria include obj id and class
                      else None
         """
-        class_list = [Buyer, BuyerNotification, Cart, Category, Chat, Order,
-                      PaymentDetail, Product, ProductImage,
-                      Review, SavedItem, SellerNotification,
+        class_list = [Customer, CustomerNotification, CustomerCard,
+                      Cart, Category, Chat, Order,
+                      OrderDetail, Product, ProductImage, Message,
+                      Review, SavedItem, SellerNotification, SellerCard,
                       Seller, ShippingAddress,
                       Subcategory, Transaction]
         objs = []
@@ -73,7 +78,7 @@ class DBStorage():
         if cls is not None and id is None:
             # query for all records in particular table
             # Add them to dictionary 'objs'
-            
+
             objs = list(self.__session.query(cls).all())
             return objs
         elif cls is None and id is None:

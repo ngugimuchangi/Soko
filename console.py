@@ -2,19 +2,25 @@
 """ Console Module """
 from cmd import Cmd
 from models import storage
-from models.buyer import Buyer
 from models.cart import Cart
 from models.category import Category
 from models.chat import Chat
+from models.customer import Customer
+from models.customer_card import CustomerCard
+from models.customer_notification import CustomerNotification
+from models.customer import Customer
+from models.message import Message
+from models.order_detail import OrderDetail
 from models.order import Order
-from models.payment_detail import PaymentDetail
 from models.product import Product
 from models.product_image import ProductImage
 from models.review import Review
 from models.saved_item import SavedItem
+from models.seller_card import SellerCard
+from models.seller_notification import SellerNotification
 from models.seller import Seller
 from models.shipping_address import ShippingAddress
-from models.subcategory import SubCategory
+from models.subcategory import Subcategory
 from models.transaction import Transaction
 import re
 
@@ -37,14 +43,17 @@ class SokoConsole(Cmd):
 
     Cmd.prompt = '(soko) '
 
-    classes = {'Buyer': Buyer, 'Cart': Cart,
+    classes = {'Customer': Customer, 'Cart': Cart,
+               'CustomerCard': CustomerCard,
+               'CustomerNotification': CustomerNotification,
                'Category': Category, 'Chat': Chat, 'Order': Order,
-               'PaymentDetail': PaymentDetail,
-               'ProductImage': ProductImage,
-               'Product': Product, 'Review': Review,
-               'SavedItem': SavedItem,
-               'Seller': Seller, 'ShippingAddress': ShippingAddress,
-               'SubCategory': SubCategory, 'Transaction': Transaction
+               'OrderDetail': OrderDetail, 'Message': Message,
+               'ProductImage': ProductImage, 'Product': Product,
+               'Review': Review, 'SavedItem': SavedItem,
+               'Seller': Seller, 'SellerCard': SellerCard,
+               'SellerNotification': SellerNotification,
+               'ShippingAddress': ShippingAddress,
+               'SubCategory': Subcategory, 'Transaction': Transaction
                }
 
     def default(self, line):
@@ -134,10 +143,10 @@ class SokoConsole(Cmd):
                 return
 
             attr_value = attr_value[0]
-            if attr_name in ['quantity', 'buyer_status', 'seller_status',
-                             'shop_status']:
+            if attr_name in ["quantity", "stock"]:
                 attr_val = int(attr_value)
-            if attr_name in ['const_per_unit', 'amount']:
+            if attr_name in ["price", "amount", "vat", "shipping_cost",
+                             "subtotal"]:
                 attr_val = float(attr_value)
             kwargs.update({attr_name: attr_value})
 

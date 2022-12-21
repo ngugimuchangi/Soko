@@ -33,12 +33,12 @@ class BaseModel:
 
     def __init__(self, **kwargs):
         """Instantiates a new model"""
-        self.id = str(uuid4())
+        self.id = uuid4().hex
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
         if kwargs:
             for key, value in kwargs.items():
-                if key not in ['id', '__class__', 'created_at', 'updated_at']:
+                if key not in ["id", "created_at", "updated_at"]:
                     setattr(key, value, self)
 
     def __str__(self):

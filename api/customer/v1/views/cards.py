@@ -1,18 +1,18 @@
 #!/usr/bin/python3
 """card endpoint module
 """
-from api.buyer.v1.views import user_views
+from api.customer.v1.views import customer_views
 from flask import abort, jsonify, make_response, request
 from models import storage
-from models.buyer import Buyer
-from models.buyer_card import BuyerCard
+from models.customer import Customer
+from models.customer_card import CustomerCard
 
 
-@user_views.route("/card/<card_id>",
-                  methods=["GET", "DELETE", "PUT"],
-                  strict_slashes=False)
+@customer_views.route("/card/<card_id>",
+                      methods=["GET", "DELETE", "PUT"],
+                      strict_slashes=False)
 def manage_card(card_id):
-    """card endpoint for get, update and delete
+    """Card endpoint for get, update and delete
        payment
        Args: card_id (str) - payment card's id
        Return: jsonified dictionary representation of
@@ -23,7 +23,7 @@ def manage_card(card_id):
     attr_ignore = ["id", "created_at", "updated_at"]
 
     # Payment card search and validation
-    card = storage.search(BuyerCard, card_id)
+    card = storage.search(CustomerCard, card_id)
     if not card:
         abort(404)
 
@@ -47,25 +47,26 @@ def manage_card(card_id):
     return jsonify(modify_card_output(card))
 
 
-@user_views.route("/buyer/<buyer_id>/card", methods=["GET", "POST"],
-                  strict_slashes=False)
-def create_and_view_payment_cards(buyer_id):
+@customer_views.route("/customers/<customer_id>/card",
+                      methods=["GET", "POST"],
+                      strict_slashes=False)
+def create_and_view_payment_cards(customer_id):
     """Card endpoint for getting all cards for a
-       specified user and adding a new card under
+       specified customer and adding a new card under
        their profile
-       Args: buyer_id (str) - buyer's id
+       Args: customer_id (str) - customer's id
        Return: jsonified dictionary with a list of all payment
-               cards belonging to specified user
+               cards belonging to specified customer
        file: card.yml
     """
-    # Buyer search and validation
-    buyer = storage.search(Buyer, buyer_id)
-    if not buyer:
+    # Customer search and validation
+    customer = storage.search(Customer, customer_id)
+    if not customer:
         abort(404)
 
     # Get all payment cards
     if request.method == "GET":
-        cards = buyer.cards
+        cards = customer.cards
         cards = {"count": len(cards), "card":
                  [modify_card_output(card) for card in cards]}
         return jsonify(cards)
@@ -76,10 +77,10 @@ def create_and_view_payment_cards(buyer_id):
         abort(400)
 
     kwargs = {key: value for key, value in data.items()
-              if hasattr(BuyerCard, key)}
-    kwargs.update({"buyer_id": buyer_id})
+              if hasattr(CustomerCard, key)}
+    kwargs.update({"customer_id": customer_id})
     try:
-        new_card = BuyerCard(**kwargs)
+        new_card = CustomerCard(**kwargs)
     except Exception:
         abort(400)
     new_card.save()
@@ -93,7 +94,7 @@ def modify_card_output(card):
         Return: dictionary represention of payment card
     """
     card_dict = card.to_dict()
-    card_dict.pop("buyer_id")
+    card_dict.pop("customer_id")
     card_dict.pop("cvv")
     card_number = card_number.split()[-1]
     card_dict.update({"card_number": card_number})

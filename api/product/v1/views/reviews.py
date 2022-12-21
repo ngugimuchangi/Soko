@@ -1,14 +1,14 @@
 #!/usr/bin/python3
-"""product endpoint module
+"""Product endpoint module
 """
-from api.products.v1.views import product_views
+from api.product.v1.views import product_views
 from flask import abort, jsonify, make_response, request
 from models import storage
 from models.product import Product
 from models.review import Review
 
 
-@product_views.route("/review/<review_id>", strict_slashes=False)
+@product_views.route("/reviews/<review_id>", strict_slashes=False)
 def get_review(review_id):
     """Review endpoint for get a review by its id
        Args: review_id (str) - review's id
@@ -26,7 +26,7 @@ def get_review(review_id):
     return jsonify(review.to_dict())
 
 
-@product_views.route("/product/<product_id>/reviews", methods=["GET",
+@product_views.route("/products/<product_id>/reviews", methods=["GET",
                      "POST"], strict_slashes=False)
 def create_or_view_products(product_id):
     """Product endpoint for getting all reviews of a specific product
@@ -54,7 +54,6 @@ def create_or_view_products(product_id):
 
     kwargs = {key: value for key, value in data.items()
               if hasattr(Product, key)}
-    kwargs.update({"product_id": product.id})
     try:
         new_product = Product(**kwargs)
     except Exception:

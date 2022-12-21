@@ -70,7 +70,6 @@ def create_and_view_payment_notifications(notification_id):
 
     kwargs = {key: value for key, value in data.items()
               if hasattr(SellerNotification, key)}
-    kwargs.update({"notification_id": notification_id})
     try:
         new_notification = SellerNotification(**kwargs)
     except Exception:

@@ -1,15 +1,15 @@
 #!/usr/bin/python3
 """ Shipping Address endpoint
 """
-from api.buyer.v1.views import user_views
+from api.customer.v1.views import customer_views
 from flask import abort, jsonify, request, make_response
 from models import storage
-from models.buyer import Buyer
+from models.customer import Customer
 from models.shipping_address import ShippingAddress
 
 
-@user_views.route("/addresses/<address_id>", method=["GET",
-                  "PUT", "DELETE"], strict_slashes=False)
+@customer_views.route("/addresses/<address_id>", method=["GET",
+                      "PUT", "DELETE"], strict_slashes=False)
 def manage_address(address_id):
     """Shipping Address endpoint for get, update and delete
        cart items
@@ -46,25 +46,25 @@ def manage_address(address_id):
     return jsonify(modify_address_output(shipping_address))
 
 
-@user_views.route("/buyer/<buyer_id>/addresses", methods=["GET",
-                  "POST"], strict_slashes=False)
-def get_and_add_cart_items(buyer_id):
+@customer_views.route("/customers/<customer_id>/addresses", methods=["GET",
+                      "POST"], strict_slashes=False)
+def get_and_add_cart_items(customer_id):
     """Addresses endpoint for getting all cart items for a
-       specified user and adding new seller
-       Args: buyer_id (str) - buyer's id
+       specified customer and adding new seller
+       Args: customer_id (str) - customer's id
        Return: jsonified dictionary with a list of all cart
-               items belonging to specified user
+               items belonging to specified customer
        file: cart.yml
     """
-    # Buyer search and validation
-    buyer = storage.search(Buyer, buyer_id)
-    if not buyer:
+    # Customer search and validation
+    customer = storage.search(Customer, customer_id)
+    if not customer:
         abort(404)
 
     # Get all addressess
     if request.method == "GET":
         # Get all cart items
-        addresses = buyer.addresses
+        addresses = customer.addresses
         addresses = {"count": len(addresses), "addresses":
                      [modify_address_output(address) for address in addresses]}
         return jsonify(addresses)
@@ -76,7 +76,7 @@ def get_and_add_cart_items(buyer_id):
 
     kwargs = {key: value for key, value in data.items()
               if hasattr(ShippingAddress, key)}
-    kwargs.update({"buyer_id": buyer_id})
+    kwargs.update({"customer_id": customer_id})
     try:
         new_address = ShippingAddress(**kwargs)
     except Exception:
@@ -92,5 +92,5 @@ def modify_address_output(address):
         Return: dictionary represention of shipping address
     """
     address_dict = address.to_dict()
-    address_dict.pop("buyer_id")
+    address_dict.pop("customer_id")
     return address_dict

@@ -1,6 +1,6 @@
 """Product search endpoint module
 """
-from api.products.v1.views import product_views
+from api.product.v1.views import product_views
 from flask import abort, jsonify, request
 from models import storage
 from models.product import Product
@@ -15,7 +15,7 @@ def search_for_products():
         Return: dictionary with a list of objects
                 matching search criteria
     """
-    from api.products.v1.views.products import modify_product_output
+    from api.product.v1.views.products import modify_product_output
     filters = request.args
     if not filters:
         abort(400)
@@ -42,7 +42,7 @@ def search_for_products_by_category(subcategory_id):
         Return: dictionary with a list of objects
                 matching search criteria
     """
-    from api.products.v1.views.products import modify_product_output
+    from api.product.v1.views.products import modify_product_output
 
     filters = request.args
     if not filters:

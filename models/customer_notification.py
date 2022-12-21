@@ -6,5 +6,5 @@
 from models.base_model import Base, BaseModel
 
 
-class BuyerNotification(Base, BaseModel):
+class CustomerNotification(Base, BaseModel):
     pass

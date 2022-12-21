@@ -58,16 +58,16 @@ def create_and_view_payment_cards(seller_id):
                cards belonging to specified user
        file: seller_card.yml
     """
-    # Buyer search and validation
+    # Seller search and validation
     seller = storage.search(Seller, seller_id)
     if not seller:
         abort(404)
 
     # Get all payment cards
     if request.method == "GET":
-        card = seller.card
-        cards = modify_card_output(card)
-        return jsonify(cards)
+        card = seller.card[0]
+        card = modify_card_output(card)
+        return jsonify(card)
 
     # Create new payment card
     data = request.get_json()
@@ -76,7 +76,6 @@ def create_and_view_payment_cards(seller_id):
 
     kwargs = {key: value for key, value in data.items()
               if hasattr(SellerCard, key)}
-    kwargs.update({"seller_id": seller_id})
     try:
         new_card = SellerCard(**kwargs)
     except Exception:

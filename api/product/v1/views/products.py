@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """product endpoint module
 """
-from api.products.v1.views import product_views
+from api.product.v1.views import product_views
 from flask import abort, jsonify, make_response, request
 from models import storage
 from models.product import Product
@@ -11,7 +11,7 @@ from os import getenv, makedirs, removedirs, path
 from werkzeug.utils import secure_filename
 
 
-@product_views.route("/product/<product_id>",
+@product_views.route("/products/<product_id>",
                      methods=["GET", "DELETE", "PUT"],
                      strict_slashes=False)
 def manage_product(product_id):
@@ -52,11 +52,11 @@ def manage_product(product_id):
     return jsonify(modify_product_output(product))
 
 
-@product_views.route("/subcategory/<subcategory_id>/products",
+@product_views.route("/subcategories/<subcategory_id>/products",
                      methods=["GET", "POST"],
                      strict_slashes=False)
 def create_or_view_products(subcategory_id):
-    """product endpoint for getting all product s for a
+    """Product endpoint for getting all product s for a
        specified user and adding a new  to their
        product
        Args: buyer_id (str) - buyer's id
@@ -103,7 +103,8 @@ def create_or_view_products(subcategory_id):
         file_path = path.join(product_directory,
                               secure_filename(file.filename))
         file.save(file_path)
-        new_image = Product(**{"file_path": file_path})
+        new_image = ProductImage(**{"product_id": new_product.id,
+                                 "file_path": file_path})
         new_image.save()
 
     return make_response(jsonify(modify_product_output(new_product)), 201)
@@ -116,8 +117,7 @@ def modify_product_output(product):
         Return: dictionary represention of product
     """
     product_dict = product.to_dict()
-    images = storage.session.query(ProductImage)\
-        .filter_by(product_id=product.id)
+    images = product.images
     images = [image.file_path for image in images]
     product_dict.upadate({"images": images})
     return product_dict

@@ -6,5 +6,5 @@
 from models.base_model import Base, BaseModel
 
 
-class BuyerCard(Base, BaseModel):
+class CustomerCard(Base, BaseModel):
     pass

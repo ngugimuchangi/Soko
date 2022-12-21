@@ -4,7 +4,7 @@
 from api.order.v1.views import order_views
 from flask import abort, jsonify, make_response, request, url_for
 from models import storage
-from models.buyer import Buyer
+from models.customer import Customer
 from models.order import Order
 from models.order_detail import OrderDetail
 from models.seller import Seller
@@ -66,22 +66,23 @@ def manage_order(order_id):
     return jsonify(modify_order_output(order))
 
 
-@order_views.route("/buyers/<buyer_id>/orders", strict_slashes=False)
-def buyer_view_orders(buyer_id):
+@order_views.route("/customers/<customer_id>/orders", strict_slashes=False)
+def customer_view_orders(customer_id):
     """Order endpoint for getting all order items for a
        specified user
-       Args: buyer_id (str) - buyer's id
+       Args: customer_id (str) - customer's id
        Return: jsonified dictionary with a list of all orders
                belonging to specified user
        file: orders.yml
     """
-    # Buyer search and validation
-    buyer = storage.search(Buyer, buyer_id)
-    if not buyer:
+    # Customer search and validation
+    customer = storage.search(Customer, customer_id)
+    if not customer:
         abort(404)
 
     # Get all orders
-    orders = storage.session.query(Order).filter_by(seller_id=buyer.id).all()
+    orders = storage.session.query(Order).filter_by(
+        customer_id=customer.id).all()
     orders = {"count": len(orders), "orders":
               [modify_order_output(order) for order in orders]}
     return jsonify(orders)
@@ -91,7 +92,7 @@ def buyer_view_orders(buyer_id):
 def seller_view_orders(seller_id):
     """Order endpoint for getting all order items for a
        specified seller
-       Args: buyer_id (str) - buyer's id
+       Args: customer_id (str) - customer's id
        Return: jsonified dictionary with a list of all orders
                belonging to specified seller
        file: orders.yml
@@ -102,6 +103,7 @@ def seller_view_orders(seller_id):
         abort(404)
 
     # Get all orders
+    # Violation of abstraction to be fixed
     orders = storage.session.query(OrderDetail).filter_by(
              seller_id=seller.id).all()
     orders = {"count": len(orders), "orders":

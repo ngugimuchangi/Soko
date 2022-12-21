@@ -1,14 +1,14 @@
 #!/usr/bin/python3
-"""Buyer notifications endpoint module
+"""customer notifications endpoint module
 """
 from api.notification.v1.views import notification_views
 from flask import abort, jsonify, make_response, request
 from models import storage
-from models.buyer import Buyer
-from models.buyer_notification import BuyerNotification
+from models.customer import Customer
+from models.customer_notification import CustomerNotification
 
 
-@notification_views.route("/buyernotifications/<notification_id>",
+@notification_views.route("/customer_notifications/<notification_id>",
                           methods=["GET", "PUT"],
                           strict_slashes=False)
 def manage_notification(notification_id):
@@ -22,7 +22,7 @@ def manage_notification(notification_id):
     attr_ignore = ["id", "created_at", "message", "updated_at"]
 
     # Notification search and validation
-    notification = storage.search(BuyerNotification, notification_id)
+    notification = storage.search(CustomerNotification, notification_id)
     if not notification:
         abort(404)
 
@@ -39,25 +39,25 @@ def manage_notification(notification_id):
     return jsonify(modify_notification_output(notification))
 
 
-@notification_views.route("/buyers/<buyer_id>/notifications",
+@notification_views.route("/customers/<customer_id>/notifications",
                           methods=["GET", "POST"],
                           strict_slashes=False)
-def create_and_view_payment_notifications(buyer_id):
+def create_and_view_payment_notifications(customer_id):
     """Notifications endpoint for getting all notifications for a
        specified user and adding a new notification
-       Args: buyer_id (str) - buyer's id
+       Args: customer_id (str) - customer's id
        Return: jsonified dictionary with a list of all notification
                belonging to specified user
-       file: buyer_notifications.yml
+       file: customer_notifications.yml
     """
-    # Buyer search and validation
-    buyer = storage.search(Buyer, buyer_id)
-    if not buyer:
+    # Customer search and validation
+    customer = storage.search(Customer, customer_id)
+    if not customer:
         abort(404)
 
     # Get all notifications
     if request.method == "GET":
-        notifications = buyer.notifications
+        notifications = customer.notifications
         notifications = {"count": len(notifications), "notifications":
                          [modify_notification_output(notification)
                           for notification in notifications]}
@@ -69,10 +69,9 @@ def create_and_view_payment_notifications(buyer_id):
         abort(400)
 
     kwargs = {key: value for key, value in data.items()
-              if hasattr(BuyerNotification, key)}
-    kwargs.update({"buyer_id": buyer_id})
+              if hasattr(CustomerNotification, key)}
     try:
-        new_notification = BuyerNotification(**kwargs)
+        new_notification = CustomerNotification(**kwargs)
     except Exception:
         abort(400)
     new_notification.save()
@@ -87,5 +86,5 @@ def modify_notification_output(notification):
         Return: dictionary represention of notification
     """
     notification_dict = notification.to_dict()
-    notification_dict.pop("buyer_id")
+    notification_dict.pop("customer_id")
     return notification_dict

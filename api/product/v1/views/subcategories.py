@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Subcategory endpoint
 """
-from api.products.v1.views import product_views
+from api.product.v1.views import product_views
 from flask import abort, jsonify, make_response, request, url_for
 from models import storage
 from models.category import Category
@@ -81,7 +81,6 @@ def create_or_view_subcategories(category_id):
 
     kwargs = {key: value for key, value in data.items()
               if hasattr(Subcategory, key)}
-    kwargs.update({"category_id": category_id})
     try:
         new_subcategory = Subcategory(**kwargs)
     except Exception:

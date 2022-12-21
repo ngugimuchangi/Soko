@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """Saved items endpoint module
 """
-from api.buyer.v1.views import user_views
+from api.customer.v1.views import user_views
 from flask import abort, jsonify, make_response, request
 from models import storage
-from models.buyer import Buyer
+from models.customer import Customer
 from models.saved_item import SavedItem
 
 
@@ -34,25 +34,25 @@ def manage_saved_items(item_id):
     return jsonify({})
 
 
-@user_views.route("/buyer/<buyer_id>/saved", methods=["GET", "POST"],
+@user_views.route("/customers/<customer_id>/saved", methods=["GET", "POST"],
                   strict_slashes=False)
-def create_and_view_saved_items(buyer_id):
+def create_and_view_saved_items(customer_id):
     """Saved items endpoint for getting all saved items for a
        specified user and adding a new item to their
        wish list
-       Args: buyer_id (str) - buyer's id
+       Args: customer_id (str) - customer's id
        Return: jsonified dictionary with a list of all saved
                items belonging to specified user
        file: saved_items.yml
     """
-    # Buyer search and validation
-    buyer = storage.search(Buyer, buyer_id)
-    if not buyer:
+    # Customer search and validation
+    customer = storage.search(Customer, customer_id)
+    if not customer:
         abort(404)
 
     # Get all saved items
     if request.method == "GET":
-        saved_items = buyer.saved_items
+        saved_items = customer.saved_items
         saved_items = {"count": len(saved_items), "saved items":
                        [modify_saved_item_output(item)
                         for item in saved_items]}
@@ -65,7 +65,6 @@ def create_and_view_saved_items(buyer_id):
 
     kwargs = {key: value for key, value in data.items()
               if hasattr(SavedItem, key)}
-    kwargs.update({"buyer_id": buyer_id})
     try:
         new_saved_item = SavedItem(**kwargs)
     except Exception:
@@ -82,5 +81,5 @@ def modify_saved_item_output(item):
         Return: dictionary represention of saved item
     """
     item_dict = item.to_dict()
-    item_dict.pop("buyer_id")
+    item_dict.pop("customer_id")
     return item_dict

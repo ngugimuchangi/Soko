@@ -1,16 +1,16 @@
 #!/usr/bin/python3
 """Cart endpoint module
 """
-from api.buyer.v1.views import user_views
+from api.customer.v1.views import customer_views
 from flask import abort, jsonify, make_response, request
 from models import storage
-from models.buyer import Buyer
+from models.customer import Customer
 from models.cart import Cart
 
 
-@user_views.route("/cart/<item_id>",
-                  methods=["GET", "DELETE", "PUT"],
-                  strict_slashes=False)
+@customer_views.route("/cart/<item_id>",
+                      methods=["GET", "DELETE", "PUT"],
+                      strict_slashes=False)
 def manage_cart(item_id):
     """Cart endpoint for get, update and delete
        cart items
@@ -47,25 +47,26 @@ def manage_cart(item_id):
     return jsonify(modify_cart_output(cart_item))
 
 
-@user_views.route("/buyer/<buyer_id>/cart", methods=["GET", "POST"],
-                  strict_slashes=False)
-def create_and_view_cart_items(buyer_id):
+@customer_views.route("/customers/<customer_id>/cart",
+                      methods=["GET", "POST"],
+                      strict_slashes=False)
+def create_and_view_cart_items(customer_id):
     """Cart endpoint for getting all cart items for a
-       specified user and adding a new item to their
+       specified customer and adding a new item to their
        cart
-       Args: buyer_id (str) - buyer's id
+       Args: customer_id (str) - customer's id
        Return: jsonified dictionary with a list of all cart
-               items belonging to specified user
+               items belonging to specified customer
        file: cart.yml
     """
-    # Buyer search and validation
-    buyer = storage.search(Buyer, buyer_id)
-    if not buyer:
+    # Customer search and validation
+    customer = storage.search(Customer, customer_id)
+    if not customer:
         abort(404)
 
     # Get all cart items
     if request.method == "GET":
-        cart_items = buyer.cart
+        cart_items = customer.cart
         cart_items = {"count": len(cart_items), "cart items":
                       [modify_cart_output(item) for item in cart_items]}
         return jsonify(cart_items)
@@ -77,7 +78,7 @@ def create_and_view_cart_items(buyer_id):
 
     kwargs = {key: value for key, value in data.items()
               if hasattr(Cart, key)}
-    kwargs.update({"buyer_id": buyer_id})
+    kwargs.update({"customer_id": customer_id})
     try:
         new_cart_item = Cart(**kwargs)
     except Exception:
@@ -93,5 +94,5 @@ def modify_cart_output(item):
         Return: dictionary represention of cart item
     """
     item_dict = item.to_dict()
-    item_dict.pop("buyer_id")
+    item_dict.pop("customer_id")
     return item_dict
