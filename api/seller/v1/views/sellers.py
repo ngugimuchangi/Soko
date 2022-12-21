@@ -84,7 +84,7 @@ def modify_seller_output(seller):
         Return: dictionary represention of seller
     """
     seller_dict = seller.to_dict()
-    seller_dict.pop("password")
+    seller_dict.pop("id")
     products = [product.id for product in seller.products]
     seller_dict.update({"products": products})
     return seller_dict

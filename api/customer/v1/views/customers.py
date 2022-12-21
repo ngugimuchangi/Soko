@@ -83,7 +83,6 @@ def modify_customer_output(customer):
 
     customer_dict = customer.to_dict()
     customer_dict.pop("id")
-    customer_dict.pop("password")
     addresses = [url_for("views.manage_address", address_id=address.id)
                  for address in customer.addresses]
     cards = [url_for("views.manage_card", card_id=card.id)

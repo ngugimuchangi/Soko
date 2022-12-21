@@ -78,7 +78,6 @@ def create_and_view_payment_cards(customer_id):
 
     kwargs = {key: value for key, value in data.items()
               if hasattr(CustomerCard, key)}
-    kwargs.update({"customer_id": customer_id})
     try:
         new_card = CustomerCard(**kwargs)
     except Exception:

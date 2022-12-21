@@ -78,7 +78,6 @@ def create_and_view_cart_items(customer_id):
 
     kwargs = {key: value for key, value in data.items()
               if hasattr(Cart, key)}
-    kwargs.update({"customer_id": customer_id})
     try:
         new_cart_item = Cart(**kwargs)
     except Exception:
