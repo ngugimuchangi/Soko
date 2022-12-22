@@ -29,10 +29,10 @@ class Order(Base, BaseModel):
     subtotal = Column(Float, CheckConstraint('subtotal > 0',
                       name='subtotal_positive'),
                       nullable=False)
-    vat = Column(Float, CheckConstraint('subtotal > 0',
+    vat = Column(Float, CheckConstraint('vat > 0',
                  name='subtotal_positive'),
                  nullable=False)
-    shipping_cost = Column(Float, CheckConstraint('subtotal > 0.00',
+    shipping_cost = Column(Float, CheckConstraint('shipping_cost > 0.00',
                            name='subtotal_positive'), nullable=False)
     shipping_address = Column(Text, nullable=True)
     order_status = Column(String(60), nullable=False)
