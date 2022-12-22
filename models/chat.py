@@ -14,7 +14,7 @@ class Chat(Base, BaseModel):
     __tablename__ = "chats"
 
     seller_id = Column(String(60), ForeignKey('sellers.id'))
-    customer_id = Column(String(60), ForeignKey('buyers.id'))
+    customer_id = Column(String(60), ForeignKey('customers.id'))
     customer_read_status = Column(Integer, default=0, nullable=False)
     seller_read_status = Column(Integer, default=0, nullable=False)
     customer_delete_status = Column(Integer, default=0, nullable=False)
