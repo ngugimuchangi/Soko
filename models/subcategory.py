@@ -21,7 +21,7 @@ class Subcategory(Base, BaseModel):
     category_id = Column(String(60), ForeignKey('categories.id'))
     subcatory_name = Column(String(128), nullable=False)
     subcategory_description = Column(Text, nullable=False)
-    products = relationship("Products", backref="subcategory",
+    products = relationship("Product", backref="subcategory",
                             cascade="all,delete")
 
     def __init__(self, **kwargs):
