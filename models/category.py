@@ -3,26 +3,24 @@
         Definition of Category class, it attributes,
         and methods
 """
-
-from typing import Text
-from sqlalchemy.orm import relationship
-import models
-from os import getenv
-import sqlalchemy
-from sqlalchemy import Column, String, Text
-from models import subcategory
-from models import product
 from models.base_model import Base, BaseModel
+from sqlalchemy.orm import relationship
+from sqlalchemy import Column, String, Text
 
 
 class Category(Base, BaseModel):
-    """Creates the Category table object."""
+    """ Category class representing categories table
+        Attributes:
+            category_name: category's name
+            category_description: category's description
+            subcategories: relationship with subcategories
+                           field
+    """
     category_name = Column(String(128), nullable=False)
-    category_description = Column(Text(255), nullable=False)
-    product = relationship('Product', backref='product')
-    subcategory = relationship('Subcategory', backref='subcategory')
+    category_description = Column(Text, nullable=False)
+    subcategories = relationship("Subcategory", backref="category",
+                                 cascade="all,delete")
 
     def __init__(self, **kwargs):
-        """Initializes the category object."""
-
+        """Instantiates the Category object."""
         super().__init__(**kwargs)

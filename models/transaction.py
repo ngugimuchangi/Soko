@@ -1,22 +1,30 @@
 #!/usr/bin/python3
-""" Base Trasnaction module
-        Definition of Base class, it attributes,
+""" Transaction module
+        Definition of Transaction class, it attributes,
         and methods
 """
-from sqlalchemy.orm import relationship
-import models
-from os import getenv
-from sqlalchemy import Column, String, ForeignKey,
-
-
 from models.base_model import Base, BaseModel
+from sqlalchemy import Column, String, Float, ForeignKey
+from sqlalchemy.orm import relationship
 
 
 class Transaction(Base, BaseModel):
-    """Creates a Transaction table object."""
-    order_id = Column(String(60), ForeignKey('orders.id'))
+    """ Transaction class representing transactions table
+        Attributes:
+            seller_id: seller's id
+            order_id: foreign key to orders table's
+                      id field
+            amount: amount paid to seller
+            details: relationship with transaction_details table
+    """
+    __table__ = "transactions"
 
-    def __init__(self, *args, **kwargs):
+    seller_id = Column(String(60), nullable=False)
+    order_id = Column(String(60), ForeignKey("orders.id"))
+    amount = Column(Float, nullable=False)
+    details = relationship("TransactionDetail", backref="transaction",
+                           cascade="all,delete")
+
+    def __init__(self, **kwargs):
         """Instantiates a Transaction object."""
-
-        super().__init__(*args, **kwargs)
+        super().__init__(**kwargs)

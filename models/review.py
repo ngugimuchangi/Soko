@@ -3,20 +3,27 @@
         Definition of Review class, it attributes,
         and methods
 """
-from sqlalchemy.orm import relationship
-import models
-from os import getenv
-from sqlalchemy import Column, String, Integer, ForeignKey, Text
 
-
+from sqlalchemy import (Column, ForeignKey,
+                        Integer, String, Text)
 from models.base_model import Base, BaseModel
 
 
 class Review (Base, BaseModel):
-    """Creates A Review table object."""
-    buyer_id = Column(String(60), ForeignKey('buyers.id'))
+    """ Review class representing reviews table
+        Attributes:
+            first_name (str): customer's first name
+            last_name (str): customer's last name
+            product_id (str): foreign key to product id table
+            rating (int): product rating
+            review (text): customer's review
+    """
+    __table__ = "reviews"
+
+    first_name = Column(String(128), nullable=False)
+    last_name = Column(String(128), nullable=False)
     product_id = Column(String(60), ForeignKey('products.id'))
-    rating = Column(Integer)
+    rating = Column(Integer, nullable=False)
     review = Column(Text(255), nullable=True)
 
     def __init__(self, *args, **kwargs):

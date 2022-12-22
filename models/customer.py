@@ -3,6 +3,7 @@
         Definition of Buyer class, it attributes,
         and methods
 """
+from flask_login import UserMixin
 from hashlib import sha256
 from models.base_model import Base, BaseModel
 from sqlalchemy import Column, String
@@ -10,7 +11,7 @@ from sqlalchemy.orm import relationship
 from uuid import uuid4
 
 
-class Customer(Base, BaseModel):
+class Customer(Base, BaseModel, UserMixin):
     """ Customer class representing customer table
         Attributes:
             first_name (str): customer's first name
