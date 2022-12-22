@@ -30,10 +30,10 @@ class Order(Base, BaseModel):
                       name='subtotal_positive'),
                       nullable=False)
     vat = Column(Float, CheckConstraint('vat > 0',
-                 name='subtotal_positive'),
+                 name='vat_positive'),
                  nullable=False)
     shipping_cost = Column(Float, CheckConstraint('shipping_cost > 0.00',
-                           name='subtotal_positive'), nullable=False)
+                           name='shipping_cost_positive'), nullable=False)
     shipping_address = Column(Text, nullable=True)
     order_status = Column(String(60), nullable=False)
     details = relationship("OrderDetail", backref="order", cascade="all")
