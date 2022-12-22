@@ -103,7 +103,7 @@ class SokoConsole(Cmd):
             return
 
         class_name = line.split()[0]
-        if class_name in SokoConsole.__classes:
+        if class_name in SokoConsole.classes.keys():
             count = len(storage.search(SokoConsole.classes.get(class_name)))
             print(count)
         else:
@@ -330,7 +330,7 @@ class SokoConsole(Cmd):
 
         args = line.split()
         class_name = args[0]
-        if class_name not in SokoConsole.__classes:
+        if class_name not in SokoConsole.classes.keys():
             print("** class doesn't exist **")
             return
 
