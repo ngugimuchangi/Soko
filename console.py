@@ -265,7 +265,7 @@ class SokoConsole(Cmd):
 
     def help_update(self):
         """ Help function for update command """
-        print("Usage: update <class name> <id>=<attribute name>",
+        print("Usage: update <class name> <id> attribute name>=" +
               "<attribute value>\n" + "Update command to search for",
               "object by id and update it using passed",
               "attribute name and value\n")
