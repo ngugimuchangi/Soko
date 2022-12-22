@@ -180,9 +180,10 @@ class SokoConsole(Cmd):
             Return: nothing
         """
         obj = SokoConsole.validate(line)
+        print(obj)
         if not obj:
             return
-        if not SokoConsole.validate_attr(line.split()):
+        if not SokoConsole.validate_attr(line.split("=")[2:]):
             return
         attr_name, attr_val = line.split()[2:4]
         if attr_name not in obj.to_dict().keys():
@@ -326,10 +327,13 @@ class SokoConsole(Cmd):
             Return: True if attributes value and names are passed
                     False if either or both are not passed.
         """
-        if len(args) < 3:
+        if not args:
             print("** attribute name missing **")
-        elif len(args) < 4:
+        elif len(args) < 2:
             print("** value missing **")
+        elif len(args) > 2:
+            print("** too many arguments.",
+                  "update one attribute at a time **")
         else:
             return True
         return False
