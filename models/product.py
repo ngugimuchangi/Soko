@@ -33,7 +33,7 @@ class Product(Base, BaseModel):
                    "price >= 0.00",
                    name='unit_cost_positive'),
                    nullable=False)
-    images = relationship("Order", backref="product",
+    images = relationship("ProductImage", backref="product",
                           cascade="all,delete")
     reviews = relationship("Review", backref="product",
                            cascade="all,delete")
