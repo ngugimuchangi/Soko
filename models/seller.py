@@ -37,7 +37,7 @@ class Seller(Base, BaseModel):
     products = relationship("Product", backref="seller",
                             cascade="all,delete")
     card = relationship("SellerCard", backref="seller",
-                        cascade="all delete")
+                        cascade="all,delete")
     notifications = relationship("SellerNotification", backref="seller",
                                  cascade="all,delete")
 
