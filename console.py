@@ -198,7 +198,7 @@ class SokoConsole(Cmd):
         if attr_name in ["price", "amount", "vat",
                          "shipping_cost", "subtotal"]:
             attr_val = float(attr_val)
-        setattr(obj, attr_val, attr_name)
+        setattr(obj, attr_name, attr_val)
         try:
             storage.save()
         except Exception as error:
