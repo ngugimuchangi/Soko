@@ -7,7 +7,7 @@ from models.base_model import Base, BaseModel
 from sqlalchemy import Column, ForeignKey, Integer, String
 
 
-class Cart(Base, BaseModel):
+class Cart(BaseModel, Base):
     """ Cart class representing cart table
         Attributes:
                 customer_id (str): foreign key to customer table's

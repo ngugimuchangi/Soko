@@ -10,7 +10,7 @@ from sqlalchemy.orm import relationship
 from uuid import uuid4
 
 
-class Seller(Base, BaseModel):
+class Seller(BaseModel, Base):
     """ Seller class representing sellers table
         Attributes:
             first_name (str): sellers's first name

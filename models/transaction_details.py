@@ -7,7 +7,7 @@ from models.base_model import Base, BaseModel
 from sqlalchemy import Column, Float, ForeignKey, String
 
 
-class TransactionDetail(Base, BaseModel):
+class TransactionDetail(BaseModel, Base):
     """ TransactionDetail class representing transactions_details table
         Attributes:
             transaction_id: foreign key to transactions table's

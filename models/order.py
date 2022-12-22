@@ -9,7 +9,7 @@ from sqlalchemy import (Column, CheckConstraint,
 from sqlalchemy.orm import relationship
 
 
-class Order(Base, BaseModel):
+class Order(BaseModel, Base):
     """ Order class representing orders table
         Attributes:
             customer_id: customer who made the order

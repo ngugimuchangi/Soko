@@ -11,7 +11,7 @@ from sqlalchemy.orm import relationship
 from uuid import uuid4
 
 
-class Customer(Base, BaseModel, UserMixin):
+class Customer(BaseModel, Base, UserMixin):
     """ Customer class representing customer table
         Attributes:
             first_name (str): customer's first name
@@ -45,7 +45,7 @@ class Customer(Base, BaseModel, UserMixin):
     notifications = relationship("CustomerNotification",
                                  backref="customer",
                                  cascade="all,delete")
-    saved_items = relationship("SavedItem",
+    saved_items = relationship("SavedItems",
                                backref="customer",
                                cascade="all,delete")
     shipping_addresses = relationship("ShippingAddress",

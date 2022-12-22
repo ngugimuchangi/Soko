@@ -9,7 +9,7 @@ from models.base_model import Base, BaseModel
 from sqlalchemy import Column, Date, ForeignKey, String
 
 
-class SellerCard(Base, BaseModel, UserMixin):
+class SellerCard(BaseModel, Base, UserMixin):
     """ SellerCard class representing seller_cards table
         Attributes:
             seller_id (str): foreign key to seller table's

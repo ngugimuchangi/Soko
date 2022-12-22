@@ -8,7 +8,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy import Column, String, Text
 
 
-class Category(Base, BaseModel):
+class Category(BaseModel, Base):
     """ Category class representing categories table
         Attributes:
             category_name: category's name

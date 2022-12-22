@@ -8,7 +8,7 @@ from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 
 
-class Chat(Base, BaseModel):
+class Chat(BaseModel, Base):
     """Creates a Chat table object."""
 
     __tablename__ = "chats"

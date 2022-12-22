@@ -8,7 +8,7 @@ from models.base_model import Base, BaseModel
 from sqlalchemy import Column, ForeignKey, String, Date
 
 
-class CustomerCard(Base, BaseModel):
+class CustomerCard(BaseModel, Base):
     """ CustomerCard class representing customer_cards table
         Attributes:
             customer_id (str): foreign key to customer table's

@@ -7,7 +7,7 @@ from models.base_model import Base, BaseModel
 from sqlalchemy import Column, ForeignKey, Integer, String, Text
 
 
-class CustomerNotification(Base, BaseModel):
+class CustomerNotification(BaseModel, Base):
     """ CustomerNotification class representing customer_notifications table
         Attributes:
                 customer_id (str): foreign key to customer table's

@@ -9,7 +9,7 @@ from sqlalchemy import (Column, CheckConstraint, ForeignKey,
 from sqlalchemy.orm import relationship
 
 
-class Product(Base, BaseModel):
+class Product(BaseModel, Base):
     """ Product class representing products table
         Attributes:
             product_name (str): Name of the product

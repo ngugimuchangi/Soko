@@ -7,7 +7,7 @@ from models.base_model import Base, BaseModel
 from sqlalchemy import Column, ForeignKey,  String
 
 
-class ProductImage(Base, BaseModel):
+class ProductImage(BaseModel, Base):
     """ ProductImage class represent product_images table
         Attributes:
             product_id (str): foreign key to products table

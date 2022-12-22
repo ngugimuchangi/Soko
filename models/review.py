@@ -9,7 +9,7 @@ from sqlalchemy import (Column, ForeignKey,
 from models.base_model import Base, BaseModel
 
 
-class Review (Base, BaseModel):
+class Review (BaseModel, Base):
     """ Review class representing reviews table
         Attributes:
             first_name (str): customer's first name

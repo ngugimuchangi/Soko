@@ -8,7 +8,7 @@ from sqlalchemy import Column, String, ForeignKey, Text
 from sqlalchemy.orm import relationship
 
 
-class Subcategory(Base, BaseModel):
+class Subcategory(BaseModel, Base):
     """ Subcategory class representing subcategories table
         Attributes:
             category_id (str): foreign key to categories table's

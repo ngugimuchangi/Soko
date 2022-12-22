@@ -7,7 +7,7 @@ from models.base_model import Base, BaseModel
 from sqlalchemy import Column, String, ForeignKey, Text
 
 
-class ShippingAddress(Base, BaseModel):
+class ShippingAddress(BaseModel, Base):
     """ ShippingAddress class representing shipping_addresses table
         Attributes:
             customer_id: foreign key to customer table's

@@ -8,7 +8,7 @@ from sqlalchemy import (Column, Float, ForeignKey,
 from models.base_model import Base, BaseModel
 
 
-class OrderDetail(Base, BaseModel):
+class OrderDetail(BaseModel, Base):
     """ OrderDetail class representing order_details table
         Attributes:
             order_id (str): foreign key to order table's id field

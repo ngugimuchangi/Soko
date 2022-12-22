@@ -8,7 +8,7 @@ from sqlalchemy import Column, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
 
 
-class Transaction(Base, BaseModel):
+class Transaction(BaseModel, Base):
     """ Transaction class representing transactions table
         Attributes:
             seller_id: seller's id

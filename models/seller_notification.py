@@ -7,7 +7,7 @@ from models.base_model import Base, BaseModel
 from sqlalchemy import Column, ForeignKey, Integer, String, Text
 
 
-class SellerNotification(Base, BaseModel):
+class SellerNotification(BaseModel, Base):
     """ SellerNotification class representing seller_notifications table
         Attributes:
                 seller_id (str): foreign key to sellers table's
