@@ -18,7 +18,7 @@ class Message(Base, BaseModel):
             message (text): text message if any
             file_path (str): path to file if any
     """
-    __table__ = "messages"
+    __tablename__ = "messages"
 
     chat_id = Column(String(60), ForeignKey("chats.id"))
     sender = Column(String(60), nullable=False)

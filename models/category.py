@@ -16,6 +16,8 @@ class Category(Base, BaseModel):
             subcategories: relationship with subcategories
                            field
     """
+    __tablename__ = "categories"
+
     category_name = Column(String(128), nullable=False)
     category_description = Column(Text, nullable=False)
     subcategories = relationship("Subcategory", backref="category",

@@ -8,7 +8,7 @@ from sqlalchemy import Column, String, ForeignKey, Text
 
 
 class ShippingAddress(Base, BaseModel):
-    """ ShippingAddress class representing shipping_address table
+    """ ShippingAddress class representing shipping_addresses table
         Attributes:
             customer_id: foreign key to customer table's
                          id field
@@ -17,6 +17,7 @@ class ShippingAddress(Base, BaseModel):
             phone_number: last_name of person associated with address
             shipping_address: shipping address details
     """
+    __tablename__ = "shipping_addresses"
 
     customer_id = Column(String(60), ForeignKey('customers.id'))
     first_name = Column(String(128), nullable=False)

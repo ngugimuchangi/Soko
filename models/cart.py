@@ -17,7 +17,7 @@ class Cart(Base, BaseModel):
                 product_image (str) product's main image
                 quantity (int): quantity of a particular item in cart
     """
-    __table__ = "cart"
+    __tablename__ = "cart"
 
     customer_id = Column(String(60), ForeignKey("customers.id"),
                          nullable=False)

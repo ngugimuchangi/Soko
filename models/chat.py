@@ -11,7 +11,7 @@ from sqlalchemy.orm import relationship
 class Chat(Base, BaseModel):
     """Creates a Chat table object."""
 
-    __table__ = "chats"
+    __tablename__ = "chats"
 
     seller_id = Column(String(60), ForeignKey('sellers.id'))
     customer_id = Column(String(60), ForeignKey('buyers.id'))

@@ -23,7 +23,7 @@ class Order(Base, BaseModel):
             order_details: relationship with order detail's table
             transactions: relationship with transaction's table
     """
-    __table__ = "orders"
+    __tablename__ = "orders"
 
     customer_id = Column(String(60), nullable=True)
     subtotal = Column(Float, CheckConstraint('subtotal > 0',

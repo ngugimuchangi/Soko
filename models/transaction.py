@@ -17,7 +17,7 @@ class Transaction(Base, BaseModel):
             amount: amount paid to seller
             details: relationship with transaction_details table
     """
-    __table__ = "transactions"
+    __tablename__ = "transactions"
 
     seller_id = Column(String(60), nullable=False)
     order_id = Column(String(60), ForeignKey("orders.id"))

@@ -20,7 +20,7 @@ class SellerCard(Base, BaseModel, UserMixin):
             name_on_card (str): identity of card holder
             card_type (str): card_type
     """
-    __table__ = "seller_cards"
+    __tablename__ = "seller_cards"
 
     seller_id = Column(String(60), ForeignKey("sellers.id"),
                        nullable=False)

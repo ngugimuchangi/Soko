@@ -15,7 +15,7 @@ class TransactionDetail(Base, BaseModel):
             order_details_id (str): link to order details
             amount (float): amount paid to seller product delivered
     """
-    __table__ = "transactions_details"
+    __tablename__ = "transactions_details"
 
     order_id = Column(String(60), ForeignKey("orders.id"))
     order_detail_id = Column(String(60), nullable=False)

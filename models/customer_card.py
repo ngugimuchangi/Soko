@@ -20,7 +20,7 @@ class CustomerCard(Base, BaseModel):
             card_type (str): card_type
 
     """
-    __table__ = "customer_cards"
+    __tablename__ = "customer_cards"
 
     customer_id = Column(String(60), ForeignKey("customers.id"),
                          nullable=False)

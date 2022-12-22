@@ -15,7 +15,7 @@ class ProductImage(Base, BaseModel):
             file_path (str): absolute path of the image
             image_status(str): image status, whether default or not
     """
-    __table__ = "product_images"
+    __tablename__ = "product_images"
 
     products_id = Column(String(60), ForeignKey("products.id"),
                          nullable=False)

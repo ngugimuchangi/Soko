@@ -28,7 +28,7 @@ class Customer(Base, BaseModel, UserMixin):
             shipping_addresses: relationship with shipping address
                               table
     """
-    __table__ = "customers"
+    __tablename__ = "customers"
 
     first_name = Column(String(128), nullable=False)
     last_name = Column(String(128), nullable=False)

@@ -16,7 +16,7 @@ class SavedItem(Base, BaseModel):
                 product_image(str): product's main image
                 product_name (str):  product's name
     """
-    __table__ = "saved_items"
+    __tablename__ = "saved_items"
 
     customer_id = Column(String(60), ForeignKey("customers.id"),
                          nullable=False)

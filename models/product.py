@@ -22,7 +22,7 @@ class Product(Base, BaseModel):
             images: relationship with product_images table
             reviews: relationship with reviews table
     """
-    __table__ = "products"
+    __tablename__ = "products"
 
     product_name = Column(String(128), nullable=False)
     category_id = Column(String(60), ForeignKey('subcategories.id'))

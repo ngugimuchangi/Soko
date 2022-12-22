@@ -15,7 +15,7 @@ class CustomerNotification(Base, BaseModel):
                 message (str):  notification message
                 read_status (int):  notification's status
     """
-    __table__ = "customer_notifications"
+    __tablename__ = "customer_notifications"
 
     customer_id = Column(String(60), ForeignKey("customers.id"),
                          nullable=False)

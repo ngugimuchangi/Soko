@@ -16,6 +16,8 @@ class Subcategory(Base, BaseModel):
             subcategory_name (str): name of subcategory
             subcategory_description (str): description of subcategory
     """
+    __tablename__ = "subcategories"
+
     category_id = Column(String(60), ForeignKey('categories.id'))
     subcatory_name = Column(String(128), nullable=False)
     subcategory_description = Column(Text, nullable=False)

@@ -24,6 +24,8 @@ class OrderDetail(Base, BaseModel):
             payment_status(str): seller payment status for ordered
                                  product(pending, paid)
     """
+    __tablename__ = "order_details"
+
     order_id = Column(String(60), ForeignKey("orders.id"), nullable=False)
     product_id = Column(String(60), nullable=False)
     product_name = Column(String(128), nullable=False)

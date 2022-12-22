@@ -25,7 +25,7 @@ class Seller(Base, BaseModel):
             card: relationship with seller_cards table
             notifications: relationship with seller_notifications table
     """
-    __table__ = "sellers"
+    __tablename__ = "sellers"
 
     first_name = Column(String(128), nullable=False)
     last_name = Column(String(128), nullable=False)

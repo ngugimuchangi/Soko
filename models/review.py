@@ -18,7 +18,7 @@ class Review (Base, BaseModel):
             rating (int): product rating
             review (text): customer's review
     """
-    __table__ = "reviews"
+    __tablename__ = "reviews"
 
     first_name = Column(String(128), nullable=False)
     last_name = Column(String(128), nullable=False)
