@@ -58,6 +58,10 @@ class SokoConsole(Cmd):
                "TransactionDetail": TransactionDetail
                }
 
+    def preloop(self):
+        print("Hello")
+    def postloop(self):
+        print("Bye")
     def do_count(self, line):
         """ Count the number of saved instances
             belonging to a specific class
@@ -343,5 +347,5 @@ class SokoConsole(Cmd):
 
 
 if __name__ == "__main__":
-    print("Hi! Welcome to Soko CLI")
+    print("(soko) Hi! Welcome to Soko CLI")
     SokoConsole().cmdloop()
