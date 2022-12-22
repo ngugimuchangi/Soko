@@ -180,13 +180,12 @@ class SokoConsole(Cmd):
             Return: nothing
         """
         obj = SokoConsole.validate(line)
-        print(obj)
         if not obj:
             return
         update_values = line.split()[2:]
         if not SokoConsole.validate_attr(update_values):
             return
-        attr_name, attr_val = update_values.split("=")
+        attr_name, attr_val = update_values[0].split("=")
         if attr_name not in obj.to_dict().keys():
             print("{} {}".format("** Cannot add new attributes.",
                                  "Trying updating existing ones only **"))
