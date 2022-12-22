@@ -183,7 +183,7 @@ class SokoConsole(Cmd):
         print(obj)
         if not obj:
             return
-        update_values = line.split()[2]
+        update_values = line.split()[2:]
         if not SokoConsole.validate_attr(update_values):
             return
         attr_name, attr_val = update_values.split("=")
@@ -332,7 +332,7 @@ class SokoConsole(Cmd):
             print("** attribute name missing **")
             return False
 
-        args = args.split("=")
+        args = args[0].split("=")
         if len(args) < 2:
             print("** value missing **")
         elif len(args) > 2:
