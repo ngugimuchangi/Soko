@@ -335,5 +335,5 @@ class SokoConsole(Cmd):
 
 
 if __name__ == "__main__":
-    SokoConsole().cmdloop()
     print("Hi! Welcome to Soko CLI")
+    SokoConsole().cmdloop()
