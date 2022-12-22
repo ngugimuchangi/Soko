@@ -22,6 +22,7 @@ from models.seller import Seller
 from models.shipping_address import ShippingAddress
 from models.subcategory import Subcategory
 from models.transaction import Transaction
+from models.transaction_details import TransactionDetail
 import re
 
 
@@ -41,19 +42,20 @@ class SokoConsole(Cmd):
             static methods:
     """
 
-    Cmd.prompt = '(soko) '
+    Cmd.prompt = "(soko) "
 
-    classes = {'Customer': Customer, 'Cart': Cart,
-               'CustomerCard': CustomerCard,
-               'CustomerNotification': CustomerNotification,
-               'Category': Category, 'Chat': Chat, 'Order': Order,
-               'OrderDetail': OrderDetail, 'Message': Message,
-               'ProductImage': ProductImage, 'Product': Product,
-               'Review': Review, 'SavedItem': SavedItem,
-               'Seller': Seller, 'SellerCard': SellerCard,
-               'SellerNotification': SellerNotification,
-               'ShippingAddress': ShippingAddress,
-               'SubCategory': Subcategory, 'Transaction': Transaction
+    classes = {"Customer": Customer, "Cart": Cart,
+               "CustomerCard": CustomerCard,
+               "CustomerNotification": CustomerNotification,
+               "Category": Category, "Chat": Chat, "Order": Order,
+               "OrderDetail": OrderDetail, "Message": Message,
+               "ProductImage": ProductImage, "Product": Product,
+               "Review": Review, "SavedItem": SavedItem,
+               "Seller": Seller, "SellerCard": SellerCard,
+               "SellerNotification": SellerNotification,
+               "ShippingAddress": ShippingAddress,
+               "SubCategory": Subcategory, "Transaction": Transaction,
+               "TransactionDetail": TransactionDetail
                }
 
     def default(self, line):
@@ -62,12 +64,12 @@ class SokoConsole(Cmd):
                 line(str): user input
             Return: execution method for command if it exists
         """
-        cmds = {'all': self.do_all, 'create': self.do_create, 'show':
-                self.do_show, 'destroy': self.do_destroy, 'update':
-                self.do_update, 'count': self.do_count}
+        cmds = {"all": self.do_all, "create": self.do_create, "show":
+                self.do_show, "destroy": self.do_destroy, "update":
+                self.do_update, "count": self.do_count}
         input = line.split()
         cmd = input[0]
-        cmd = cmd.split('.')
+        cmd = cmd.split(".")
 
         if len(cmd) == 1:
             cmd = cmd[0]
@@ -78,7 +80,7 @@ class SokoConsole(Cmd):
             if not match:
                 print("**{} {}**".format("unknown syntax:", line))
                 return
-            cmd_args = cmd.replace("(", '').replace(")", '').split()
+            cmd_args = cmd.replace("(", "").replace(")", "").split()
             cmd = cmd_args[0]
             args = cmd_args[1:]
 
@@ -86,7 +88,7 @@ class SokoConsole(Cmd):
             print("**{} {}**".format("unknown syntax:", line))
             return
 
-        args = ' '.join(args)
+        args = " ".join(args)
         return cmds.get(cmd)(args)
 
     def do_count(self, line):
@@ -164,7 +166,7 @@ class SokoConsole(Cmd):
         """ Display string representation of an instance based
             on the class name and id
             Args:
-                line (str): instance's class name and id
+                line (str): instance"s class name and id
             Return: nothing
         """
         obj = SokoConsole.validate(line)
@@ -174,7 +176,7 @@ class SokoConsole(Cmd):
     def do_destroy(self, line):
         """ Search and destroy object using its class name and id
             Args:
-                line (str): object's class name and id
+                line (str): object"s class name and id
             Return: nothing
         """
         obj = SokoConsole.validate(line)
@@ -204,10 +206,10 @@ class SokoConsole(Cmd):
         print(objects)
 
     def do_update(self, line):
-        """ Update an object's existing attribute or add new
+        """ Update an object"s existing attribute or add new
             attribute to the object
             Args:
-                line (str): class name, object's id, attribute name,
+                line (str): class name, object"s id, attribute name,
                             attribute value
             Return: nothing
         """
@@ -221,13 +223,13 @@ class SokoConsole(Cmd):
             print("{} {}".format("**Cannot add new attributes.",
                                  "Trying updating existing ones only**"))
             return
-        if attr_name in ['created_at', 'updated_at']:
+        if attr_name in ["created_at", "updated_at"]:
             print("**Cannot update created and updated times manually")
             return
-        if attr_name in ['quantity', 'buyer_status', 'seller_status',
-                         'shop_status']:
+        if attr_name in ["quantity", "buyer_status", "seller_status",
+                         "shop_status"]:
             attr_val = int(attr_val)
-        if attr_name in ['const_per_unit', 'amount']:
+        if attr_name in ["const_per_unit", "amount"]:
             attr_val = float(attr_val)
         setattr(obj, attr_val, attr_name)
         storage.save()
@@ -292,7 +294,7 @@ class SokoConsole(Cmd):
     def help_update(self):
         """ Help function for update command """
         print("Usage: update <class name> <id> <attribute name>",
-              '"<attribute value>"\n' + "Update command to search for",
+              "<attribute value>\n" + "Update command to search for",
               "object by id and update it using passed",
               "attribute name and value\n")
 

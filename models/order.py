@@ -36,8 +36,8 @@ class Order(Base, BaseModel):
                            name='shipping_cost_positive'), nullable=False)
     shipping_address = Column(Text, nullable=True)
     order_status = Column(String(60), nullable=False)
-    details = relationship("OrderDetail", backref="order", cascade="all")
-    transactions = relationship("Transaction", backref="order", cascade="all")
+    details = relationship("OrderDetail", backref="order", cascade="all,delete")
+    transactions = relationship("Transaction", backref="order", cascade="all,delete")
 
     def __init__(self, *args, **kwargs) -> None:
         """Instantiates the Order object."""

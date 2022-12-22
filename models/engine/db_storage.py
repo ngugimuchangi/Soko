@@ -23,6 +23,7 @@ from models.seller import Seller
 from models.shipping_address import ShippingAddress
 from models.subcategory import Subcategory
 from models.transaction import Transaction
+from models.transaction_details import TransactionDetail
 from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
@@ -72,7 +73,7 @@ class DBStorage():
                       OrderDetail, Product, ProductImage, Message,
                       Review, SavedItem, SellerNotification, SellerCard,
                       Seller, ShippingAddress,
-                      Subcategory, Transaction]
+                      Subcategory, Transaction, TransactionDetail]
         objs = []
 
         if cls is not None and id is None:
