@@ -38,11 +38,11 @@ class DBStorage():
     def __init__(self):
         """ Constructor method to create engine for database storage"""
         # environment variables
-        env = getenv('SOKO_ENV')
-        user = getenv('SOKO_MYSQL_USER')
-        pwd = getenv('SOKO_MYSQL_PWD')
-        host = getenv('SOKO_MYSQL_HOST')
-        db = getenv('SOKO_MYSQL_DB')
+        env = getenv("SOKO_ENV")
+        user = getenv("SOKO_MYSQL_USER")
+        pwd = getenv("SOKO_MYSQL_PWD")
+        host = getenv("SOKO_MYSQL_HOST")
+        db = getenv("SOKO_MYSQL_DB")
         if all(var is not None for var in [user, pwd, host, db]):
             self.__engine = create_engine("{}://{}:{}@{}/{}".format(
                             "mysql+mysqldb", user, pwd, host, db),
