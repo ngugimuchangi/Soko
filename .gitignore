@@ -1,5 +1,0 @@
-.env
-.gitignore
-.venv
-__pycache__
-config_deploy
