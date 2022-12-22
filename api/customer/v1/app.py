@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Buyer RESTful API v.1
 """
-from api.customer.v1.views import user_views
+from api.customer.v1.views import customer_views
 from dotenv import load_dotenv
 from flasgger import Swagger
 from flask import Flask, jsonify, make_response
@@ -13,7 +13,7 @@ load_dotenv()
 
 
 app = Flask(__name__)
-app.register_blueprint(user_views)
+app.register_blueprint(customer_views)
 app.config["JSONIFY_PRETTYPRINT_REGULAR"]
 CORS(app, resources={r"/api/*": {"origins": getenv("ORIGINS")}})
 Swagger(app)
