@@ -45,7 +45,7 @@ class Customer(Base, BaseModel, UserMixin):
     notifications = relationship("CustomerNotification",
                                  backref="customer",
                                  cascade="all,delete")
-    saved_items = relationship("SavedItems",
+    saved_items = relationship("SavedItem",
                                backref="customer",
                                cascade="all,delete")
     shipping_addresses = relationship("ShippingAddress",
