@@ -38,7 +38,9 @@ class BaseModel:
         self.updated_at = datetime.now()
         if kwargs:
             for key, value in kwargs.items():
-                if key not in ["id", "created_at", "updated_at"]:
+                if hasattr(self.__class__, key) and \
+                   key not in ["id", "created_at",
+                               "updated_at"]:
                     setattr(self, key, value)
 
     def __str__(self):

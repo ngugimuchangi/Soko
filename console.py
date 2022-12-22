@@ -58,39 +58,6 @@ class SokoConsole(Cmd):
                "TransactionDetail": TransactionDetail
                }
 
-    def default(self, line):
-        """ Parse line to establish the command to exectue
-            Args:
-                line(str): user input
-            Return: execution method for command if it exists
-        """
-        cmds = {"all": self.do_all, "create": self.do_create, "show":
-                self.do_show, "destroy": self.do_destroy, "update":
-                self.do_update, "count": self.do_count}
-        input = line.split()
-        cmd = input[0]
-        cmd = cmd.split(".")
-
-        if len(cmd) == 1:
-            cmd = cmd[0]
-            args = input[1:]
-        else:
-            cmd_args = cmd[1]
-            match = re.search(r"\(.*\)$", cmd_args)
-            if not match:
-                print("**{} {}**".format("unknown syntax:", line))
-                return
-            cmd_args = cmd.replace("(", "").replace(")", "").split()
-            cmd = cmd_args[0]
-            args = cmd_args[1:]
-
-        if cmd not in cmds.keys():
-            print("**{} {}**".format("unknown syntax:", line))
-            return
-
-        args = " ".join(args)
-        return cmds.get(cmd)(args)
-
     def do_count(self, line):
         """ Count the number of saved instances
             belonging to a specific class
@@ -133,9 +100,9 @@ class SokoConsole(Cmd):
 
         kwargs = {}
         for arg in args:
-            attr_name = args.split("=")[0]
+            attr_name = arg.split("=")[0]
             if not hasattr(SokoConsole.classes.get(class_name), attr_name):
-                print("** {} {} {}**".format(attr_name,
+                print("** {} {} {} **".format(attr_name,
                       "is not an attribute of", class_name))
                 return
 
@@ -146,20 +113,19 @@ class SokoConsole(Cmd):
 
             attr_value = attr_value[0]
             if attr_name in ["quantity", "stock"]:
-                attr_val = int(attr_value)
+                attr_value = int(attr_value)
             if attr_name in ["price", "amount", "vat", "shipping_cost",
                              "subtotal"]:
-                attr_val = float(attr_value)
+                attr_value = float(attr_value)
             kwargs.update({attr_name: attr_value})
 
         try:
             new_object = SokoConsole.classes[class_name](**kwargs)
-        except Exception:
-            print("** missing non-nullable field",
-                  "or relationship key not found **")
+            new_object.save()
+        except Exception as error:
+            print("** {} **".format(error))
             return
         else:
-            new_object.save()
             print(new_object.id)
 
     def do_show(self, line):
@@ -226,13 +192,17 @@ class SokoConsole(Cmd):
         if attr_name in ["created_at", "updated_at"]:
             print("**Cannot update created and updated times manually")
             return
-        if attr_name in ["quantity", "buyer_status", "seller_status",
-                         "shop_status"]:
+        if attr_name in ["quantity", "stock"]:
             attr_val = int(attr_val)
-        if attr_name in ["const_per_unit", "amount"]:
+        if attr_name in ["price", "amount", "vat",
+                         "shipping_cost", "subtotal"]:
             attr_val = float(attr_val)
         setattr(obj, attr_val, attr_name)
-        storage.save()
+        try:
+            storage.save()
+        except Exception as error:
+            print("** {} **".fomart(error))
+            return
         print("{} {} {}".format(obj.__class__.__name__,
                                 obj.id, "successfully updated"))
 
@@ -366,3 +336,4 @@ class SokoConsole(Cmd):
 
 if __name__ == "__main__":
     SokoConsole().cmdloop()
+    print("Hi! Welcome to Soko CLI")
