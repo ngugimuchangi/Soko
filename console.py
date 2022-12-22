@@ -183,9 +183,10 @@ class SokoConsole(Cmd):
         print(obj)
         if not obj:
             return
-        if not SokoConsole.validate_attr(line.split("=")[2:]):
+        update_values = line.split()[2]
+        if not SokoConsole.validate_attr(update_values):
             return
-        attr_name, attr_val = line.split()[2:4]
+        attr_name, attr_val = update_values.split("=")
         if attr_name not in obj.to_dict().keys():
             print("{} {}".format("** Cannot add new attributes.",
                                  "Trying updating existing ones only **"))
@@ -329,7 +330,10 @@ class SokoConsole(Cmd):
         """
         if not args:
             print("** attribute name missing **")
-        elif len(args) < 2:
+            return False
+
+        args = args.split("=")
+        if len(args) < 2:
             print("** value missing **")
         elif len(args) > 2:
             print("** too many arguments.",
