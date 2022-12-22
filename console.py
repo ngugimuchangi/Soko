@@ -106,7 +106,7 @@ class SokoConsole(Cmd):
                       "is not an attribute of", class_name))
                 return
 
-            attr_value = args.split("=")[1:]
+            attr_value = arg.split("=")[1:]
             if not attr_value:
                 print("** missing attribute value **")
                 return
