@@ -39,7 +39,7 @@ class BaseModel:
         if kwargs:
             for key, value in kwargs.items():
                 if key not in ["id", "created_at", "updated_at"]:
-                    setattr(key, value, self)
+                    setattr(self, key, value)
 
     def __str__(self):
         """ String representation method
