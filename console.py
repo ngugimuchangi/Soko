@@ -185,12 +185,12 @@ class SokoConsole(Cmd):
         if not SokoConsole.validate_attr(line.split()):
             return
         attr_name, attr_val = line.split()[2:4]
-        if attr_name in obj.to_dict().keys():
-            print("{} {}".format("**Cannot add new attributes.",
-                                 "Trying updating existing ones only**"))
+        if attr_name not in obj.to_dict().keys():
+            print("{} {}".format("** Cannot add new attributes.",
+                                 "Trying updating existing ones only **"))
             return
         if attr_name in ["created_at", "updated_at"]:
-            print("**Cannot update created and updated times manually")
+            print("** Cannot update created and updated times manually ")
             return
         if attr_name in ["quantity", "stock"]:
             attr_val = int(attr_val)
@@ -240,7 +240,8 @@ class SokoConsole(Cmd):
 
     def help_create(self):
         """ Help function for create command """
-        print("Usage: create <class name>\n" +
+        print("Usage: create <class name>",
+              "<attr_name>=<attribute_value>\n" +
               "Create command to create new object instance.\n")
 
     def help_show(self):
@@ -263,7 +264,7 @@ class SokoConsole(Cmd):
 
     def help_update(self):
         """ Help function for update command """
-        print("Usage: update <class name> <id> <attribute name>",
+        print("Usage: update <class name> <id>=<attribute name>",
               "<attribute value>\n" + "Update command to search for",
               "object by id and update it using passed",
               "attribute name and value\n")
