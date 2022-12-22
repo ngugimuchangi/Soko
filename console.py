@@ -213,7 +213,7 @@ class SokoConsole(Cmd):
             Return: nothing
         """
         storage.close()
-        print("{} Goodbye :-)".format(SokoConsole.prompt))
+        print("{}Goodbye :-)".format(SokoConsole.prompt))
         exit()
 
     def do_EOF(self, line):
@@ -343,5 +343,5 @@ class SokoConsole(Cmd):
 
 
 if __name__ == "__main__":
-    print("{} Hi! Welcome to Soko CLI".format(SokoConsole.prompt))
+    print("{}Hi! Welcome to Soko CLI".format(SokoConsole.prompt))
     SokoConsole().cmdloop()
