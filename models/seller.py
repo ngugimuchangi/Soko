@@ -35,7 +35,7 @@ class Seller(Base, BaseModel):
     salt = Column(String(60))
     shop_status = Column(Integer, default=1, nullable=False)
     products = relationship("Product", backref="seller",
-                            cascade="all delete")
+                            cascade="all,delete")
     card = relationship("SellerCard", backref="seller",
                         cascade="all delete")
     notifications = relationship("SellerNotification", backref="seller",
