@@ -36,9 +36,9 @@ class Customer(BaseModel, Base, UserMixin):
     email = Column(String(128), nullable=False, unique=True)
     password = Column(String(128), nullable=False)
     salt = Column(String(60))
-    card = relationship('CustomerCard',
-                        backref="customer",
-                        cascade="all,delete")
+    cards = relationship('CustomerCard',
+                         backref="customer",
+                         cascade="all,delete")
     cart = relationship("Cart",
                         backref="customer",
                         cascade="all,delete")
@@ -48,9 +48,9 @@ class Customer(BaseModel, Base, UserMixin):
     saved_items = relationship("SavedItem",
                                backref="customer",
                                cascade="all,delete")
-    shipping_addresses = relationship("ShippingAddress",
-                                      backref="customer",
-                                      cascade="all,delete")
+    addresses = relationship("ShippingAddress",
+                             backref="customer",
+                             cascade="all,delete")
 
     def __init__(self, **kwargs):
         """Instantiates the Customer object."""

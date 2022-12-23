@@ -11,7 +11,7 @@ from models.seller_notification import SellerNotification
 @notification_views.route("/sellernotifications/<notification_id>",
                           methods=["GET", "PUT"],
                           strict_slashes=False)
-def manage_notification(notification_id):
+def manage_seller_notification(notification_id):
     """Notification endpoint for get and update user
        notifications
        Args: notification_id (str) - notification id
@@ -42,7 +42,7 @@ def manage_notification(notification_id):
 @notification_views.route("/sellers/<notification_id>/notifications",
                           methods=["GET", "POST"],
                           strict_slashes=False)
-def create_and_view_payment_notifications(notification_id):
+def create_and_view_seller_notifications(notification_id):
     """Notifications endpoint for getting all notifications for a
        specified seller and adding a new notification
        Args: notification_id (str) - seller's id

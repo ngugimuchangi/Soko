@@ -78,7 +78,7 @@ class BaseModel:
         # Card expiring date
         if my_dict.get("expiry_date"):
             my_dict.update({"expiry_date": my_dict.get(
-                           "expiry_date").isofomart()})
+                           "expiry_date").isoformat()})
 
         # remove password and salt from dictionary
         # representation if they exist

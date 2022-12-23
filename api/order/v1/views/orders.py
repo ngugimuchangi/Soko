@@ -111,7 +111,7 @@ def seller_view_orders(seller_id):
     return jsonify(orders)
 
 
-@order_views.route("/order", method=["POST"],
+@order_views.route("/order", methods=["POST"],
                    strict_slashes=False)
 def create_order():
     """Order endpoint for creating new orders

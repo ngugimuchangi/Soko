@@ -8,7 +8,7 @@ from models.customer import Customer
 from models.shipping_address import ShippingAddress
 
 
-@customer_views.route("/addresses/<address_id>", method=["GET",
+@customer_views.route("/addresses/<address_id>", methods=["GET",
                       "PUT", "DELETE"], strict_slashes=False)
 def manage_address(address_id):
     """Shipping Address endpoint for get, update and delete

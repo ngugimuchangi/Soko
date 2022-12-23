@@ -19,7 +19,7 @@ class Subcategory(BaseModel, Base):
     __tablename__ = "subcategories"
 
     category_id = Column(String(60), ForeignKey('categories.id'))
-    subcatory_name = Column(String(128), nullable=False)
+    subcategory_name = Column(String(128), nullable=False)
     subcategory_description = Column(Text, nullable=False)
     products = relationship("Product", backref="subcategory",
                             cascade="all,delete")

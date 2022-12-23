@@ -6,6 +6,7 @@ from flask import abort, jsonify, make_response, request, url_for
 from hashlib import sha256
 from models import storage
 from models.customer import Customer
+from os import getenv
 
 
 @customer_views.route("/customers/<customer_id>",
@@ -67,7 +68,7 @@ def get_all_customers():
                created customer
     file: customer.yml
     """
-    customers = storage.all(Customer)
+    customers = storage.search(Customer)
     customers = {"count": len(customers), "customers":
                  [modify_customer_output(customer)
                   for customer in customers]}
@@ -80,12 +81,20 @@ def modify_customer_output(customer):
         Args: customer (object) - customer object
         Return: dictionary represention of customer
     """
-
     customer_dict = customer.to_dict()
     customer_dict.pop("id")
-    addresses = [url_for("views.manage_address", address_id=address.id)
+    addresses = ["{}{}".format(getenv("HOST_DOMAIN"),
+                 url_for("customer_views.manage_address",
+                 address_id=address.id))
                  for address in customer.addresses]
-    cards = [url_for("views.manage_card", card_id=card.id)
+    cards = ["{}{}".format(getenv("HOST_DOMAIN"),
+             url_for("customer_views.manage_card",
+             card_id=card.id))
              for card in customer.cards]
-    customer_dict.update({"shipping addresseses": addresses, "cards": cards})
+    saved_items = ["{}{}".format(getenv("HOST_DOMAIN"),
+                   url_for("customer_views.saved_items",
+                   item_id=item.id))
+                   for item in customer.saved_items]
+    customer_dict.update({"shipping addresseses": addresses,
+                         "cards": cards, "saved_items": saved_items})
     return customer_dict

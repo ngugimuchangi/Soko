@@ -8,7 +8,7 @@ from models.customer import Customer
 from models.customer_card import CustomerCard
 
 
-@customer_views.route("/card/<card_id>",
+@customer_views.route("/cards/<card_id>",
                       methods=["GET", "DELETE", "PUT"],
                       strict_slashes=False)
 def manage_card(card_id):
@@ -47,7 +47,7 @@ def manage_card(card_id):
     return jsonify(modify_card_output(card))
 
 
-@customer_views.route("/customers/<customer_id>/card",
+@customer_views.route("/customers/<customer_id>/cards",
                       methods=["GET", "POST"],
                       strict_slashes=False)
 def create_and_view_payment_cards(customer_id):
@@ -95,6 +95,4 @@ def modify_card_output(card):
     card_dict = card.to_dict()
     card_dict.pop("customer_id")
     card_dict.pop("cvv")
-    card_number = card_number.split()[-1]
-    card_dict.update({"card_number": card_number})
     return card_dict

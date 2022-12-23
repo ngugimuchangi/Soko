@@ -5,6 +5,7 @@ from api.product.v1.views import product_views
 from flask import abort, jsonify, make_response, request, url_for
 from models import storage
 from models.category import Category
+from os import getenv
 
 
 @product_views.route("/categories/<category_id>", methods=["GET", "PUT",
@@ -85,8 +86,9 @@ def modify_category_output(category):
         Return: dictionary represention of category
     """
     category_dict = category.to_dict()
-    subcategories = [url_for("views.manage_subcategory",
-                     subcategory_id=sub_cat.id)
-                     for sub_cat in category.subcartegories]
+    subcategories = ["{}{}".format(getenv("HOST_DOMAIN"),
+                     url_for("product_views.manage_subcategory",
+                     subcategory_id=sub_cat.id))
+                     for sub_cat in category.subcategories]
     category_dict.update({"subcategories": subcategories})
     return category_dict

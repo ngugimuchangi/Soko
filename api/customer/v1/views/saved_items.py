@@ -1,16 +1,16 @@
 #!/usr/bin/python3
 """Saved items endpoint module
 """
-from api.customer.v1.views import user_views
+from api.customer.v1.views import customer_views
 from flask import abort, jsonify, make_response, request
 from models import storage
 from models.customer import Customer
 from models.saved_item import SavedItem
 
 
-@user_views.route("/saved/<item_id>",
-                  methods=["GET", "DELETE"],
-                  strict_slashes=False)
+@customer_views.route("/saved/<item_id>",
+                      methods=["GET", "DELETE"],
+                      strict_slashes=False)
 def manage_saved_items(item_id):
     """Saved items endpoint for get and delete
        saved items
@@ -34,8 +34,9 @@ def manage_saved_items(item_id):
     return jsonify({})
 
 
-@user_views.route("/customers/<customer_id>/saved", methods=["GET", "POST"],
-                  strict_slashes=False)
+@customer_views.route("/customers/<customer_id>/saved",
+                      methods=["GET", "POST"],
+                      strict_slashes=False)
 def create_and_view_saved_items(customer_id):
     """Saved items endpoint for getting all saved items for a
        specified user and adding a new item to their

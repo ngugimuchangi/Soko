@@ -33,9 +33,9 @@ class CustomerCard(BaseModel, Base):
     def __init__(self, **kwargs):
         """Instantiates a CustomerCard object"""
         # Create date object for expiry date
-        expiry_date = kwargs.get("expiry_date")
-        month = expiry_date.get("month")
-        year = expiry_date.get("year")
+        expiry_date = kwargs.get("expiry_date").split("/")
+        month = int(expiry_date[0])
+        year = int(expiry_date[1])
         expiry_date = date(year, month, 1)
 
         # Check card type

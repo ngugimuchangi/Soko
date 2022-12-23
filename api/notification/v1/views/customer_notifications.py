@@ -11,7 +11,7 @@ from models.customer_notification import CustomerNotification
 @notification_views.route("/customer_notifications/<notification_id>",
                           methods=["GET", "PUT"],
                           strict_slashes=False)
-def manage_notification(notification_id):
+def manage_customer_notification(notification_id):
     """Notification endpoint for get and update user
        notifications
        Args: notification_id (str) - notification id
@@ -42,7 +42,7 @@ def manage_notification(notification_id):
 @notification_views.route("/customers/<customer_id>/notifications",
                           methods=["GET", "POST"],
                           strict_slashes=False)
-def create_and_view_payment_notifications(customer_id):
+def create_and_view_customer_notifications(customer_id):
     """Notifications endpoint for getting all notifications for a
        specified user and adding a new notification
        Args: customer_id (str) - customer's id

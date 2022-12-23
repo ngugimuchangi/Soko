@@ -8,7 +8,7 @@ from models.category import Category
 from models.subcategory import Subcategory
 
 
-@product_views.route("/subcategory/<subcategory_id>",
+@product_views.route("/subcategories/<subcategory_id>",
                      methods=["GET", "DELETE", "PUT"],
                      strict_slashes=False)
 def manage_subcategory(subcategory_id):
@@ -47,7 +47,7 @@ def manage_subcategory(subcategory_id):
     return jsonify(modify_subcategory_output(subcategory))
 
 
-@product_views.route("/category/<categor_id>/subcategories/",
+@product_views.route("/categories/<category_id>/subcategories/",
                      methods=["GET", "POST"],
                      strict_slashes=False)
 def create_or_view_subcategories(category_id):
@@ -67,11 +67,11 @@ def create_or_view_subcategories(category_id):
     # Get all subcategory items
     if request.method == "GET":
         # Get all subcategory items
-        subcategory_items = category.subcategory
+        subcategory_items = category.subcategories
         subcategory_items = {"count": len(subcategory_items),
                              "subcategory items":
                              [modify_subcategory_output(item)
-                              for item in category.subcategory]}
+                              for item in subcategory_items]}
         return jsonify(subcategory_items)
 
     # Create new subcategory item
@@ -97,7 +97,7 @@ def modify_subcategory_output(subcategory):
         Return: dictionary represention of subcategory
     """
     subcategory_dict = subcategory.to_dict()
-    products = [url_for("views.manage_product", product_id=product.id)
+    products = [url_for("product_views.manage_product", product_id=product.id)
                 for product in subcategory.products]
     subcategory_dict.update({"products": products})
     return subcategory_dict

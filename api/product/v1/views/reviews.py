@@ -28,9 +28,9 @@ def get_review(review_id):
 
 @product_views.route("/products/<product_id>/reviews", methods=["GET",
                      "POST"], strict_slashes=False)
-def create_or_view_products(product_id):
+def create_or_view_product_reviews(product_id):
     """Product endpoint for getting all reviews of a specific product
-       Args: buyer_id (str) - buyer's id
+       Args: product_id (str) - product's id
        Return: jsonified dictionary with a list of all reviews
                s belonging to specified product
        file: review.yml
@@ -43,7 +43,7 @@ def create_or_view_products(product_id):
     # Get all reviews
     if request.method == "GET":
         reviews = product.reviews
-        reviews = {"count": len(reviews), "products": [reviews.to_dict()
+        reviews = {"count": len(reviews), "products": [review.to_dict()
                    for review in reviews]}
         return jsonify(reviews)
 
