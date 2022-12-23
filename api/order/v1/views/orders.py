@@ -143,12 +143,12 @@ def seller_view_orders(seller_id):
         else:
             order_dict = item.order.to_dict()
             order_dict.pop("subtotal")
-            formated_orders.update({item.order_id: {"order":
-                                    item.order.to_dict(),
-                                    "details": [item_dict],
-                                    "order_amount": amount}})
-    formated_orders = [{key: value} for key, value
-                       in formated_orders.items()]
+            order_dict.update({"details": [item_dict],
+                               "order_amount": amount})
+            formated_orders.update({item.order_id: order_dict})
+
+    formated_orders = [order for order in
+                       formated_orders.values()]
     orders = {"count": len(formated_orders),
               "orders": formated_orders,
               "total": total}
