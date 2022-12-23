@@ -71,7 +71,7 @@ def create_or_view_sellers():
     file: seller.yml
     """
 
-    data = storage.all(Seller)
+    data = storage.search(Seller)
     sellers = {"count": len(data), "sellers":
                [modify_seller_output(seller) for seller in data]}
     return jsonify(sellers)
