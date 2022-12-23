@@ -32,6 +32,10 @@ class OrderDetail(BaseModel, Base):
     seller_id = Column(String(128), nullable=False)
     price = Column(Float, nullable=False)
     quantity = Column(Integer, nullable=False)
-    fullfilment_status = Column(String(60), default="pending", nullable=False)
+    fulfilment_status = Column(String(60), default="pending", nullable=False)
     review_status = Column(String(60), default="pending", nullable=False)
     payment_status = Column(String(60), default="pending", nullable=False)
+
+    def __init__(self, **kwargs):
+        """Instantiates the OrderDetails object."""
+        super().__init__(**kwargs)

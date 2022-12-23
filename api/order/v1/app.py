@@ -40,7 +40,7 @@ def not_found(error):
     """Object not found
     """
     search_response = {"error": "Not found"}
-    return make_response(jsonify(search_response, 404))
+    return make_response(jsonify(search_response), 404)
 
 
 @app.teardown_appcontext

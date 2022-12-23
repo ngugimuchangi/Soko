@@ -13,7 +13,7 @@ class SavedItem(BaseModel, Base):
                 customer_id (str): foreign key to customer table's
                                    id field
                 product_id (str):  product's id
-                product_image(str): product's main image
+                product_image(str): absolute path to product's default image
                 product_name (str):  product's name
     """
     __tablename__ = "saved_items"
@@ -22,7 +22,7 @@ class SavedItem(BaseModel, Base):
                          nullable=False)
     product_id = Column(String(60), nullable=False)
     product_name = Column(String(128), nullable=False)
-    product_image = Column(String(128), nullable=False)
+    product_image = Column(String(256), nullable=False)
     quantity = Column(Integer, nullable=False)
 
     def __init__(self, **kwargs):

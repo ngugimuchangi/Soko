@@ -4,7 +4,7 @@
         and methods
 """
 from models.base_model import Base, BaseModel
-from sqlalchemy import Column, ForeignKey, Integer, String, Text
+from sqlalchemy import Boolean, Column, ForeignKey, String, Text
 
 
 class CustomerNotification(BaseModel, Base):
@@ -20,7 +20,7 @@ class CustomerNotification(BaseModel, Base):
     customer_id = Column(String(60), ForeignKey("customers.id"),
                          nullable=False)
     message = Column(Text, nullable=False)
-    read_status = Column(Integer, default=0, nullable=False)
+    read_status = Column(Boolean, default=False, nullable=False)
 
     def __init__(self, **kwargs):
         """Instantiates a CustomerNotification object."""

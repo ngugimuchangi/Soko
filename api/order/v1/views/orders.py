@@ -11,7 +11,7 @@ from models.seller import Seller
 from os import getenv
 
 
-@order_views.route("/order/<order_id>",
+@order_views.route("/orders/<order_id>",
                    methods=["GET", "PUT" "DELETE"],
                    strict_slashes=False)
 def manage_order(order_id):
@@ -22,18 +22,19 @@ def manage_order(order_id):
         file: order.yml
     """
     attr_ignore = ["id", "order_id", "product_id",
-                   "created_at", "updated_at"]
+                   "created_at", "updated_at",
+                   "details", "transactions"]
     # Order item search and validation
     order = storage.search(Order, order_id)
     if not order:
         abort(404)
 
-    # Get cart item
+    # Get order item
     if request.method == "GET":
         return jsonify(modify_order_output(order))
 
     if request.method == "DELETE":
-        if order.status == "awaiting payment":
+        if order.payment_status == "awaiting payment":
             storage.delete(order)
             jsonify("{}")
         else:
@@ -43,18 +44,19 @@ def manage_order(order_id):
     data = request.get_json()
     if not data:
         abort(400)
-    order_status = data.get("(order_status")
-    order_details = data.get("product_details")
 
-    # a. Update order status
-    if order_status:
-        order.status = order_status
+    order_details = data.get("details")
 
-    # b. Update item details
+    # a. Update order attributes
+    for key, value in data:
+        if not hasattr(Order, key) and key not in attr_ignore:
+            setattr(order, key, value)
+
     if not order_details:
         storage.save()
         return jsonify(modify_order_output(order))
 
+    # b. Update item details
     for item in order_details:
         order_item = storage.search(OrderDetail, item.get("id"))
         if not order_item:
@@ -62,6 +64,18 @@ def manage_order(order_id):
         for key, value in item.items():
             if hasattr(OrderDetail, key) and key not in attr_ignore:
                 setattr(order_item, key, value)
+    # update order_fufillment status
+    order_details = order.details
+    if all(item.fulfillment == "delivered" for item in order_details):
+        order.fulfillment_status = "shipped "
+
+    # c. Delete specific items
+    items_to_delete = data.get("items_to_delete")
+    if items_to_delete:
+        for item_id in items_to_delete:
+            item = storage.search(OrderDetail, item_id)
+            if item:
+                storage.delete(item)
     storage.save()
     return jsonify(modify_order_output(order))
 
@@ -105,7 +119,7 @@ def seller_view_orders(seller_id):
     # Get all orders
     # Violation of abstraction to be fixed
     orders = storage.session.query(OrderDetail).filter_by(
-             seller_id=seller.id).all()
+             seller_id=seller.id).all().group_by(OrderDetail.order_id)
     orders = {"count": len(orders), "orders":
               [order.to_dict() for order in orders]}
     return jsonify(orders)
@@ -129,18 +143,19 @@ def create_order():
         abort(400)
 
     kwargs = {key: value for key, value in data.items()
-              if hasattr(Order, key)}
+              if hasattr(Order, key) and key not in
+              ["details", "transactions"]}
     try:
         new_order = Order(**kwargs)
+        new_order.save()
     except Exception:
         abort(400)
-    new_order.save()
-    for order_item in data.get("order_details"):
+    for order_item in data.get("details"):
         try:
             new_order_item = OrderDetail(**order_item)
+            new_order_item.save()
         except Exception:
             abort(400)
-        new_order_item.save()
 
     new_order_details = modify_order_output(new_order)
     new_order_details.update("{}{}".format(getenv("HOST_DOMAIN"),
@@ -163,6 +178,8 @@ def modify_order_output(order):
         item_dict = order_item.to_dict()
         item_dict.pop("order_id")
         order_items.append(item_dict)
-
-    order_dict.update({"order_details": order_items})
+    url = "{}{}".format(getenv("HOST_DOMAIN"),
+                        url_for("order_views.manage_order",
+                        order_id=order.id))
+    order_dict.update({"details": order_items, "url": url})
     return order_dict

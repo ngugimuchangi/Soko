@@ -2,6 +2,8 @@
 """Seller notifications endpoint module
 """
 from api.notification.v1.views import notification_views
+from api.notification.v1.views.customer_notifications import \
+    filter_notifications
 from flask import abort, jsonify, make_response, request
 from models import storage
 from models.seller import Seller
@@ -58,6 +60,15 @@ def create_and_view_seller_notifications(notification_id):
     # Get all notifications
     if request.method == "GET":
         notifications = seller.notifications
+        read_status = request.args.get("read_status")
+        if read_status:
+            try:
+                read_status = bool(read_status)
+            except Exception:
+                pass
+            else:
+                notifications = filter_notifications(notifications,
+                                                     read_status)
         notifications = {"count": len(notifications), "notifications":
                          [modify_notification_output(notification)
                           for notification in notifications]}

@@ -58,6 +58,15 @@ def create_and_view_customer_notifications(customer_id):
     # Get all notifications
     if request.method == "GET":
         notifications = customer.notifications
+        read_status = request.args.get("read_status")
+        if read_status:
+            try:
+                read_status = bool(read_status)
+            except Exception:
+                pass
+            else:
+                notifications = filter_notifications(notifications,
+                                                     read_status)
         notifications = {"count": len(notifications), "notifications":
                          [modify_notification_output(notification)
                           for notification in notifications]}
@@ -88,3 +97,19 @@ def modify_notification_output(notification):
     notification_dict = notification.to_dict()
     notification_dict.pop("customer_id")
     return notification_dict
+
+
+def filter_notifications(notifications, read_status):
+    """ Filters notification by given search if
+        parameters
+        Args:
+            notifications(list): list of notifications
+            read_status (str): whether a message is read
+                                   or not
+        Return: list of notifications
+        file: customer_notifications.yml
+    """
+    filtered_notifications = [notification for notification in
+                              notifications if notifications.read_status
+                              is read_status]
+    return filtered_notifications

@@ -14,7 +14,7 @@ class Cart(BaseModel, Base):
                                    id field
                 product_id (str):  product's id
                 product_name (str):  product's name
-                product_image (str) product's main image
+                product_image (str) absolute path product's default image
                 quantity (int): quantity of a particular item in cart
     """
     __tablename__ = "cart"
@@ -23,7 +23,7 @@ class Cart(BaseModel, Base):
                          nullable=False)
     product_id = Column(String(60), nullable=False)
     product_name = Column(String(128), nullable=False)
-    product_image = Column(String(128), nullable=False)
+    product_image = Column(String(256), nullable=False)
     quantity = Column(Integer, nullable=False)
 
     def __init__(self, **kwargs):

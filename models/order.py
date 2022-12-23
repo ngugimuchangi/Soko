@@ -35,12 +35,13 @@ class Order(BaseModel, Base):
     shipping_cost = Column(Float, CheckConstraint('shipping_cost > 0.00',
                            name='shipping_cost_positive'), nullable=False)
     shipping_address = Column(Text, nullable=True)
-    order_status = Column(String(60), nullable=False)
+    order_status = Column(String(60), default="awating payment",
+                          nullable=False)
     details = relationship("OrderDetail", backref="order",
                            cascade="all,delete")
     transactions = relationship("Transaction", backref="order",
                                 cascade="all,delete")
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, **kwargs):
         """Instantiates the Order object."""
-        super().__init__(*args, **kwargs)
+        super().__init__(**kwargs)

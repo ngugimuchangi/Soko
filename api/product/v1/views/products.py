@@ -1,13 +1,14 @@
 #!/usr/bin/python3
-"""product endpoint module
+"""Products endpoint module
 """
 from api.product.v1.views import product_views
-from flask import abort, jsonify, make_response, request
+from flask import (abort, jsonify, make_response,
+                   request, url_for)
 from models import storage
 from models.product import Product
 from models.subcategory import Subcategory
 from models.product_image import ProductImage
-from os import getenv, makedirs, removedirs, path
+from os import getenv, makedirs, remove, path
 from werkzeug.utils import secure_filename
 
 
@@ -37,7 +38,10 @@ def manage_product(product_id):
 
     # Delete product
     if request.method == 'DELETE':
-        removedirs(path.join(product_files_directory, product.id))
+        images = product.images
+        for image in images:
+            if path.exists(image.file_path) and image.status != "default":
+                remove(image.file_path)
         storage.delete(product)
         return jsonify({})
 
@@ -95,7 +99,8 @@ def create_or_view_products(subcategory_id):
 
     # Save files
     product_files_directory = getenv("PRODUCT_IMAGES")
-    product_directory = path.join(product_files_directory, new_product.id)
+    product_directory = path.join(product_files_directory,
+                                  new_product.id)
     makedirs(product_directory)
 
     files = request.files
@@ -116,8 +121,17 @@ def modify_product_output(product):
         Args: product (object) - product object
         Return: dictionary represention of product
     """
+    host_domain = getenv("HOST_DOMAIN")
     product_dict = product.to_dict()
-    images = product.images
-    images = [image.file_path for image in images]
-    product_dict.upadate({"images": images})
+    shop_status = product.seller.shop_status
+    reviews = ["{}{}".format(host_domain,
+               url_for("product_views.get_reviews",
+                       review_id=review.id))
+               for review in product.reviews]
+    images = [image.file_path for image in product.images]
+    url = "{}{}".format(host_domain, url_for(
+                        "product_views.manage_product"))
+    product_dict.upadate({"images": images, "reviews": reviews,
+                          "shop_status": shop_status,
+                          "url": url})
     return product_dict
