@@ -24,8 +24,8 @@ class CustomerCard(BaseModel, Base):
 
     customer_id = Column(String(60), ForeignKey("customers.id"),
                          nullable=False)
-    card_number = Column(String(60), nullable=False)
-    cvv = Column(String(60), nullable=False)
+    card_number = Column(String(20), nullable=False)
+    cvv = Column(String(10), nullable=False)
     expiry_date = Column(Date, nullable=False)
     name_on_card = Column(String(128), nullable=False)
     card_type = Column(String(60), nullable=False)

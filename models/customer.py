@@ -6,7 +6,7 @@
 from flask_login import UserMixin
 from hashlib import sha256
 from models.base_model import Base, BaseModel
-from sqlalchemy import Column, String
+from sqlalchemy import Boolean, Column, String
 from sqlalchemy.orm import relationship
 from uuid import uuid4
 
@@ -21,6 +21,7 @@ class Customer(BaseModel, Base, UserMixin):
             email (str): customer's email address
             password (str): customer's hashed password
             salt (str): salt used to hash password
+            confirmed(str): confirmation status
             card: relationship with cards table
             cart: relationship with cart table
             notifications: relationship with customer_notifications table
@@ -36,6 +37,7 @@ class Customer(BaseModel, Base, UserMixin):
     email = Column(String(128), nullable=False, unique=True)
     password = Column(String(128), nullable=False)
     salt = Column(String(60))
+    confirmed = Column(Boolean, default=False, nullable=False)
     cards = relationship('CustomerCard',
                          backref="customer",
                          cascade="all,delete")

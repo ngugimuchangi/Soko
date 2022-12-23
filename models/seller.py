@@ -4,13 +4,14 @@
         and methods
 """
 from hashlib import sha256
+from flask_login import UserMixin
 from models.base_model import Base, BaseModel
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, Boolean, String
 from sqlalchemy.orm import relationship
 from uuid import uuid4
 
 
-class Seller(BaseModel, Base):
+class Seller(BaseModel, Base, UserMixin):
     """ Seller class representing sellers table
         Attributes:
             first_name (str): sellers's first name
@@ -20,7 +21,8 @@ class Seller(BaseModel, Base):
             email (str): seller's email address
             password (str): customer's hashed password
             salt (str): salt used to hash password
-            shop_status(int): shop status
+            shop_status(str): shop status
+            confirmed(str): confirmation status
             products: relationship with products table
             card: relationship with seller_cards table
             notifications: relationship with seller_notifications table
@@ -33,7 +35,8 @@ class Seller(BaseModel, Base):
     email = Column(String(255), nullable=False, unique=True)
     password = Column(String(128), nullable=False)
     salt = Column(String(60))
-    shop_status = Column(Integer, default=1, nullable=False)
+    shop_status = Column(String(10), default="open", nullable=False)
+    confirmed = Column(Boolean(10), default=False, nullable=False)
     products = relationship("Product", backref="seller",
                             cascade="all,delete")
     card = relationship("SellerCard", backref="seller",
