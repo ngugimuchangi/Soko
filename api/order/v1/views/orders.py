@@ -116,12 +116,42 @@ def seller_view_orders(seller_id):
     if not seller:
         abort(404)
 
-    # Get all orders
-    # Violation of abstraction to be fixed
-    orders = storage.session.query(OrderDetail).filter_by(
-             seller_id=seller.id).all().group_by(OrderDetail.order_id)
-    orders = {"count": len(orders), "orders":
-              [order.to_dict() for order in orders]}
+    # Get query parameters
+    filters = request.args
+    if filters and filters.get("payment_status"):
+        order_items = storage.session.query(OrderDetail).filter_by(
+            seller_id=seller_id, payment_status=filters.get(
+                "payment_status")).all()
+    else:
+        # Get all orders
+        order_items = storage.session.query(OrderDetail).filter_by(
+            seller_id=seller.id).all()
+    formated_orders = {}
+    total = 0
+
+    for item in order_items:
+        item_dict = item.to_dict()
+        item_dict.pop('order_id')
+        amount = item.price * item.quantity
+        item_dict.update({"amount": amount})
+        total += amount
+
+        if item.order_id in formated_orders.key():
+            formated_orders[item.order_id]["details"].append(item_dict)
+            formated_orders[item.order_id]["order_amount"] += amount
+
+        else:
+            order_dict = item.order.to_dict()
+            order_dict.pop("subtotal")
+            formated_orders.update({item.order_id: {"order":
+                                    item.order.to_dict(),
+                                    "details": [item_dict],
+                                    "order_amount": amount}})
+    formated_orders = [{key: value} for key, value
+                       in formated_orders.items()]
+    orders = {"count": len(formated_orders),
+              "orders": formated_orders,
+              "total": total}
     return jsonify(orders)
 
 
@@ -177,6 +207,7 @@ def modify_order_output(order):
     for order_item in order.details:
         item_dict = order_item.to_dict()
         item_dict.pop("order_id")
+        item_dict.update({"amout": order_item.price * order_item.quantity})
         order_items.append(item_dict)
     url = "{}{}".format(getenv("HOST_DOMAIN"),
                         url_for("order_views.manage_order",
