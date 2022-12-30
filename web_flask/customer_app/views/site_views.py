@@ -7,4 +7,4 @@ from web_flask.customer_app.views import customer_views
 
 @customer_views.route("/")
 def home():
-    return render_template("index.html", cache_id=uuid4().hex)
+    return render_template("index.html", title="Home", cache_id=uuid4().hex)
