@@ -1,0 +1,47 @@
+{% extends "base.html" %} {% block styles %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='styles/index.css') + '?' + cache_id }}"
+/>
+{% endblock %} {% block body%}
+<header>
+  <section class="header container">
+    <img
+      src="{{ url_for('static', filename='images/site/logo-small.svg') }}"
+      alt="logo"
+      class="logo"
+    />
+    <div class="search-div">
+      <input
+        type="text"
+        name="search"
+        class="search"
+        placeholder="Search products"
+      />
+      <button class="search">SEARCH</button>
+    </div>
+    <div class="icons-container">
+      <div class="icon profile"></div>
+      <div class="icon notification"></div>
+      <div class="icon messages"></div>
+      <div class="icon cart"></div>
+    </div>
+  </section>
+</header>
+<div class="container">
+  <section class="banner-categories">
+    <article class="categories"></article>
+    <article class="banner"></article>
+    <aside class="cart-saved"></aside>
+  </section>
+  <section class="products">
+    <article class="christmas"></article>
+    <article class="trending"></article>
+    <artcile class="fashion"></artcile>
+    <article class="budget"></article>
+  </section>
+</div>
+<footer>
+  <section class="footer container"></section>
+</footer>
+{% endblock %}

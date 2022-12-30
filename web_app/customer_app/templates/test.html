@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soko</title>
+    <style>
+      textarea {
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 100%;
+      }
+      body {
+        background-color: #eeeef2;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      section.chat-box {
+        width: 200px;
+        padding: 10px;
+        padding-right: 15px;
+        margin: auto auto;
+        align-items: center;
+        border-radius: 5px;
+        border: 1px solid black;
+      }
+      div.chat-history {
+        color: #a7a9be;
+      }
+      button {
+        background-color: #d37e30;
+        width: 70px;
+        height: 40px;
+        margin: auto;
+        border-radius: 10px;
+        display: block;
+      }
+      button:hover {
+        background-color: #fc870b;
+      }
+      p.chat-message {
+        height: fit-content;
+        width: fit-content;
+        max-width: 150px;
+        word-wrap: break-word;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: #26415f;
+        color: #eeeef2;
+      }
+      a {
+        color: white;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" defer></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"
+      integrity="sha512-YeeA/Qxn5hYdkukScTCNNOhTrv1C2RubAGButJ1rmgQwZf/HdRaCGl+JAVkqsqaNRaYNHdheiuKKuPf9mDcqKg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      defer
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='scripts/test.js') + '?' + cache_id }}"
+      defer
+    ></script>
+  </head>
+  <body>
+    <section class="chat-box">
+      <div class="chat-history"></div>
+      <form action="">
+        <label for="message" style="display: block"> Enter message here</label>
+        <textarea
+          name="message"
+          placeholder="Start chatting"
+          rows="10"
+          spellcheck="true"
+        ></textarea>
+        <button>Send</button>
+      </form>
+    </section>
+  </body>
+</html>

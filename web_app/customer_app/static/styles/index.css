@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+body {
+  min-width: 1000px;
+}
+.header,
+.footer,
+.icons-container {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.header {
+  width: 1500px;
+}
+header,
+footer {
+  width: 100%;
+  height: 70px;
+  padding: 10px;
+  background: #26415f;
+  color: #fff;
+  padding-left: 0;
+}
+
+.logo {
+  padding-left: 10px;
+  width: 200px;
+  height: 51px;
+  justify-self: start;
+}
+
+.search-div {
+  height: 40px;
+  min-width: 580px;
+}
+.search {
+  height: 100%;
+  border-radius: 4px;
+}
+input.search {
+  width: 80%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+input.search:focus {
+  outline: 1px solid #cdd2d8;
+}
+button.search {
+  width: 30%;
+  font-size: 16px;
+  font-weight: 500;
+  width: 80px;
+  text-align: center;
+}
+button {
+  background: #fc870b;
+}
+button:hover {
+  background: #d37e30;
+}
+.container {
+  margin: auto;
+  max-width: 1500px;
+}
+
+footer {
+  position: relative;
+  top: 85vh;
+}
+.icons-container {
+  width: 200px;
+}
+
+/* Icons */
+.icon {
+  width: 32px;
+  height: 32px;
+}
+
+.profile {
+  background: url("../images/icons/24/profile-white.svg") center no-repeat;
+}
+.notification {
+  background: url("../images/icons/24/notification-white.svg") center no-repeat;
+}
+.messages {
+  background: url("../images/icons/24/messages-white.svg") center no-repeat;
+}
+.cart {
+  background: url("../images/icons/24/cart-white.svg") center no-repeat;
+}
+
+.profile:hover {
+  background: url("../images/icons/24/profile-yellow.svg") center no-repeat;
+}
+.notification:hover {
+  background: url("../images/icons/24/notification-yellow.svg") center no-repeat;
+}
+.message:hover {
+  background: url("../images/icons/24/messages-yellow.svg") center no-repeat;
+}
+.cart:hover {
+  src: url("../images/icons/24/cart-yellow.svg") center no-repeat;
+}

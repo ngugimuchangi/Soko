@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+/*  Login - Singup  Styles*/
+body {
+  background: #cdd2d8;
+  font-family: "Roboto";
+}
+.container {
+  margin: auto;
+  width: 500px;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  top: 100px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Logo */
+#favicon,
+#logo {
+  margin-bottom: 10px;
+}
+#favicon {
+  width: 48px;
+  height: 54px;
+}
+#logo {
+  width: 151px;
+  height: 40px;
+}
+
+/* Form */
+#signup,
+#login,
+.text,
+.text-pwd,
+button {
+  height: 50px;
+  width: 350px;
+}
+
+.text,
+.text-pwd,
+button {
+  border-radius: 4px;
+  border: 1px solid #818181;
+}
+
+.text,
+.text-pwd,
+button,
+input[type="checkbox"] {
+  margin-bottom: 20px;
+}
+.text-pwd,
+.text {
+  background: #cdd2d8;
+}
+
+.text {
+  padding-left: 20px;
+  padding-right: 10%;
+}
+
+label,
+.text,
+.text-pwd {
+  text-align: left;
+  display: block;
+}
+
+label {
+  margin-bottom: 5px;
+}
+input:focus {
+  outline: none;
+}
+
+.pwd {
+  height: 100%;
+  width: 90%;
+  padding-left: 20px;
+  background: #cdd2d8;
+}
+button,
+label {
+  font-size: large;
+}
+button {
+  color: #fff;
+  background: #26415f;
+}
+
+button:hover {
+  background: #315985;
+}
+/* Action */
+#signup {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+#login {
+  text-align: center;
+}
+a {
+  text-decoration: none;
+  font-size: large;
+  font-weight: 500;
+  color: #26415f;
+}
+a:hover {
+  color: #315985;
+}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+<!-- prettier ignore -->
+{% block styles %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='styles/login.css') + '?' + cache_id}}"
+/>
+{% endblock %}
+
+<!-- prettier ignore -->
+<!-- Login form -->
+{% block body %}
+<section class="container">
+  <img
+    src="{{ url_for('static', filename='images/site/favicon-big.svg') }}"
+    alt="logo"
+    id="favicon"
+  />
+  <img
+    src="{{ url_for('static', filename='images/site/logo-small.svg') }}"
+    alt="logo-text"
+    id="logo"
+  />
+  <div id="credentials">
+    <form action="{{ url_for('customer_views.login') }}" method="post">
+      <label for="email"> Email </label>
+      <input type="email" name="email" class="text" required />
+      <label for="password"> Password </label>
+      <div class="text-pwd">
+        <input type="password" name="password" class="pwd" required />
+        <i class="fa-solid fa-eye"></i>
+      </div>
+      <label for="remember-me">
+        <input type="checkbox" name="remember-me" />
+        Remember me
+      </label>
+      <button>Log In</button>
+    </form>
+  </div>
+  <span id="signup">
+    <a href="#">Forgot password?</a>
+    <a href="{{ url_for('customer_views.signup') }}"> Sign Up</a>
+  </span>
+</section>
+
+{% endblock %}
