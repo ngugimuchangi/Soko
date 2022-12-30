@@ -1,30 +1,32 @@
 #!/usr/bin/python3
-"""Seller RESTful API v.1
+""" Messanger/Chat API v.1
 """
-from api.seller.v1.views import seller_views
 from dotenv import load_dotenv
 from flasgger import Swagger
-from flask import Flask, jsonify, make_response
-from flask_cors import CORS
+from flask import Flask, jsonify, make_response, render_template
+from flask_login import LoginManager
 from models import storage
 from os import getenv
+from web_flask.customer_app.views import customer_views
 
 load_dotenv()
 
-
 app = Flask(__name__)
-app.register_blueprint(seller_views)
-app.config["JSONIFY_PRETTYPRINT_REGULAR"]
-cors = CORS(app, resources={r"/api/*": {"origins": getenv("ORIGINS")}})
+app.register_blueprint(customer_views)
+app.jinja_env.trim_blocks = True
+app.jinja_env.lstrip_blocks = True
+app.config["SECRET_KEY"] = getenv("SOKO_CUSTOMER_APP_SECRET_KEY")
 swagger = Swagger(app)
+#login_manger = LoginManager()
+#login_manger.init_app(app)
 
 
 @app.errorhandler(404)
 def not_found(error):
-    """Object not found
+    """Chat Object not found
     """
     search_response = {"error": "Not found"}
-    return make_response(jsonify(search_response, 404))
+    return make_response(jsonify(search_response), 404)
 
 
 @app.errorhandler(400)
@@ -50,8 +52,7 @@ def teardown(error):
     """
     storage.close()
 
-
 if __name__ == "__main__":
-    port = getenv("SELLER_API_PORT")
-    host = getenv("SELLER_API_HOST")
-    app.run(host=host, port=port, threaded=True)
+    host = getenv("SOKO_CUSTOMER_APP_HOST")
+    port = getenv("SOKO_CUSTOMER_APP_PORT")
+    app.run(host=host, port=port, debug=True)

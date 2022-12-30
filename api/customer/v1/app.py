@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Buyer RESTful API v.1
+"""Customer RESTful API v.1
 """
 from api.customer.v1.views import customer_views
 from dotenv import load_dotenv

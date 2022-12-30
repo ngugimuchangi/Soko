@@ -31,12 +31,12 @@ class Customer(BaseModel, Base, UserMixin):
     """
     __tablename__ = "customers"
 
-    first_name = Column(String(128), nullable=False)
-    last_name = Column(String(128), nullable=False)
+    first_name = Column(String(128), nullable=True)
+    last_name = Column(String(128), nullable=True)
     phone_number = Column(String(60), nullable=False)
     email = Column(String(128), nullable=False, unique=True)
     password = Column(String(128), nullable=False)
-    salt = Column(String(60))
+    salt = Column(String(60), nullable=False)
     confirmed = Column(Boolean, default=False, nullable=False)
     cards = relationship('CustomerCard',
                          backref="customer",

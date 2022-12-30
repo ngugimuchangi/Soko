@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Buyer RESTful API v.1
+"""Order RESTful API v.1
 """
 from api.order.v1.views import order_views
 from dotenv import load_dotenv
@@ -15,8 +15,8 @@ load_dotenv()
 app = Flask(__name__)
 app.register_blueprint(order_views)
 app.config["JSONIFY_PRETTYPRINT_REGULAR"]
-CORS(app, resources={r"/api/*": {"origins": getenv("ORIGINS")}})
-Swagger(app)
+cors = CORS(app, resources={r"/api/*": {"origins": getenv("ORIGINS")}})
+swagger = Swagger(app)
 
 
 @app.errorhandler(400)
