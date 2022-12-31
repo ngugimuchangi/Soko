@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Soko - {{ title }}</title>
     <link
+      rel="icon"
+      href="{{ url_for('static', filename='images/site/favicon-small.svg') }}"
+    />
+    <link
       rel="stylesheet"
       href="{{ url_for('static', filename='styles/main.css') + '?' + cache_id }}"
     />

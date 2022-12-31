@@ -4,7 +4,7 @@ from flask import redirect, render_template, request, url_for
 from models import storage
 from models.customer import Customer
 from uuid import uuid4
-from web_flask.customer_app.views import customer_views
+from web_app.customer_app.views import customer_views
 
 
 @customer_views.route("/login", methods=["GET", "POST"])
@@ -15,7 +15,6 @@ def login():
         email = request.form.get("email")
         password = request.form.get("password")
         customer = storage.session.query(Customer).filter_by(email=email).first()
-        print("hello",  customer)
         if not customer:
             return render_template("login.html", title="Login", cache_id=uuid4().hex)
         password = sha256("{}{}".format(password, customer.salt).encode("utf-8")).hexdigest()

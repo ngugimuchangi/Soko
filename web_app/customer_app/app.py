@@ -7,7 +7,7 @@ from flask import Flask, jsonify, make_response, render_template
 from flask_login import LoginManager
 from models import storage
 from os import getenv
-from web_flask.customer_app.views import customer_views
+from web_app.customer_app.views import customer_views
 
 load_dotenv()
 

@@ -2,7 +2,7 @@
 from flask import redirect, render_template, request, url_for
 from models import storage
 from uuid import uuid4
-from web_flask.customer_app.views import customer_views
+from web_app.customer_app.views import customer_views
 
 
 @customer_views.route("/")
