@@ -1,9 +1,32 @@
-{% extends "base.html" %} {% block styles %}
+{% extends "base.html" %}
+
+<!-- prettier-ignore -->
+{% block styles %}
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='styles/index.css') + '?' + cache_id }}"
 />
-{% endblock %} {% block body%}
+{% endblock %}
+
+<!-- prettier-ignore -->
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.5.0.js" defer></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"
+  integrity="sha512-YeeA/Qxn5hYdkukScTCNNOhTrv1C2RubAGButJ1rmgQwZf/HdRaCGl+JAVkqsqaNRaYNHdheiuKKuPf9mDcqKg=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+  defer
+></script>
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename='scripts/index.js') + '?' + cache_id}}"
+  defer
+></script>
+{%endblock %}
+
+<!-- prettier-ignore -->
+{% block body%}
 <header>
   <section class="logo container">
     <img
@@ -36,31 +59,33 @@
     <!-- Navigation icons -->
     <div class="nav-icons flex-row">
       <div class="user">
-        <span id="user-name">Hello, John</span>
-        <i class="fa-regular fa-user fa-lg icon"></i>
-        <!-- Profile menu -->
-        <div class="profile-menu">
-          <ul>
-            <li>
-              <a href="#"> Profile</a>
-            </li>
-            <li>
-              <a href="#"> Orders</a>
-            </li>
-            <li>
-              <a href="#"> Saved Items</a>
-            </li>
-            <li>
-              <a href="#"> Log Out</a>
-            </li>
-          </ul>
+        <span id="user-name">Hello, Anastacia</span>
+        <div class="user-icon">
+          <i class="fa-regular fa-user fa-lg icon"></i>
+          <!-- Profile menu -->
+          <div class="profile-menu">
+            <ul>
+              <li>
+                <a href="#"> Profile</a>
+              </li>
+              <li>
+                <a href="#"> Orders</a>
+              </li>
+              <li>
+                <a href="#"> Saved Items</a>
+              </li>
+              <li>
+                <a href="#"> Log Out</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <i class="fa-regular fa-bell fa-lg icon"></i>
       <!-- Notification menu -->
       <div class="notification-menu">
         <div class="notification-options flex-row">
-          <div>Mark all as read</div>
+          <a href="javascript:void(0)">Mark all as read</a>
           <a href="#">View all</a>
         </div>
       </div>
@@ -68,14 +93,43 @@
     </div>
   </section>
 </header>
-<div class="container">
-  <section class="banner-categories">
-    <article class="categories"></article>
-    <article class="banner"></article>
-    <aside class="cart-saved"></aside>
+<div class="content container">
+  <section class="banner">
+    <div class="banner">
+      <div class="slide fade">
+        <img
+          src="{{ url_for('static', filename='images/site/christmas-banner.jpg') }}"
+          alt="christmas-ad"
+        />
+      </div>
+      <div class="slide fade">
+        <img
+          src="{{ url_for('static', filename='images/site/new-year-banner.jpg') }}"
+          alt="new-year-ad"
+        />
+      </div>
+      <div class="slide fade">
+        <img
+          src="{{ url_for('static', filename='images/site/back-to-school-banner.jpg') }}"
+          alt="back-to-school-ad"
+        />
+      </div>
+      <a class="prev">&#10094;</a>
+      <a class="next">&#10095;</a>
+    </div>
+    <div class="flex-row shop-now-div">
+      <button id="shop-now">SHOP NOW</button>
+    </div>
+    <div class="thumbnails">
+      <span class="banner-nav" slide-idx="0"></span>
+      <span class="banner-nav" slide-idx="1"></span>
+      <span class="banner-nav" slide-idx="2"></span>
+    </div>
   </section>
   <section class="products">
-    <div class="christmas"></div>
+    <div class="christmas">
+      <article class="product"></article>
+    </div>
     <div class="trending"></div>
     <div class="fashion"></div>
     <div class="budget"></div>

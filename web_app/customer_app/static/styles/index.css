@@ -3,10 +3,13 @@
 body {
   min-width: 900px;
 }
+
 /* Container to hold and center items */
 .container {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: auto;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 /* Header and footer common styles */
 header,
@@ -19,6 +22,7 @@ footer {
 header {
   position: sticky;
   top: 0;
+  z-index: 1;
 }
 /* Flex row common class properties */
 .flex-row {
@@ -28,19 +32,12 @@ header {
   justify-content: space-between;
 }
 
-.header-nav,
-.footer-nav {
-  max-width: 1000px;
-  padding-right: 10px;
-  padding-left: 20px;
-}
-
 .header-nav {
   height: 70px;
 }
 .logo {
   height: 75px;
-  padding: 10px 0 10px 20px;
+  padding: 10px 0 10px 10px;
 }
 
 /* Logo */
@@ -59,13 +56,6 @@ header {
 }
 
 /* Navigation section */
-.header-nav span {
-  max-width: 150px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 /* Burger menu for categories */
 .product-nav {
   height: 100%;
@@ -109,18 +99,25 @@ button.search {
 button {
   background: #fc870b;
   font-weight: 600;
-  color: #fff;
+  color: #000;
+  border-radius: 4px;
 }
 button:hover {
   background: #d37e30;
 }
 
 /* Navigation Icons */
-
+.icon:hover,
+.nav > a:hover {
+  color: #fc870b;
+}
 .nav-icons {
-  width: 300px;
   height: 100%;
   position: relative;
+}
+.nav-icons .user,
+.nav-icons .fa-bell {
+  margin-right: 60px;
 }
 .nav-icons a {
   height: 100%;
@@ -143,9 +140,16 @@ button:hover {
 }
 
 #user-name {
-  margin-right: 20px;
+  display: inline-block;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 5px;
+  vertical-align: bottom;
 }
-.user {
+.user-icon {
+  display: inline-block;
   position: relative;
 }
 .profile-menu {
@@ -153,11 +157,11 @@ button:hover {
   height: 150px;
   display: none;
   position: absolute;
-  top: 20px;
-  left: 30px;
+  top: 18px;
+  left: -65px;
   background-color: #fff;
   border-radius: 4px;
-  box-shadow: 0px 8px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 .notification-menu {
   width: 250px;
@@ -168,7 +172,7 @@ button:hover {
   left: 55px;
   background-color: #fff;
   border-radius: 4px;
-  box-shadow: 0px 8px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 .fa-user:hover + .profile-menu,
 .profile-menu:hover,
@@ -183,17 +187,103 @@ button:hover {
   position: absolute;
   bottom: 0;
 }
-.notification-options > a,
-.notification-options > div {
-  cursor: pointer;
-  color: #26415f;
-}
-.notification-options > *:hover {
-  color: #315985;
+
+/* Content */
+.content {
+  margin-top: 10px;
 }
 
-.show {
-  display: block;
+/* Carousel Banner */
+.banner {
+  width: 100%;
+  height: 400px;
+  border-radius: 8px;
+  position: relative;
+}
+.slide,
+.slide img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+.slide {
+  display: none;
+}
+/* Banner previous and next */
+.prev,
+.next {
+  position: absolute;
+  top: 45%;
+  width: 32px;
+  height: 32px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  color: #cdd2d8;
+  font-weight: bold;
+  font-size: 24px;
+  transition: 0.6s ease;
+  border-radius: 50%;
+  text-align: center;
+  /* border-radius: 0 3px 3px 0; */
+}
+.prev {
+  left: 20px;
+}
+.next {
+  right: 20px;
+  /* border-radius: 3px 0 0 3px; */
+}
+
+.prev:hover,
+.next:hover {
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+/* Banner navigation */
+.thumbnails {
+  text-align: center;
+  position: relative;
+  bottom: 70px;
+}
+.banner-nav {
+  height: 5px;
+  width: 30px;
+  margin: 0 2px;
+  border-radius: 8px;
+  background-color: #bbb;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+  cursor: pointer;
+}
+.active,
+.banner-nav:hover {
+  background: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Shop now button */
+.shop-now-div {
+  width: 100%;
+  justify-content: space-around;
+  position: relative;
+  bottom: 90px;
+}
+button#shop-now {
+  width: 180px;
+  height: 45px;
 }
 
 /* Footer */
@@ -201,8 +291,8 @@ footer {
   height: 70px;
   padding-top: 30px;
   padding-bottom: 20px;
-  position: relative;
-  top: 78vh;
+  position: absolute;
+  bottom: 0;
 }
 .socials {
   width: 270px;
@@ -214,7 +304,14 @@ footer {
 .nav {
   width: 350px;
 }
-.icon:hover,
-.nav > a:hover {
-  color: #fc870b;
+
+/* Toggle classes */
+.show {
+  display: block;
+}
+
+.flex-column {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }

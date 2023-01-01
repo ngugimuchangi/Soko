@@ -23,7 +23,7 @@ swagger = Swagger(app)
 
 @app.errorhandler(404)
 def not_found(error):
-    """Chat Object not found
+    """Page not found Object not found
     """
     search_response = {"error": "Not found"}
     return make_response(jsonify(search_response), 404)
