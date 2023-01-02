@@ -45,6 +45,88 @@
     <div class="product-nav flex-row">
       <span class="hamburger">&#9776; </span>
       <span>Categories</span>
+      <nav class="categories">
+        <a>
+          <img
+            src="{{ url_for('static', filename='images/categories/supermarket.svg') }}"
+            alt="supermarket"
+          />
+          SUPERMARKET
+        </a>
+        <ul class="subcategories"></ul>
+        <a>
+          <img
+            src="{{ url_for('static', filename='images/categories/healthcare-beauty.svg') }}"
+            alt="healthcare-beauty"
+          />
+          HEALTHCARE AND BEAUTY
+        </a>
+        <ul class="subcategories"></ul>
+        <a>
+          <img
+            src="{{ url_for('static', filename='images/categories/home-office.svg') }}"
+            alt="home-office"
+          />
+          HOME AND OFFICE
+        </a>
+        <ul class="subcategories"></ul>
+        <a>
+          <img
+            src="{{ url_for('static', filename='images/categories/home-appliances.svg') }}"
+            alt="home-appliances"
+          />
+          HOME APPLIANCES
+        </a>
+        <ul class="subcategories"></ul>
+        <a>
+          <img
+            src="{{ url_for('static', filename='images/categories/mobile-tablets.svg') }}"
+            alt="mobile-tablets"
+          />
+          PHONES AND TABLETS
+        </a>
+        <ul class="subcategories"></ul>
+        <a>
+          <img
+            src="{{ url_for('static', filename='images/categories/laptops.svg') }}"
+            alt="laptops"
+          />
+          COMPUTING
+        </a>
+        <ul class="subcategories"></ul>
+        <a>
+          <img
+            src="{{ url_for('static', filename='images/categories/tv-audio.svg') }}"
+            alt="tv-audio"
+          />
+          TV &#38; AUDIO
+        </a>
+        <ul class="subcategories"></ul>
+        <a>
+          <img
+            src="{{ url_for('static', filename='images/categories/gaming.svg') }}"
+            alt="gaming"
+          />
+          GAMING
+        </a>
+        <ul class="subcategories"></ul>
+        <a>
+          <img
+            src="{{ url_for('static', filename='images/categories/fashion.svg') }}"
+            alt="fashion"
+          />
+          FASHION
+        </a>
+        <ul class="subcategories"></ul>
+        <a>
+          <img
+            src="{{ url_for('static', filename='images/categories/baby-products.svg') }}"
+            alt="baby-products"
+          />
+          BABY PRODUCTS AND TOYS
+        </a>
+        <ul class="subcategories"></ul>
+      </nav>
     </div>
     <!-- Search bar -->
     <div class="search-div">
@@ -57,7 +139,7 @@
       <button class="search">SEARCH</button>
     </div>
     <!-- Navigation icons -->
-    <div class="nav-icons flex-row">
+    <nav class="nav-icons flex-row">
       <div class="user">
         <span id="user-name">Hello, Anastacia</span>
         <div class="user-icon">
@@ -66,15 +148,28 @@
           <div class="profile-menu">
             <ul>
               <li>
+                <i class="fa-regular fa-user fa-lg"></i>
                 <a href="#"> Profile</a>
               </li>
               <li>
+                <img
+                  src="{{ url_for('static', filename='images/icons/24/wishlist-black.svg') }}"
+                  alt="wishlist-black"
+                />
                 <a href="#"> Orders</a>
               </li>
               <li>
+                <img
+                  src="{{ url_for('static', filename='images/icons/24/heart-black.svg') }}"
+                  alt="heart"
+                />
                 <a href="#"> Saved Items</a>
               </li>
               <li>
+                <img
+                  src="{{ url_for('static', filename='images/icons/24/logout-black.svg') }}"
+                  alt="wishlist-black"
+                />
                 <a href="#"> Log Out</a>
               </li>
             </ul>
@@ -89,11 +184,21 @@
           <a href="#">View all</a>
         </div>
       </div>
+      <!-- Cart sections -->
       <i class="fa-solid fa-cart-shopping fa-lg icon"></i>
-    </div>
+    </nav>
+    <aside class="slide-cart">
+      <div class="cart-num">"Cart(1)"</div>
+      <div class="cart-item">
+        <img src="" alt="product" />
+      </div>
+    </aside>
   </section>
 </header>
-<div class="content container">
+
+{% block main %}
+<!--Product Content -->
+<main class="content container">
   <section class="banner">
     <div class="banner">
       <div class="slide fade">
@@ -260,22 +365,29 @@
       </article>
     </div>
   </section>
-</div>
-<section class="messanger"></section>
-
+</main>
+{% endblock %}
+<!-- Footer sections -->
 <footer>
   <section class="footer-nav container flex-row">
     <div class="socials flex-row">
       Stay in touch with us
-      <i class="fa-brands fa-twitter fa-lg icon"></i>
-      <i class="fa-brands fa-instagram fa-lg icon"></i>
-      <i class="fa-brands fa-facebook fa-lg icon"></i>
+      <i class="fa-brands fa-twitter fa-lg footer-icon"></i>
+      <i class="fa-brands fa-instagram fa-lg footer-icon"></i>
+      <i class="fa-brands fa-facebook fa-lg footer-icon"></i>
     </div>
-    <div class="nav flex-row">
+    <nav class="nav flex-row">
       <a href="#">ABOUT US</a>
       <a href="#">CONTACT US</a>
       <a href="#">SELL ON SOKO</a>
       <a href="#">FAQ</a>
+    </nav>
+    <div class="messanger">
+      <div class="message-header flex-row">
+        <i class="fa-regular fa-message fa-lg"> <span>Messages</span></i>
+        <i class="fa-solid fa-chevron-up arrow"></i>
+      </div>
+      <div class="chats"></div>
     </div>
   </section>
 </footer>

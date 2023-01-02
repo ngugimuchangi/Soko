@@ -41,4 +41,13 @@ $("document").ready(function () {
     currentSlide(idx);
   });
   // END OF BANNER ANIMATION
+
+  // START OF MESSANGER
+  const toggleArrow = $(".arrow");
+  toggleArrow.click(function () {
+    $(this).toggleClass("fa-chevron-up fa-chevron-down");
+    $(".messanger").toggleClass("messanger-size");
+    $(".message-header").toggleClass("message-header-properties");
+  });
+  // END OF MESSANGER
 });
