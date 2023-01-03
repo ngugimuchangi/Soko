@@ -45,9 +45,10 @@ $("document").ready(function () {
   // START OF MESSANGER
   const toggleArrow = $(".arrow");
   toggleArrow.click(function () {
-    $(this).toggleClass("fa-chevron-up fa-chevron-down");
+    $(this).toggleClass("fa-angles-up fa-angles-down");
     $(".messanger").toggleClass("messanger-size");
     $(".message-header").toggleClass("message-header-properties");
+    $(".chats, .chat-message").toggle();
   });
   // END OF MESSANGER
 });

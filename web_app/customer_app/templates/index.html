@@ -143,12 +143,12 @@
       <div class="user">
         <span id="user-name">Hello, Anastacia</span>
         <div class="user-icon">
-          <i class="fa-regular fa-user fa-lg icon"></i>
+          <i class="fa-solid fa-user fa-lg icon"></i>
           <!-- Profile menu -->
           <div class="profile-menu">
             <ul>
               <li>
-                <i class="fa-regular fa-user fa-lg"></i>
+                <i class="fa-solid fa-user fa-lg"></i>
                 <a href="#"> Profile</a>
               </li>
               <li>
@@ -176,7 +176,7 @@
           </div>
         </div>
       </div>
-      <i class="fa-regular fa-bell fa-lg icon"></i>
+      <i class="fa-solid fa-bell fa-lg icon"></i>
       <!-- Notification menu -->
       <div class="notification-menu">
         <div class="notification-options flex-row">
@@ -188,10 +188,40 @@
       <i class="fa-solid fa-cart-shopping fa-lg icon"></i>
     </nav>
     <aside class="slide-cart">
-      <div class="cart-num">"Cart(1)"</div>
-      <div class="cart-item">
-        <img src="" alt="product" />
+      <div class="cart-num">Cart(1)</div>
+      <div class="cart-container flex-column">
+        <article class="cart-item">
+          <img src="../static/images/site/macbook.jpeg" alt="product" />
+          <h3>MacBook Pro</h3>
+          <span>$1299.99</span>
+          <div class="add-substract">
+            <i class="fa-solid fa-minus fa-lg"></i>
+            <input type="text" class="quantity" disabled value="10" />
+            <i class="fa-solid fa-plus fa-lg"></i>
+          </div>
+          <i class="fa-solid fa-trash-can fa-lg"></i>
+        </article>
+        <article class="cart-item">
+          <img src="../static/images/site/macbook.jpeg" alt="product" />
+          <h3>MacBook Pro</h3>
+          <span>$1299.99</span>
+          <div class="add-substract">
+            <i class="fa-solid fa-minus fa-lg"></i>
+            <input type="text" class="quantity" disabled value="10" />
+            <i class="fa-solid fa-plus fa-lg"></i>
+          </div>
+          <i class="fa-solid fa-trash-can fa-lg"></i>
+        </article>
       </div>
+      <div class="subtotal flex-row">
+        <span>Subtotal:</span>
+        <span> $12999.90 </span>
+      </div>
+      <div class="disclaimer">
+        <i class="fa-solid fa-circle-exclamation fa-lg"></i>
+        <span> Delivery fees will be calculated at checkout</span>
+      </div>
+      <button class="checkout">CHECKOUT</button>
     </aside>
   </section>
 </header>
@@ -367,7 +397,7 @@
   </section>
 </main>
 {% endblock %}
-<!-- Footer sections -->
+<!-- Footer section -->
 <footer>
   <section class="footer-nav container flex-row">
     <div class="socials flex-row">
@@ -382,12 +412,47 @@
       <a href="#">SELL ON SOKO</a>
       <a href="#">FAQ</a>
     </nav>
+    <!-- Messanger -->
     <div class="messanger">
       <div class="message-header flex-row">
         <i class="fa-regular fa-message fa-lg"> <span>Messages</span></i>
-        <i class="fa-solid fa-chevron-up arrow"></i>
+        <i class="fa-solid fa-angles-up arrow"></i>
       </div>
-      <div class="chats"></div>
+      <div class="chats">
+        <article class="chat">
+          <h3 class="user"></h3>
+          <div class="messages"></div>
+        </article>
+        <article class="chat">
+          <h3 class="user"></h3>
+          <div class="messages"></div>
+        </article>
+        <article class="chat">
+          <h3 class="user"></h3>
+          <div class="messages"></div>
+        </article>
+        <article class="chat">
+          <h3 class="user"></h3>
+          <div class="messages"></div>
+        </article>
+        <article class="chat">
+          <h3 class="user"></h3>
+          <div class="messages"></div>
+        </article>
+        <article class="chat">
+          <h3 class="user"></h3>
+          <div class="messages"></div>
+        </article>
+        <article class="chat">
+          <h3 class="user"></h3>
+          <div class="messages"></div>
+        </article>
+      </div>
+      <div class="chat-message">
+        <textarea name="message" id="message" cols="40" rows="3"></textarea>
+        <i class="fa-solid fa-face-smile fa-lg"></i>
+        <i class="fa-solid fa-paper-plane fa-lg"></i>
+      </div>
     </div>
   </section>
 </footer>
