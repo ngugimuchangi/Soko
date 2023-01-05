@@ -573,12 +573,16 @@ footer {
   background-color: #fff;
   transition: width height 1s;
   color: #000;
-  /* overflow: scroll; */
   font-family: "Roboto", sans-serif;
+}
+@media only screen and (min-width: 1000px) {
+  .messanger {
+    right: -350px;
+  }
 }
 .messanger-size {
   width: 450px;
-  height: 450px;
+  height: 500px;
 }
 .fa-message > span {
   font-family: "Roboto", sans-serif;
@@ -595,6 +599,13 @@ footer {
   font-weight: 800;
   margin-left: 5px;
 }
+.back-to-chat-list {
+  position: relative;
+  top: 3px;
+  font-size: 24px;
+  margin-right: 10px;
+  cursor: pointer;
+}
 .message-header-properties {
   border-bottom: 2px solid #cdd2d8;
 }
@@ -602,7 +613,7 @@ body:has(.fa-angles-down) {
   overflow: hidden;
 }
 .chats {
-  height: 390px;
+  height: 440px;
   margin-bottom: 10px;
   display: none;
   overflow-x: hidden;
@@ -620,6 +631,7 @@ body:has(.fa-angles-down) {
   margin-bottom: 10px;
   border-radius: 8px;
   padding: 5px;
+  position: relative;
 }
 
 .chat:hover {
@@ -657,16 +669,25 @@ seller-name {
 }
 .chat-history {
   width: 100%;
-  height: 310px;
+  height: 360px;
   overflow-x: hidden;
   text-overflow: clip;
   white-space: nowrap;
   overflow-y: scroll;
 }
-.customer,
-.seller {
+.customer-message-container {
+  width: 250px;
+  position: relative;
+  left: 40%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  align-content: flex-end;
+}
+.customer-message,
+.seller-message {
+  width: fit-content;
   max-width: 250px;
-  min-width: 10px;
   min-height: 20px;
   padding: 8px;
   overflow: hidden;
@@ -676,13 +697,11 @@ seller-name {
   border-radius: 8px;
   line-height: 24px;
 }
-.customer {
-  position: relative;
-  left: 40%;
+.customer-message {
   background-color: #2d8af5;
   color: #f4f6f8;
 }
-.seller {
+.seller-message {
   background-color: #cdd2d8;
   color: #1f0f0f;
 }
@@ -712,8 +731,33 @@ textarea#message:focus {
 }
 .fa-paper-plane:hover,
 .fa-face-smile:hover,
-.arrow:hover {
+.arrow:hover,
+.back-to-chat-list:hover,
+.fa-ellipsis:hover,
+.fa-trash-can:hover {
   color: #fc870b;
+}
+.fa-ellipsis {
+  margin-left: 5px;
+}
+.delete {
+  display: none;
+  position: absolute;
+  right: 0;
+  border-radius: 4px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+  /* z-index: 3; */
+  width: 180px;
+  height: 40px;
+  background-color: #fff;
+  color: #000;
+  padding-top: 10px;
+  padding: 10px;
+}
+.chat:has(.fa-ellipsis:hover) .delete,
+.delete:hover {
+  display: block;
 }
 
 /* END OF FOOTER SECTION */

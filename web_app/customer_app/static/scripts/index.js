@@ -44,29 +44,77 @@ $("document").ready(function () {
 
   // START OF MESSANGER
   // Opening an closing window
-  //&#10094;
   const toggleArrow = $(".arrow");
+  const chatHistory = $(".chat-history");
+  const chatList = $(".chats");
+  let toggleSection = chatList;
+  let headerContent = $(".message-header .fa-message");
+  let tempContent;
+  let prevContent;
   toggleArrow.click(function () {
-    $(this).toggleClass("fa-angles-up fa-angles-down");
-    $(".messanger").toggleClass("messanger-size");
-    $(".message-header").toggleClass("message-header-properties");
-    $(".chats").toggle();
+    if ($(this).hasClass("fa-angles-up")) {
+      $(this).removeClass("fa-angles-up");
+      $(this).addClass("fa-angles-down");
+      $(".messanger").addClass("messanger-size");
+      $(".message-header").addClass("message-header-properties");
+      toggleSection.show();
+      if (toggleSection.hasClass("chat-active")) {
+        headerContent.replaceWith(prevContent);
+        headerContent = prevContent;
+      }
+      $(".back-to-chat-list").click(() => goBack());
+    } else {
+      $(this).removeClass("fa-angles-down");
+      $(this).addClass("fa-angles-up");
+      $(".messanger").removeClass("messanger-size");
+      $(".message-header").removeClass("message-header-properties");
+      toggleSection.hide();
+      tempContent = $(
+        '<i class="fa-regular fa-message fa-lg"><span>Messages</span></i>'
+      );
+      if (toggleSection.hasClass("chat-active")) {
+        prevContent = headerContent;
+        headerContent.replaceWith(tempContent);
+        headerContent = tempContent;
+      }
+    }
   });
 
   // Loading messages
-  const chatHistory = $(".chat-history");
   const chat = $(".chat");
   chat.click(function () {
-    $(".chats").hide();
-    $(".chat-active").show();
-    chatHistory.scrollTop(chatHistory.height());
+    toggleSection.hide();
+    toggleSection = $(".chat-active");
+    toggleSection.show();
+    chatHistory.scrollTop(chatHistory.prop("scrollHeight"));
+    tempContent = $(
+      `<div class="chat-active-header"><span class="back-to-chat-list">&#10094;</span><span class="seller-name">  ${$(
+        this
+      )
+        .children(".seller-name")
+        .text()} </span></div>`
+    );
+    $(".message-header .fa-message").replaceWith(tempContent);
+    headerContent = tempContent;
+    $(".back-to-chat-list").click(() => goBack());
   });
+
+  // Navigating back to chat list
+  function goBack() {
+    toggleSection.hide();
+    toggleSection = chatList;
+    toggleSection.show();
+    $(".chat-active-header").replaceWith(
+      $('<i class="fa-regular fa-message fa-lg"><span>Messages</span></i>')
+    );
+  }
+
   // Sending message
   const send = $(".fa-paper-plane");
   send.click(function () {
     const textArea = $("textarea#message");
     if (textArea.val() === "") return;
-    const newMessage = $('<p class="customer"></p>');
+    let newMessage = $('<p class="customer-message"></p>');
     if (
       textArea.val().includes("http") &&
       !textArea.val().includes("<script>")
@@ -75,9 +123,30 @@ $("document").ready(function () {
     } else {
       newMessage.text(textArea.val());
     }
+    newMessage = $('<div class="customer-message-container"></div>').append(
+      newMessage
+    );
     textArea.val("");
     chatHistory.append(newMessage);
-    chatHistory.scrollTop(chatHistory.height());
+    chatHistory.scrollTop(chatHistory.prop("scrollHeight"));
   });
+
+  // Deleting message
+  // Show message on ellipsis click
+  $(".fa-ellipsis").click(() => {
+    $(".delete").show();
+  });
+  // Delete message on trash-can click
+  $(".delete .trash-can").click(function () {
+    $(this).parent().toggle();
+    $(this).parent().parent().remove();
+  });
+  // Hide delete option on click body
+  $("body *").click(() => {
+    if ($(".delete").css("display") === "block") {
+      $(".delete").hide();
+    }
+  });
+
   // END OF MESSANGER
 });
