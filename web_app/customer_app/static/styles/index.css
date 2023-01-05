@@ -88,10 +88,17 @@ button:hover {
   font-size: larger;
   position: relative;
 }
-
+.hamburger {
+  transition: transform 0.6s;
+}
 /* Categories pop up */
 .product-nav:hover .categories {
   display: block;
+}
+.product-nav:hover .hamburger {
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
 }
 .categories,
 .subcategories {
@@ -200,7 +207,8 @@ button.search {
   text-decoration: none;
   color: #000;
 }
-.nav-icons a:hover {
+.nav-icons a:hover,
+span#login-prompt a:hover {
   color: #fc870b;
 }
 .nav-icons li {
@@ -212,9 +220,18 @@ button.search {
   cursor: pointer;
 }
 
+span#login-prompt {
+  margin-right: 20px;
+  position: relative;
+  top: 6px;
+  font-weight: 600;
+}
+span#login-prompt a {
+  color: #fff;
+}
 #user-name {
   display: inline-block;
-  max-width: 150px;
+  width: 115px;
   height: 70px;
   padding-top: 35px;
   margin-right: 5px;
@@ -334,9 +351,6 @@ input.quantity {
   justify-self: center;
 }
 
-.fa-trash-can {
-  margin-bottom: 20px;
-}
 .cart-item .fa-solid:hover {
   color: #fc870b;
 }
@@ -559,7 +573,7 @@ footer {
   background-color: #fff;
   transition: width height 1s;
   color: #000;
-  overflow: scroll;
+  /* overflow: scroll; */
   font-family: "Roboto", sans-serif;
 }
 .messanger-size {
@@ -570,26 +584,109 @@ footer {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
 }
-.message-header-properties {
-  border-bottom: 2px solid #cdd2d8;
+.message-header {
   height: 40px;
   padding-bottom: 5px;
   margin-bottom: 10px;
+  color: #717171;
 }
-.chats,
-.chat-message {
-  display: none;
+.fa-message span {
+  display: inline-block;
+  font-weight: 800;
+  margin-left: 5px;
+}
+.message-header-properties {
+  border-bottom: 2px solid #cdd2d8;
+}
+body:has(.fa-angles-down) {
+  overflow: hidden;
 }
 .chats {
+  height: 390px;
+  margin-bottom: 10px;
+  display: none;
   overflow-x: hidden;
   text-overflow: clip;
   white-space: nowrap;
   overflow-y: scroll;
 }
-.chats {
-  height: 310px;
+.chat {
+  display: grid;
+  grid-template-columns: 60px 150px 180px;
+  grid-template-rows: 30px;
+  gap: 5px;
+  width: 100%;
+  height: 70px;
   margin-bottom: 10px;
+  border-radius: 8px;
+  padding: 5px;
 }
+
+.chat:hover {
+  background-color: #cdd7e5;
+}
+.seller-name,
+.date,
+.last-message {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.seller-image {
+  background-color: #cdd2d8;
+  border-radius: 50%;
+  padding-left: 10px;
+  grid-row: 1 / span 2;
+}
+seller-name {
+  font-weight: 600;
+}
+.fa-shop {
+  color: #bbb;
+  position: relative;
+  top: 20px;
+}
+.date {
+  justify-self: end;
+}
+.last-message {
+  grid-column: 2 / span 2;
+}
+.chat-active {
+  display: none;
+}
+.chat-history {
+  width: 100%;
+  height: 310px;
+  overflow-x: hidden;
+  text-overflow: clip;
+  white-space: nowrap;
+  overflow-y: scroll;
+}
+.customer,
+.seller {
+  max-width: 250px;
+  min-width: 10px;
+  min-height: 20px;
+  padding: 8px;
+  overflow: hidden;
+  white-space: normal;
+  height: fit-content;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  line-height: 24px;
+}
+.customer {
+  position: relative;
+  left: 40%;
+  background-color: #2d8af5;
+  color: #f4f6f8;
+}
+.seller {
+  background-color: #cdd2d8;
+  color: #1f0f0f;
+}
+
 textarea#message {
   border-radius: 4px;
   border: 2px solid #cdd2d8;
@@ -597,6 +694,8 @@ textarea#message {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: 400;
+  resize: none;
+  padding: 5px;
 }
 textarea#message:focus {
   outline: none;
@@ -616,15 +715,5 @@ textarea#message:focus {
 .arrow:hover {
   color: #fc870b;
 }
-.chat {
-  width: 100%;
-  height: 50px;
-  border-bottom: 1px solid #cdd2d8;
-}
-.messages {
-  display: none;
-}
-body:has(.fa-angles-down) {
-  overflow: hidden;
-}
+
 /* END OF FOOTER SECTION */

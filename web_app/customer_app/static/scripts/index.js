@@ -43,12 +43,41 @@ $("document").ready(function () {
   // END OF BANNER ANIMATION
 
   // START OF MESSANGER
+  // Opening an closing window
+  //&#10094;
   const toggleArrow = $(".arrow");
   toggleArrow.click(function () {
     $(this).toggleClass("fa-angles-up fa-angles-down");
     $(".messanger").toggleClass("messanger-size");
     $(".message-header").toggleClass("message-header-properties");
-    $(".chats, .chat-message").toggle();
+    $(".chats").toggle();
+  });
+
+  // Loading messages
+  const chatHistory = $(".chat-history");
+  const chat = $(".chat");
+  chat.click(function () {
+    $(".chats").hide();
+    $(".chat-active").show();
+    chatHistory.scrollTop(chatHistory.height());
+  });
+  // Sending message
+  const send = $(".fa-paper-plane");
+  send.click(function () {
+    const textArea = $("textarea#message");
+    if (textArea.val() === "") return;
+    const newMessage = $('<p class="customer"></p>');
+    if (
+      textArea.val().includes("http") &&
+      !textArea.val().includes("<script>")
+    ) {
+      // Add link as a tag
+    } else {
+      newMessage.text(textArea.val());
+    }
+    textArea.val("");
+    chatHistory.append(newMessage);
+    chatHistory.scrollTop(chatHistory.height());
   });
   // END OF MESSANGER
 });

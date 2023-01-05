@@ -6,6 +6,7 @@ from flasgger import Swagger
 from flask import Flask, jsonify, make_response, render_template
 from flask_login import LoginManager
 from models import storage
+from models.customer import Customer
 from os import getenv
 from web_app.customer_app.views import customer_views
 
@@ -17,8 +18,16 @@ app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 app.config["SECRET_KEY"] = getenv("SOKO_CUSTOMER_APP_SECRET_KEY")
 swagger = Swagger(app)
-#login_manger = LoginManager()
-#login_manger.init_app(app)
+login_manger = LoginManager()
+login_manger.init_app(app)
+login_manger.login_view = "customer_views.login"
+
+@login_manger.user_loader
+def load_user(user_id):
+    """ Finds user associated with id and adds them
+        to flask-login session
+    """
+    return storage.search(Customer, user_id)
 
 
 @app.errorhandler(404)

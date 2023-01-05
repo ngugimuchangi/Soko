@@ -15,7 +15,7 @@ $(function () {
     if (textArea.val() === "") return;
 
     socket.send(textArea.val());
-    const message = $("<p class='chat-message'></p>").text(textArea.val());
+    const message = $("<p class='chat-message'></p>").html(textArea.val());
     chatHistory.append(message);
     $("textarea").val("");
   });

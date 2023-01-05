@@ -5,6 +5,12 @@ body {
   background: #cdd2d8;
   font-family: "Roboto";
 }
+.alert {
+  margin: auto;
+  width: 500px;
+  position: relative;
+  top: 90px;
+}
 .container {
   margin: auto;
   width: 500px;
@@ -92,12 +98,12 @@ button,
 label {
   font-size: large;
 }
-button {
+.container button {
   color: #fff;
   background: #26415f;
 }
 
-button:hover {
+.container button:hover {
   background: #315985;
 }
 /* Action */
@@ -109,12 +115,15 @@ button:hover {
 #login {
   text-align: center;
 }
-a {
+.container a {
   text-decoration: none;
   font-size: large;
   font-weight: 500;
   color: #26415f;
 }
-a:hover {
+.container a:hover {
   color: #315985;
+}
+.toggle-password {
+  margin-left: 6px;
 }

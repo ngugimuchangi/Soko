@@ -2,15 +2,35 @@
 
 <!-- prettier ignore -->
 {% block styles %}
+<!-- prettier ignore -->
+{{ super() }}
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='styles/login.css') + '?' + cache_id}}"
 />
 {% endblock %}
 
+<!-- prettier-ignore -->
+{% block scripts %}
+<!-- prettier ignore -->
+{{ super() }}
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename='scripts/login.js') + '?' + cache_id }}"
+  defer
+></script>
+{% endblock %}
+
 <!-- prettier ignore -->
 <!-- Reset form -->
 {% block body %}
+<!-- prettier ignore -->
+{% with messages = get_flashed_messages() %} {% if messages %}
+<div class="alert alert-danger alert-dismissible fade show">
+  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  <strong>{{ messages[0] }}</strong>
+</div>
+{% endif %} {% endwith %}
 <section class="container">
   <img
     src="{{ url_for('static', filename='images/site/favicon-big.svg') }}"
@@ -22,17 +42,29 @@
     alt="logo-text"
     id="logo"
   />
-  <div id="credentials">
+  <div class="credentials pwd-check">
     <form action="{{ url_for('customer_views.login') }}" method="post">
       <label for="password"> New password </label>
       <div class="text-pwd">
-        <input type="password" name="password" class="pwd" />
-        <i class="fa-solid fa-eye"></i>
+        <input
+          type="password"
+          name="password"
+          class="pwd"
+          required
+          oninvalid="this.setCustomValidity('Enter your new email')"
+        />
+        <i class="fa-solid fa-lock toggle-password"></i>
       </div>
-      <label for="password"> Confirm password </label>
+      <label for="confirm-pwd"> Confirm password </label>
       <div class="text-pwd">
-        <input type="password" name="password" class="pwd" />
-        <i class="fa-solid fa-eye"></i>
+        <input
+          type="password"
+          name="confirm-pwd"
+          class="pwd"
+          required
+          oninvalid="this.setCustomValidity('Confirm your new email')"
+        />
+        <i class="fa-solid fa-lock toggle-password"></i>
       </div>
       <button>Reset</button>
     </form>

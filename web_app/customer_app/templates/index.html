@@ -7,10 +7,8 @@
   href="{{ url_for('static', filename='styles/index.css') + '?' + cache_id }}"
 />
 {% endblock %}
-
 <!-- prettier-ignore -->
 {% block scripts %}
-<script src="https://code.jquery.com/jquery-3.5.0.js" defer></script>
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"
   integrity="sha512-YeeA/Qxn5hYdkukScTCNNOhTrv1C2RubAGButJ1rmgQwZf/HdRaCGl+JAVkqsqaNRaYNHdheiuKKuPf9mDcqKg=="
@@ -140,8 +138,21 @@
     </div>
     <!-- Navigation icons -->
     <nav class="nav-icons flex-row">
+      {% if not current_user.is_authenticated %}
+      <span id="login-prompt">
+        <a href="{{ url_for('customer_views.login') }}"> Login </a>
+      </span>
+      {% endif %}
+      <!-- prettier-ignore -->
+      {% if current_user.is_authenticated %}
       <div class="user">
-        <span id="user-name">Hello, Anastacia</span>
+        <!-- prettier-ignore -->
+        <span id="user-name">
+          {% if current_user.first_name %}
+          {{ "Hello, " + current_user.first_name }}
+          {% endif %}
+        </span>
+
         <div class="user-icon">
           <i class="fa-solid fa-user fa-lg icon"></i>
           <!-- Profile menu -->
@@ -170,7 +181,7 @@
                   src="{{ url_for('static', filename='images/icons/24/logout-black.svg') }}"
                   alt="wishlist-black"
                 />
-                <a href="#"> Log Out</a>
+                <a href="{{ url_for('customer_views.logout') }}"> Log Out</a>
               </li>
             </ul>
           </div>
@@ -184,6 +195,7 @@
           <a href="#">View all</a>
         </div>
       </div>
+      {% endif %}
       <!-- Cart sections -->
       <i class="fa-solid fa-cart-shopping fa-lg icon"></i>
     </nav>
@@ -206,9 +218,9 @@
           <h3>MacBook Pro</h3>
           <span>$1299.99</span>
           <div class="add-substract">
-            <i class="fa-solid fa-minus fa-lg"></i>
+            <i class="fa-solid fa-minus fa-lg minus"></i>
             <input type="text" class="quantity" disabled value="10" />
-            <i class="fa-solid fa-plus fa-lg"></i>
+            <i class="fa-solid fa-plus fa-lg add"></i>
           </div>
           <i class="fa-solid fa-trash-can fa-lg"></i>
         </article>
@@ -412,48 +424,121 @@
       <a href="#">SELL ON SOKO</a>
       <a href="#">FAQ</a>
     </nav>
+    {% if current_user.is_authenticated %}
     <!-- Messanger -->
     <div class="messanger">
       <div class="message-header flex-row">
-        <i class="fa-regular fa-message fa-lg"> <span>Messages</span></i>
-        <i class="fa-solid fa-angles-up arrow"></i>
+        <i class="fa-regular fa-message fa-lg"><span>Messages</span></i>
+        <i class="fa-solid fa-angles-up fa-lg arrow"></i>
       </div>
-      <div class="chats">
-        <article class="chat">
-          <h3 class="user"></h3>
-          <div class="messages"></div>
-        </article>
-        <article class="chat">
-          <h3 class="user"></h3>
-          <div class="messages"></div>
-        </article>
-        <article class="chat">
-          <h3 class="user"></h3>
-          <div class="messages"></div>
-        </article>
-        <article class="chat">
-          <h3 class="user"></h3>
-          <div class="messages"></div>
-        </article>
-        <article class="chat">
-          <h3 class="user"></h3>
-          <div class="messages"></div>
-        </article>
-        <article class="chat">
-          <h3 class="user"></h3>
-          <div class="messages"></div>
-        </article>
-        <article class="chat">
-          <h3 class="user"></h3>
-          <div class="messages"></div>
-        </article>
-      </div>
-      <div class="chat-message">
-        <textarea name="message" id="message" cols="40" rows="3"></textarea>
-        <i class="fa-solid fa-face-smile fa-lg"></i>
-        <i class="fa-solid fa-paper-plane fa-lg"></i>
-      </div>
+      <ul class="chats">
+        <li class="chat">
+          <div class="seller-image">
+            <i class="fa-solid fa-shop fa-2xl"></i>
+          </div>
+          <span class="seller-name">Top Seller</span>
+          <span class="date">5 Jan 2023</span>
+          <p class="last-message">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            Asperiores, quibusdam.
+          </p>
+        </li>
+        <li class="chat">
+          <div class="seller-image">
+            <i class="fa-solid fa-shop fa-2xl"></i>
+          </div>
+          <span class="seller-name">Top Seller</span>
+          <span class="date">5 Jan 2023</span>
+          <p class="last-message">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            Asperiores, quibusdam.
+          </p>
+        </li>
+        <li class="chat">
+          <div class="seller-image">
+            <i class="fa-solid fa-shop fa-2xl"></i>
+          </div>
+          <span class="seller-name">Top Seller</span>
+          <span class="date">5 Jan 2023</span>
+          <p class="last-message">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            Asperiores, quibusdam.
+          </p>
+        </li>
+        <li class="chat">
+          <div class="seller-image">
+            <i class="fa-solid fa-shop fa-2xl"></i>
+          </div>
+          <span class="seller-name">Top Seller</span>
+          <span class="date">5 Jan 2023</span>
+          <p class="last-message">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            Asperiores, quibusdam.
+          </p>
+        </li>
+        <li class="chat">
+          <div class="seller-image">
+            <i class="fa-solid fa-shop fa-2xl"></i>
+          </div>
+          <span class="seller-name">Top Seller</span>
+          <span class="date">5 Jan 2023</span>
+          <p class="last-message">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            Asperiores, quibusdam.
+          </p>
+        </li>
+        <li class="chat">
+          <div class="seller-image">
+            <i class="fa-solid fa-shop fa-2xl"></i>
+          </div>
+          <span class="seller-name">Top Seller</span>
+          <span class="date">5 Jan 2023</span>
+          <p class="last-message">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            Asperiores, quibusdam.
+          </p>
+        </li>
+        <li class="chat">
+          <div class="seller-image">
+            <i class="fa-solid fa-shop fa-2xl"></i>
+          </div>
+          <span class="seller-name">Top Seller</span>
+          <span class="date">5 Jan 2023</span>
+          <p class="last-message">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            Asperiores, quibusdam.
+          </p>
+        </li>
+      </ul>
+      <article class="chat-active">
+        <div class="chat-history">
+          <p class="customer">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti,
+            voluptates.
+          </p>
+          <p class="seller">Lorem ipsum dolor sit amet.</p>
+          <p class="customer">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti,
+            voluptates.
+          </p>
+          <p class="seller">Lorem ipsum dolor sit amet.</p>
+          <p class="customer">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti,
+            voluptates.
+          </p>
+          <p class="customer">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti,
+            voluptates.
+          </p>
+        </div>
+        <div class="chat-message">
+          <textarea name="message" id="message" cols="40" rows="3"></textarea>
+          <i class="fa-solid fa-face-smile fa-lg"></i>
+          <i class="fa-solid fa-paper-plane fa-lg"></i>
+        </div>
+      </article>
     </div>
+    {% endif %}
   </section>
 </footer>
 {% endblock %}

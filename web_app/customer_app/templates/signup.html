@@ -2,15 +2,35 @@
 
 <!-- prettier ignore -->
 {% block styles %}
+<!-- prettier ignore -->
+{{ super() }}
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='styles/login.css') + '?' + cache_id}}"
 />
 {% endblock %}
 
+<!-- prettier-ignore -->
+{% block scripts %}
+<!-- prettier ignore -->
+{{ super() }}
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename='scripts/login.js') + '?' + cache_id }}"
+  defer
+></script>
+{% endblock %}
+
 <!-- prettier ignore -->
 <!-- Signup form -->
 {% block body %}
+<!-- prettier ignore -->
+{% with messages = get_flashed_messages() %} {% if messages %}
+<div class="alert alert-danger alert-dismissible fade show">
+  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  <strong>{{ messages[0] }}</strong>
+</div>
+{% endif %} {% endwith %}
 <section class="container">
   <img
     src="{{ url_for('static', filename='images/site/favicon-big.svg') }}"
@@ -22,22 +42,50 @@
     alt="logo-text"
     id="logo"
   />
-  <div id="credentials">
-    <form action="{{ url_for('customer_views.signup') }}" method="post">
+  <div class="credentials pwd-check signup">
+    <form
+      action="{{ url_for('customer_views.signup') }}"
+      method="post"
+      autocomplete="off"
+    >
       <label for="email"> Email </label>
-      <input type="email" name="email" class="text" />
+      <input
+        type="email"
+        name="email"
+        class="text"
+        required
+        oninvalid="this.setCustomValidity('Enter your email')"
+      />
       <label for="password"> Password </label>
       <div class="text-pwd">
-        <input type="password" name="password" class="pwd" autocomplete="off" />
-        <i class="fa-solid fa-eye"></i>
+        <input
+          type="password"
+          name="password"
+          class="pwd"
+          required
+          oninvalid="this.setCustomValidity('Enter your password')"
+        />
+        <i class="fa-solid fa-lock toggle-password"></i>
       </div>
       <label for="confirm-pwd"> Confirm password </label>
       <div class="text-pwd">
-        <input type="password" name="password" class="pwd" autocomplete="off" />
-        <i class="fa-solid fa-eye"></i>
+        <input
+          type="password"
+          name="confirm-pwd"
+          class="pwd"
+          required
+          oninvalid="this.setCustomValidity('Confirm your password')"
+        />
+        <i class="fa-solid fa-lock toggle-password"></i>
       </div>
       <label for="phone_number"> Phone number </label>
-      <input type="tel" name="phone_number" / class="text">
+      <input
+        type="tel"
+        name="phone_number"
+        class="text"
+        required
+        oninvalid="this.setCustomValidity('Enter your phone number')"
+      />
       <button>Sign Up</button>
     </form>
   </div>
