@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
 /* START OF COMMON PROPERTIES */
+/* Variables */
+:root {
+  --hover-color: #26415f;
+}
 body {
   min-width: 900px;
   background-color: #f4f6f8;
@@ -17,15 +21,18 @@ body {
 /* Header and footer common styles */
 header,
 footer {
-  width: 100%;
   background: #26415f;
   color: #fff;
+  width: 100%;
 }
 
 header {
   position: sticky;
   top: 0;
   z-index: 1;
+}
+a {
+  color: #000;
 }
 /* Flex row common class properties */
 .flex-row {
@@ -51,6 +58,9 @@ button {
   background-position: 10px center;
 }
 button:hover {
+  background-color: #fd9f3c;
+}
+button:disabled {
   background-color: #d37e30;
 }
 /* END OF COMMON PROPERTIES */
@@ -132,7 +142,7 @@ button:hover {
 .categories a:hover,
 .subcategories a:hover,
 .categories a:has(+ .subcategories:hover) {
-  color: #fc870b;
+  color: var(--hover-color);
 }
 .subcategories {
   min-width: 300px;
@@ -207,7 +217,9 @@ button.search {
   text-decoration: none;
   color: #000;
 }
-.nav-icons a:hover,
+.nav-icons a:hover {
+  color: var(--hover-color);
+}
 span#login-prompt a:hover {
   color: #fc870b;
 }
@@ -262,13 +274,16 @@ span#login-prompt a {
   margin-left: 5px;
   padding-bottom: 10px;
 }
-.profile-menu .fa-user {
-  margin-left: 5px;
+.profile-menu i {
+  margin-right: 5px;
 }
-.profile-menu ul li:first-child a {
+/* .profile-menu .fa-user {
+  margin-left: 5px;
+} */
+/* .profile-menu li:first-child a {
   position: relative;
   top: 5px;
-}
+} */
 
 .notification-menu {
   width: 250px;
@@ -346,13 +361,23 @@ input.quantity {
   justify-self: center;
 }
 .fa-trash-can,
-.add-substract {
+.add-subtract {
   align-self: center;
   justify-self: center;
 }
+.add,
+.subtract {
+  user-select: none;
+}
+.cart-item i {
+  color: #717171;
+}
 
-.cart-item .fa-solid:hover {
-  color: #fc870b;
+.cart-item i:hover {
+  color: var(--hover-color);
+}
+i.fa-trash-can:hover {
+  color: #bb0a1e;
 }
 .cart-item img {
   grid-row: 1 / -1;
@@ -380,9 +405,9 @@ input.quantity {
 }
 .checkout {
   text-align: center;
-  background-image: url(../images/icons/24/checkout-black.svg);
   position: relative;
-  left: 190px;
+  left: 180px;
+  background-image: url(../images/icons/24/checkout-black.svg);
 }
 nav.nav-icons:has(.fa-cart-shopping:hover) + .slide-cart,
 .slide-cart:hover {
@@ -575,9 +600,13 @@ footer {
   color: #000;
   font-family: "Roboto", sans-serif;
 }
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1400px) {
+  .footer-nav {
+    position: static;
+  }
   .messanger {
-    right: -350px;
+    right: 10px;
+    bottom: 70px;
   }
 }
 .messanger-size {
@@ -585,6 +614,9 @@ footer {
   height: 500px;
 }
 .fa-message > span {
+  display: inline-block;
+  font-weight: 800;
+  margin-left: 10px;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
 }
@@ -593,11 +625,6 @@ footer {
   padding-bottom: 5px;
   margin-bottom: 10px;
   color: #717171;
-}
-.fa-message span {
-  display: inline-block;
-  font-weight: 800;
-  margin-left: 5px;
 }
 .back-to-chat-list {
   position: relative;
@@ -650,8 +677,8 @@ body:has(.fa-angles-down) {
   padding-left: 10px;
   grid-row: 1 / span 2;
 }
-seller-name {
-  font-weight: 600;
+.seller-name {
+  font-weight: 800;
 }
 .fa-shop {
   color: #bbb;
@@ -733,31 +760,32 @@ textarea#message:focus {
 .fa-face-smile:hover,
 .arrow:hover,
 .back-to-chat-list:hover,
-.fa-ellipsis:hover,
-.fa-trash-can:hover {
-  color: #fc870b;
+.fa-ellipsis:hover {
+  color: var(--hover-color);
 }
 .fa-ellipsis {
   margin-left: 5px;
 }
 .delete {
-  display: none;
-  position: absolute;
-  right: 0;
-  border-radius: 4px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-
-  /* z-index: 3; */
   width: 180px;
   height: 40px;
   background-color: #fff;
-  color: #000;
+  color: #26415f;
   padding-top: 10px;
   padding: 10px;
-}
-.chat:has(.fa-ellipsis:hover) .delete,
-.delete:hover {
-  display: block;
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 20px;
+  border-radius: 4px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.delete:hover {
+  color: #bb0a1e;
+}
 /* END OF FOOTER SECTION */
+
+/* USER DASHBOARD */
+
+/* END OF USER DASHBOARD */

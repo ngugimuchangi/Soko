@@ -4,7 +4,7 @@
 {% block styles %}
 <link
   rel="stylesheet"
-  href="{{ url_for('static', filename='styles/index.css') + '?' + cache_id }}"
+  href="{{ url_for('static', filename='styles/styles.css') + '?' + cache_id }}"
 />
 {% endblock %}
 <!-- prettier-ignore -->
@@ -26,6 +26,7 @@
 <!-- prettier-ignore -->
 {% block body%}
 <header>
+  {% block logo %}
   <section class="logo container">
     <img
       src="{{ url_for('static', filename='images/site/favicon-big.svg') }}"
@@ -38,13 +39,19 @@
       id="logo"
     />
   </section>
+  {% endblock %}
+  <!-- prettier-ignore -->
+  {% block header_nav %}
+  {% block categories_search_nav_icons %}
   <div id="seperator"></div>
   <section class="header-nav container flex-row">
     <div class="product-nav flex-row">
       <span class="hamburger">&#9776; </span>
       <span>Categories</span>
       <nav class="categories">
-        <a>
+        <a
+          href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='supermarket')) }}"
+        >
           <img
             src="{{ url_for('static', filename='images/categories/supermarket.svg') }}"
             alt="supermarket"
@@ -52,7 +59,9 @@
           SUPERMARKET
         </a>
         <ul class="subcategories"></ul>
-        <a>
+        <a
+          href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='healthcare-and-beauty')) }}"
+        >
           <img
             src="{{ url_for('static', filename='images/categories/healthcare-beauty.svg') }}"
             alt="healthcare-beauty"
@@ -60,7 +69,9 @@
           HEALTHCARE AND BEAUTY
         </a>
         <ul class="subcategories"></ul>
-        <a>
+        <a
+          href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='home-and-office')) }}"
+        >
           <img
             src="{{ url_for('static', filename='images/categories/home-office.svg') }}"
             alt="home-office"
@@ -68,7 +79,9 @@
           HOME AND OFFICE
         </a>
         <ul class="subcategories"></ul>
-        <a>
+        <a
+          href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='home-appliances')) }}"
+        >
           <img
             src="{{ url_for('static', filename='images/categories/home-appliances.svg') }}"
             alt="home-appliances"
@@ -76,7 +89,9 @@
           HOME APPLIANCES
         </a>
         <ul class="subcategories"></ul>
-        <a>
+        <a
+          href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='phone-and-tablets')) }}"
+        >
           <img
             src="{{ url_for('static', filename='images/categories/mobile-tablets.svg') }}"
             alt="mobile-tablets"
@@ -84,7 +99,9 @@
           PHONES AND TABLETS
         </a>
         <ul class="subcategories"></ul>
-        <a>
+        <a
+          href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='computing')) }}"
+        >
           <img
             src="{{ url_for('static', filename='images/categories/laptops.svg') }}"
             alt="laptops"
@@ -92,7 +109,9 @@
           COMPUTING
         </a>
         <ul class="subcategories"></ul>
-        <a>
+        <a
+          href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='tv-and-audio')) }}"
+        >
           <img
             src="{{ url_for('static', filename='images/categories/tv-audio.svg') }}"
             alt="tv-audio"
@@ -100,7 +119,9 @@
           TV &#38; AUDIO
         </a>
         <ul class="subcategories"></ul>
-        <a>
+        <a
+          href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='gaming')) }}"
+        >
           <img
             src="{{ url_for('static', filename='images/categories/gaming.svg') }}"
             alt="gaming"
@@ -108,7 +129,9 @@
           GAMING
         </a>
         <ul class="subcategories"></ul>
-        <a>
+        <a
+          href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='fashion')) }}"
+        >
           <img
             src="{{ url_for('static', filename='images/categories/fashion.svg') }}"
             alt="fashion"
@@ -116,7 +139,9 @@
           FASHION
         </a>
         <ul class="subcategories"></ul>
-        <a>
+        <a
+          href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='baby-products')) }}"
+        >
           <img
             src="{{ url_for('static', filename='images/categories/baby-products.svg') }}"
             alt="baby-products"
@@ -134,7 +159,12 @@
         class="search"
         placeholder="Search products"
       />
-      <button class="search">SEARCH</button>
+      <button
+        class="search"
+        onclick="window.location.href='{{url_for('customer_views.search_products')}}'"
+      >
+        SEARCH
+      </button>
     </div>
     <!-- Navigation icons -->
     <nav class="nav-icons flex-row">
@@ -156,35 +186,28 @@
         <div class="user-icon">
           <i class="fa-solid fa-user fa-lg icon"></i>
           <!-- Profile menu -->
-          <div class="profile-menu">
-            <ul>
-              <li>
-                <i class="fa-solid fa-user fa-lg"></i>
-                <a href="#"> Profile</a>
-              </li>
-              <li>
-                <img
-                  src="{{ url_for('static', filename='images/icons/24/wishlist-black.svg') }}"
-                  alt="wishlist-black"
-                />
-                <a href="#"> Orders</a>
-              </li>
-              <li>
-                <img
-                  src="{{ url_for('static', filename='images/icons/24/heart-black.svg') }}"
-                  alt="heart"
-                />
-                <a href="#"> Saved Items</a>
-              </li>
-              <li>
-                <img
-                  src="{{ url_for('static', filename='images/icons/24/logout-black.svg') }}"
-                  alt="wishlist-black"
-                />
-                <a href="{{ url_for('customer_views.logout') }}"> Log Out</a>
-              </li>
-            </ul>
-          </div>
+          <ul class="profile-menu">
+            <li>
+              <a href="{{ url_for('customer_views.customer_dashboard') }}">
+                <i class="fa-regular fa-user fa-lg"></i> Profile</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('customer_views.customer_dashboard') }}">
+                <i class="fa-solid fa-list"></i> Orders</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('customer_views.customer_dashboard') }}">
+                <i class="fa-regular fa-heart"></i> Saved Items</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('customer_views.logout') }}">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out</a
+              >
+            </li>
+          </ul>
         </div>
       </div>
       <i class="fa-solid fa-bell fa-lg icon"></i>
@@ -199,43 +222,53 @@
       <!-- Cart sections -->
       <i class="fa-solid fa-cart-shopping fa-lg icon"></i>
     </nav>
+    {% endblock %}
+    <!-- prettier-ignore -->
+    {% block cart %}
     <aside class="slide-cart">
       <div class="cart-num">Cart(1)</div>
       <div class="cart-container flex-column">
         <article class="cart-item">
           <img src="../static/images/site/macbook.jpeg" alt="product" />
           <h3>MacBook Pro</h3>
-          <span>$1299.99</span>
-          <div class="add-substract">
-            <i class="fa-solid fa-minus fa-lg"></i>
-            <input type="text" class="quantity" disabled value="10" />
-            <i class="fa-solid fa-plus fa-lg"></i>
+          <span class="price">$1299.99</span>
+          <div class="add-subtract">
+            <i class="fa-solid fa-minus fa-lg subtract"></i>
+            <input type="text" class="quantity" disabled value="1" />
+            <i class="fa-solid fa-plus fa-lg add"></i>
           </div>
-          <i class="fa-solid fa-trash-can fa-lg"></i>
+          <i class="fa-solid fa-trash-can fa-lg delete-item"></i>
         </article>
         <article class="cart-item">
           <img src="../static/images/site/macbook.jpeg" alt="product" />
           <h3>MacBook Pro</h3>
-          <span>$1299.99</span>
-          <div class="add-substract">
-            <i class="fa-solid fa-minus fa-lg minus"></i>
-            <input type="text" class="quantity" disabled value="10" />
+          <span class="price">$1299.99</span>
+          <div class="add-subtract">
+            <i class="fa-solid fa-minus fa-lg subtract"></i>
+            <input type="text" class="quantity" disabled value="1" />
             <i class="fa-solid fa-plus fa-lg add"></i>
           </div>
-          <i class="fa-solid fa-trash-can fa-lg"></i>
+          <i class="fa-solid fa-trash-can fa-lg delete-item"></i>
         </article>
       </div>
       <div class="subtotal flex-row">
         <span>Subtotal:</span>
-        <span> $12999.90 </span>
+        <span class="cart-subtotal"> $12999.90 </span>
       </div>
       <div class="disclaimer">
         <i class="fa-solid fa-circle-exclamation fa-lg"></i>
         <span> Delivery fees will be calculated at checkout</span>
       </div>
-      <button class="checkout">CHECKOUT</button>
+      <button
+        class="checkout"
+        onclick="window.location.href='{{url_for('customer_views.checkout')}}'"
+      >
+        CHECKOUT
+      </button>
     </aside>
+    {% endblock%}
   </section>
+  {% endblock%}
 </header>
 
 {% block main %}
@@ -276,7 +309,12 @@
   <section class="products">
     <h1>Christmas Deals</h1>
     <div class="landing-category flex-row">
-      <article class="product" data-id="" data-name="">
+      <article
+        class="product"
+        data-id=""
+        data-name=""
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+      >
         <img
           src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
           alt="product"
@@ -410,6 +448,7 @@
 </main>
 {% endblock %}
 <!-- Footer section -->
+{% block footer %}
 <footer>
   <section class="footer-nav container flex-row">
     <div class="socials flex-row">
@@ -419,10 +458,10 @@
       <i class="fa-brands fa-facebook fa-lg footer-icon"></i>
     </div>
     <nav class="nav flex-row">
-      <a href="#">ABOUT US</a>
-      <a href="#">CONTACT US</a>
+      <a href="{{ url_for('customer_views.about') }}">ABOUT US</a>
+      <a href="{{ url_for('customer_views.contacts') }}">CONTACT US</a>
       <a href="#">SELL ON SOKO</a>
-      <a href="#">FAQ</a>
+      <a href="{{ url_for('customer_views.faq') }}">FAQ</a>
     </nav>
     {% if current_user.is_authenticated %}
     <!-- Messanger -->
@@ -596,4 +635,4 @@
     {% endif %}
   </section>
 </footer>
-{% endblock %}
+{% endblock %} {% endblock %}

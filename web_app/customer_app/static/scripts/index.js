@@ -42,47 +42,78 @@ $("document").ready(function () {
   });
   // END OF BANNER ANIMATION
 
+  // START OF CART
+  const itemsOnCart = $(".cart-num");
+  const subtotalElement = $(".cart-subtotal");
+  // Subtotal calculation
+  function calculateSubtotal() {
+    // let subtotal = parseFloat(subtotalElement.val.slice(1));
+    let subtotal = 0;
+    const cartItems = $(".cart-item");
+    itemsOnCart.text(`Cart(${cartItems.length})`);
+    cartItems.each(function () {
+      const price = parseFloat($(this).children(".price").text().slice(1));
+      const quantity = parseInt(
+        $(this).children(".add-subtract").children(".quantity").val()
+      );
+      subtotal += price * quantity;
+    });
+    subtotalElement.text(`$${subtotal.toFixed(2)}`);
+  }
+  calculateSubtotal();
+
+  // Add or subtract quantity of cart item
+  function addOrSubtract(item, operation) {
+    if (operation === "add") {
+      item.val(parseInt(item.val()) + 1);
+    }
+    if (operation === "subtract" && parseInt(item.val()) > 1) {
+      item.val(parseInt(item.val()) - 1);
+    }
+    calculateSubtotal();
+  }
+  $(".add").click(function () {
+    addOrSubtract($(this).prev(), "add");
+  });
+  $(".subtract").click(function () {
+    addOrSubtract($(this).next(), "subtract");
+  });
+
+  // Delete cart-item
+  $(".delete-item").click(function () {
+    $(this).parent().remove();
+    calculateSubtotal();
+    if ($(".cart-item").length === 0) {
+      $(".subtotal, .disclaimer").hide();
+      $(".checkout").prop("disabled", true);
+    }
+  });
+  // END OF CART
+
   // START OF MESSANGER
-  // Opening an closing window
+  // Socket integration to be done
+  // Opening and closing chat section
   const toggleArrow = $(".arrow");
   const chatHistory = $(".chat-history");
   const chatList = $(".chats");
   let toggleSection = chatList;
   let headerContent = $(".message-header .fa-message");
   let tempContent;
-  let prevContent;
   toggleArrow.click(function () {
-    if ($(this).hasClass("fa-angles-up")) {
-      $(this).removeClass("fa-angles-up");
-      $(this).addClass("fa-angles-down");
-      $(".messanger").addClass("messanger-size");
-      $(".message-header").addClass("message-header-properties");
-      toggleSection.show();
-      if (toggleSection.hasClass("chat-active")) {
-        headerContent.replaceWith(prevContent);
-        headerContent = prevContent;
-      }
+    $(this).toggleClass("fa-angles-up fa-angles-down");
+    $(".messanger").toggleClass("messanger-size");
+    $(".message-header").toggleClass("message-header-properties");
+    toggleSection.toggle();
+    if (toggleSection.hasClass("chat-active")) {
       $(".back-to-chat-list").click(() => goBack());
-    } else {
-      $(this).removeClass("fa-angles-down");
-      $(this).addClass("fa-angles-up");
-      $(".messanger").removeClass("messanger-size");
-      $(".message-header").removeClass("message-header-properties");
-      toggleSection.hide();
-      tempContent = $(
-        '<i class="fa-regular fa-message fa-lg"><span>Messages</span></i>'
-      );
-      if (toggleSection.hasClass("chat-active")) {
-        prevContent = headerContent;
-        headerContent.replaceWith(tempContent);
-        headerContent = tempContent;
-      }
+      $(".back-to-chat-list").toggle();
     }
   });
 
   // Loading messages
   const chat = $(".chat");
-  chat.click(function () {
+  chat.click(function (event) {
+    event.stopPropagation();
     toggleSection.hide();
     toggleSection = $(".chat-active");
     toggleSection.show();
@@ -131,22 +162,28 @@ $("document").ready(function () {
     chatHistory.scrollTop(chatHistory.prop("scrollHeight"));
   });
 
-  // Deleting message
-  // Show message on ellipsis click
-  $(".fa-ellipsis").click(() => {
-    $(".delete").show();
-  });
-  // Delete message on trash-can click
-  $(".delete .trash-can").click(function () {
-    $(this).parent().toggle();
-    $(this).parent().parent().remove();
-  });
-  // Hide delete option on click body
-  $("body *").click(() => {
-    if ($(".delete").css("display") === "block") {
-      $(".delete").hide();
-    }
-  });
-
+  // Deleting entire chat
+  if (toggleSection.hasClass("chats")) {
+    // Click on ellipsis to show delete menu
+    $(".fa-ellipsis").click(function (event) {
+      event.stopPropagation();
+      const deletePrompt = $(this).parent().next(".delete");
+      deletePrompt.parent().siblings().children(".delete").hide();
+      deletePrompt.toggle();
+    });
+    // Delete message on click trash can
+    $(".delete .fa-trash-can").click(function (event) {
+      event.stopPropagation();
+      $(this).parent().toggle();
+      $(this).parent().parent().remove();
+    });
+    // Close delete pop-up on click anywhere
+    // on the messanger body except the pop-up
+    $(".messanger").click(() => {
+      if ($(".delete").is(":visible")) {
+        $(".delete").hide();
+      }
+    });
+  }
   // END OF MESSANGER
 });
