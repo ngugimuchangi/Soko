@@ -1,1 +1,300 @@
 {% extends "index.html" %}
+<!-- prettier-ignore -->
+{% block scripts%}
+{{ super() }}
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename='scripts/dashboard.js') + '?' + cache_id}}"
+  defer
+></script>
+{% endblock %}
+
+<!-- prettier-ignore -->
+{% block main %}
+<div class="dashboard-container container">
+  <nav class="dashboard-nav box-shadow">
+    <ul>
+      <a href="{{ url_for('customer_views.customer_dashboard', section='profile') }}">
+        {% if section == "profile" %}
+        <li id="profile" class="flex-row dashboard-active">
+        {% else %}
+        <li id="profile" class="flex-row">
+          {% endif %}
+          <i class="fa-regular fa-user fa-xl dashboard-nav-icon"></i>
+          <span>Profile</span>
+        </li>
+      </a>
+      <a
+        href="{{ url_for('customer_views.customer_dashboard', section='notifications') }}"
+      >
+        {% if section == "notifications" %}
+        <li id="notifications" class="flex-row dashboard-active">
+        {% else %}
+        <li id="notifications" class="flex-row">
+        {% endif %}
+          <i class="fa-regular fa-bell fa-xl dashboard-nav-icon"></i>
+          <span>Notifications</span>
+        </li>
+      </a>
+      <a
+        href="{{ url_for('customer_views.customer_dashboard', section='messages') }}"
+      >
+        {% if section == "messages" %}
+        <li id="messages" class="flex-row dashboard-active">
+        {% else %}
+        <li id="messages" class="flex-row">
+        {% endif %}
+          <i class="fa-regular fa-message fa-xl dashboard-nav-icon"></i>
+          <span>Messages</span>
+        </li>
+      </a>
+      <a
+        href="{{ url_for('customer_views.customer_dashboard', section='saved-items') }}"
+      >
+        {% if section == "saved-items" %}
+        <li id="saved-items" class="flex-row dashboard-active">
+        {% else %}
+        <li id="saved-items" class="flex-row">
+        {% endif %}
+        <i class="fa-regular fa-heart fa-xl dashboard-nav-icon"></i>
+        <span>Saved Items</span>
+      </li>
+      </a>
+      <a
+        href="{{ url_for('customer_views.customer_dashboard', section='orders') }}"
+      >
+        {% if section == "orders" %}
+        <li id="orders" class="flex-row dashboard-active">
+        {% else %}
+        <li id="orders" class="flex-row">
+        {% endif %}
+          <i class="fa-solid fa-list-ul fa-xl dashboard-nav-icon"></i>
+          <span>Orders</span>
+        </li>
+      </a>
+      <a
+        href="{{ url_for('customer_views.customer_dashboard', section='pending-reviews') }}"
+      >
+        {% if section == "prending reviews" %}
+        <li id="reviews" class="flex-row dashboard-active">
+        {% else %}
+        <li id="reviews" class="flex-row">
+        {% endif %}
+          <i class="fa-solid fa-pen-to-square fa-xl dashboard-nav-icon"></i>
+          <span>Pending Reviews</span>
+        </li>
+      </a>
+      <a
+        href="{{ url_for('customer_views.customer_dashboard', section='settings') }}"
+      >
+        {% if section == "settings" %}
+        <li id="settings" class="flex-row dashboard-active">
+        {% else %}
+        <li id="settings" class="flex-row">
+        {% endif %}
+          <i class="fa-solid fa-gears fa-xl dashboard-nav-icon"></i>
+          <span>Settings</span>
+        </li>
+      </a>
+      <div class="separator"></div>
+      <li id="logout">
+        <a href="{{url_for('customer_views.logout') }}" class="flex-row">
+          <i
+            class="fa-solid fa-arrow-right-from-bracket fa-xl dashboard-nav-icon"
+          ></i>
+          <span> Logout</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="dashboard-content">
+    {% if section == "profile" %}
+    <div
+      class="dashboard-content-container profile-content active-dashboard-content"
+    >
+    {% else %}
+    <div class="dashboard-content-container profile-content">
+    {% endif %}
+        <section class="user-info">
+          <h3 class="dashboard-section-header">My Profile</h3>
+          <div class="user-info-div flex-column box-shadow">
+            <div class="user-name-and-edit flex-row">
+              <h3>Duncan Ngugi</h3>
+              <i class="fa-solid fa-pen dashboard-content-icon edit"></i>
+            </div>
+            <div id="user-email">
+              <i class="fa-regular fa-envelope dashboard-content-icon"></i>
+              <span>{{ current_user.email }}</span>
+            </div>
+            <div class="user-phone-number">
+              <i class="fa-solid fa-phone dashboard-content-icon"></i>
+              <span>{{ current_user.phone_number }}</span>
+            </div>
+          </div>
+        </section>
+        <section class="user-addresses">
+          <h3 class="dashboard-section-header">Address Book</h3>
+          <div class="user-addresses-div flex-row box-shadow">
+            <article class="address user-item flex-column">
+              <div class="address-holder flex-row">
+                <p>Dennis Kinyua</p>
+                <i class="fa-solid fa-star default dashboard-content-icon"></i>
+              </div>
+              <p>+254701123345</p>
+              <p>Jay's Apartment, Block B</p>
+              <div class="delete-edit flex-row">
+                <i
+                  class="fa-solid fa-trash-can dashboard-content-icon delete-address"
+                ></i>
+                <i class="fa-solid fa-pen dashboard-content-icon edit"></i>
+              </div>
+            </article>
+            <article class="address user-item flex-column">
+              <div class="address-holder flex-row">
+                <p>Emmanuel Chalo</p>
+                <i class="fa-regular fa-star dashboard-content-icon"></i>
+              </div>
+              <p>+254702345789</p>
+              <p>KICC Building, Nairobi CBD</p>
+              <div class="delete-edit flex-row">
+                <i
+                  class="fa-solid fa-trash-can dashboard-content-icon delete-address"
+                ></i>
+                <i class="fa-solid fa-pen dashboard-content-icon edit"></i>
+              </div>
+            </article>
+            <article class="new-address new-user-item flex-column">
+              <i
+                class="fa-solid fa-plus fa-xl add-address dashboard-content-icon"
+              ></i>
+              <span>Add New Address</span>
+            </article>
+          </div>
+        </section>
+        <section class="user-card-details">
+          <h3 class="dashboard-section-header">Card Details</h3>
+          <div class="card-details-div flex-row box-shadow">
+            <article class="card user-item flex-column">
+              <div class="card-holder flex-row">
+                <p>Duncan Ngugi</p>
+                <i class="fa-solid fa-star dashboard-content-icon default"></i>
+              </div>
+              <p>XXXX-XXXX-XXXX-1234</p>
+              <p>Expires on: 12/23</p>
+              <div class="delete-edit flex-row">
+                <i
+                  class="fa-solid fa-trash-can dashboard-content-icon delete-card"
+                ></i>
+                <i class="fa-solid fa-pen dashboard-content-icon edit"></i>
+              </div>
+            </article>
+            <article class="new-card new-user-item flex-column">
+              <i
+                class="fa-solid fa-plus fa-xl add-card dashboard-content-icon"
+              ></i>
+              <span>Add New Card</span>
+            </article>
+          </div>
+        </section>
+      </div>
+      <!-- Saved Items -->
+      {% if section == "saved-items" %}
+      <div
+        class="dashboard-content-container saved-items-content active-dashboard-content"
+      >
+        {% else %}
+        <div class="dashboard-content-container saved-items-content">
+          {% endif %}
+
+          <h3 class="dashboard-section-header">Saved Items</h3>
+          <article
+            class="saved-item box-shadow flex-row"
+            data-name="MacBook-Pro"
+            data-id="123"
+          >
+            <div class="saved-item-details flex-row">
+              <a
+                href="{{ url_for('customer_views.view_product', product_name='MacBook-Pro') }}"
+              >
+                <img
+                  src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
+                  alt="MacBook-Pro"
+                />
+              </a>
+              <div class="price-and-name flex-column">
+                <h3>MacBook Pro</h3>
+                <span>$1299</span>
+              </div>
+            </div>
+            <button class="add-to-cart">ADD TO CART</button>
+            <div class="stock-and-delete-from-cart flex-column">
+              <span class="stock in-stock">9 In Stock</span>
+              <i
+                class="fa-solid fa-trash-can fa-lg dashboard-content-icon delete-saved-item"
+              ></i>
+            </div>
+          </article>
+          <article
+            class="saved-item box-shadow flex-row"
+            data-name="MacBook-Pro"
+            data-id="123"
+          >
+            <div class="saved-item-details flex-row">
+              <a
+                href="{{ url_for('customer_views.view_product', product_name='MacBook-Pro') }}"
+              >
+                <img
+                  src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
+                  alt="MacBook-Pro"
+                />
+              </a>
+              <div class="price-and-name flex-column">
+                <h3>MacBook Pro</h3>
+                <span>$1299</span>
+              </div>
+            </div>
+            <button class="add-to-cart">ADD TO CART</button>
+            <div class="stock-and-delete-from-cart flex-column">
+              <span class="stock in-stock">10 In Stock</span>
+              <i
+                class="fa-solid fa-trash-can fa-lg dashboard-content-icon delete-saved-item"
+              ></i>
+            </div>
+          </article>
+          <article
+            class="saved-item box-shadow flex-row"
+            data-name="MacBook-Pro"
+            data-id="123"
+          >
+            <div class="saved-item-details flex-row">
+              <a
+                href="{{ url_for('customer_views.view_product', product_name='MacBook-Pro') }}"
+              >
+                <img
+                  src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
+                  alt="MacBook-Pro"
+                />
+              </a>
+              <div class="price-and-name flex-column">
+                <h3>MacBook Pro</h3>
+                <span>$1299</span>
+              </div>
+            </div>
+            <button class="add-to-cart">ADD TO CART</button>
+            <div class="stock-and-delete-from-cart flex-column">
+              <span class="stock out-of-stock">Out of Stock</span>
+              <i
+                class="fa-solid fa-trash-can fa-lg dashboard-content-icon delete-saved-item"
+              ></i>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+
+    <!-- prettier-ignore -->
+    {% block messenger %}
+{% endblock %}
+  </div>
+</div>

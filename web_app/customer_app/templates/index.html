@@ -28,22 +28,24 @@
 <header>
   {% block logo %}
   <section class="logo container">
-    <img
-      src="{{ url_for('static', filename='images/site/favicon-big.svg') }}"
-      alt="favicon"
-      id="favicon"
-    />
-    <img
-      src="{{ url_for('static', filename='images/site/logo-big.svg') }}"
-      alt="logo"
-      id="logo"
-    />
+    <a href="{{ url_for('customer_views.home') }}">
+      <img
+        src="{{ url_for('static', filename='images/site/favicon-big.svg') }}"
+        alt="favicon"
+        id="favicon"
+      />
+      <img
+        src="{{ url_for('static', filename='images/site/logo-big.svg') }}"
+        alt="logo"
+        id="logo"
+      />
+    </a>
   </section>
   {% endblock %}
   <!-- prettier-ignore -->
   {% block header_nav %}
   {% block categories_search_nav_icons %}
-  <div id="seperator"></div>
+  <div class="separator"></div>
   <section class="header-nav container flex-row">
     <div class="product-nav flex-row">
       <span class="hamburger">&#9776; </span>
@@ -52,101 +54,71 @@
         <a
           href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='supermarket')) }}"
         >
-          <img
-            src="{{ url_for('static', filename='images/categories/supermarket.svg') }}"
-            alt="supermarket"
-          />
-          SUPERMARKET
+          <i class="fa-solid fa-basket-shopping fa-lg"></i>
+          Supermarket
         </a>
         <ul class="subcategories"></ul>
         <a
           href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='healthcare-and-beauty')) }}"
         >
-          <img
-            src="{{ url_for('static', filename='images/categories/healthcare-beauty.svg') }}"
-            alt="healthcare-beauty"
-          />
-          HEALTHCARE AND BEAUTY
+          <i class="fa-solid fa-bottle-droplet fa-lg"></i>
+          Healthcare and Beauty
         </a>
         <ul class="subcategories"></ul>
         <a
           href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='home-and-office')) }}"
         >
-          <img
-            src="{{ url_for('static', filename='images/categories/home-office.svg') }}"
-            alt="home-office"
-          />
-          HOME AND OFFICE
+          <i class="fa-solid fa-chair fa-lg"></i>
+          Home &#38; Office
         </a>
         <ul class="subcategories"></ul>
         <a
           href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='home-appliances')) }}"
         >
-          <img
-            src="{{ url_for('static', filename='images/categories/home-appliances.svg') }}"
-            alt="home-appliances"
-          />
-          HOME APPLIANCES
+          <i class="fa-solid fa-kitchen-set fa-lg"></i>
+          Home Appliances
         </a>
         <ul class="subcategories"></ul>
         <a
           href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='phone-and-tablets')) }}"
         >
-          <img
-            src="{{ url_for('static', filename='images/categories/mobile-tablets.svg') }}"
-            alt="mobile-tablets"
-          />
-          PHONES AND TABLETS
+          <i class="fa-solid fa-tablet-screen-button fa-lg"></i>
+          Phones &#38; Tablets
         </a>
         <ul class="subcategories"></ul>
         <a
           href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='computing')) }}"
         >
-          <img
-            src="{{ url_for('static', filename='images/categories/laptops.svg') }}"
-            alt="laptops"
-          />
-          COMPUTING
+          <i class="fa-solid fa-computer"></i>
+          Computing
         </a>
         <ul class="subcategories"></ul>
         <a
           href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='tv-and-audio')) }}"
         >
-          <img
-            src="{{ url_for('static', filename='images/categories/tv-audio.svg') }}"
-            alt="tv-audio"
-          />
-          TV &#38; AUDIO
+          <i class="fa-solid fa-tv fa-lg"></i>
+          Tv &#38; Audio
         </a>
         <ul class="subcategories"></ul>
         <a
           href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='gaming')) }}"
         >
-          <img
-            src="{{ url_for('static', filename='images/categories/gaming.svg') }}"
-            alt="gaming"
-          />
-          GAMING
+          <i class="fa-solid fa-gamepad fa-lg"></i>
+          Gaming
         </a>
         <ul class="subcategories"></ul>
         <a
           href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='fashion')) }}"
         >
-          <img
-            src="{{ url_for('static', filename='images/categories/fashion.svg') }}"
-            alt="fashion"
-          />
-          FASHION
+          <i class="fa-solid fa-shirt fa-lg"></i>
+          Fashion
         </a>
         <ul class="subcategories"></ul>
         <a
           href="{{ (url_for('customer_views.get_products_by_category', subcategory_name='baby-products')) }}"
         >
-          <img
-            src="{{ url_for('static', filename='images/categories/baby-products.svg') }}"
-            alt="baby-products"
-          />
-          BABY PRODUCTS AND TOYS
+          <i class="fa-solid fa-baby fa-lg"></i>
+          Baby Products and Toys
         </a>
         <ul class="subcategories"></ul>
       </nav>
@@ -161,7 +133,7 @@
       />
       <button
         class="search"
-        onclick="window.location.href='{{url_for('customer_views.search_products')}}'"
+        onclick="window.location.href='{{url_for('customer_views.search_products') }}'"
       >
         SEARCH
       </button>
@@ -188,17 +160,23 @@
           <!-- Profile menu -->
           <ul class="profile-menu">
             <li>
-              <a href="{{ url_for('customer_views.customer_dashboard') }}">
+              <a
+                href="{{ url_for('customer_views.customer_dashboard', section='profile') }}"
+              >
                 <i class="fa-regular fa-user fa-lg"></i> Profile</a
               >
             </li>
             <li>
-              <a href="{{ url_for('customer_views.customer_dashboard') }}">
+              <a
+                href="{{ url_for('customer_views.customer_dashboard', section='orders') }}"
+              >
                 <i class="fa-solid fa-list"></i> Orders</a
               >
             </li>
             <li>
-              <a href="{{ url_for('customer_views.customer_dashboard') }}">
+              <a
+                href="{{ url_for('customer_views.customer_dashboard', section='saved-items') }}"
+              >
                 <i class="fa-regular fa-heart"></i> Saved Items</a
               >
             </li>
@@ -215,7 +193,7 @@
       <div class="notification-menu">
         <div class="notification-options flex-row">
           <a href="javascript:void(0)">Mark all as read</a>
-          <a href="#">View all</a>
+          <a href="{{ url_for('customer_views.customer_dashboard', section='notifications') }}">View all</a>
         </div>
       </div>
       {% endif %}
@@ -228,10 +206,10 @@
     <aside class="slide-cart">
       <div class="cart-num">Cart(1)</div>
       <div class="cart-container flex-column">
-        <article class="cart-item">
+        <article class="cart-item" data-name="MacBook-Pro" , data-id="123">
           <img src="../static/images/site/macbook.jpeg" alt="product" />
           <h3>MacBook Pro</h3>
-          <span class="price">$1299.99</span>
+          <span class="price" data-name="price">$1299.99</span>
           <div class="add-subtract">
             <i class="fa-solid fa-minus fa-lg subtract"></i>
             <input type="text" class="quantity" disabled value="1" />
@@ -239,7 +217,7 @@
           </div>
           <i class="fa-solid fa-trash-can fa-lg delete-item"></i>
         </article>
-        <article class="cart-item">
+        <article class="cart-item" data-name="Mac-Book-Pro" , data-id="13">
           <img src="../static/images/site/macbook.jpeg" alt="product" />
           <h3>MacBook Pro</h3>
           <span class="price">$1299.99</span>
@@ -271,9 +249,9 @@
   {% endblock%}
 </header>
 
-{% block main %}
 <!--Product Content -->
 <main class="content container">
+  {% block main %}
   <section class="banner">
     <div class="banner">
       <div class="slide fade">
@@ -298,7 +276,7 @@
       <a class="next">&#10095;</a>
     </div>
     <div class="flex-row shop-now-div">
-      <a href="#prod"><button id="shop-now">SHOP NOW</button></a>
+      <button id="shop-now">SHOP NOW</button>
     </div>
     <div class="thumbnails">
       <span class="banner-nav" slide-idx="0"></span>
@@ -311,8 +289,9 @@
     <div class="landing-category flex-row">
       <article
         class="product"
-        data-id=""
-        data-name=""
+        data-id="123"
+        data-name="MacBook Pro"
+        stock="0"
         onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
       >
         <img
@@ -321,135 +300,264 @@
         />
         <h3>MacBook Pro</h3>
         <p>$1299.99</p>
+        <button class="add-to-cart">ADD TO CART</button>
       </article>
-      <article class="product" data-id="" data-name="">
+      <article
+        class="product"
+        data-id="123"
+        data-name="MacBook Pro"
+        stock="0"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+      >
         <img
           src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
           alt="product"
         />
         <h3>MacBook Pro</h3>
         <p>$1299.99</p>
+        <button class="add-to-cart">ADD TO CART</button>
       </article>
-      <article class="product" data-id="" data-name="">
+      <article
+        class="product"
+        data-id="123"
+        data-name="MacBook Pro"
+        stock="10"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+      >
         <img
           src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
           alt="product"
         />
         <h3>MacBook Pro</h3>
         <p>$1299.99</p>
+        <button class="add-to-cart">ADD TO CART</button>
       </article>
-      <article class="product" data-id="" data-name="">
+      <article
+        class="product"
+        data-id="123"
+        data-name="MacBook Pro"
+        stock="10"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+      >
         <img
           src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
           alt="product"
         />
         <h3>MacBook Pro</h3>
         <p>$1299.99</p>
+        <button class="add-to-cart">ADD TO CART</button>
       </article>
-      <article class="product" data-id="" data-name="">
+      <article
+        class="product"
+        data-id="123"
+        data-name="MacBook Pro"
+        stock="10"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+      >
         <img
           src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
           alt="product"
         />
         <h3>MacBook Pro</h3>
         <p>$1299.99</p>
+        <button class="add-to-cart">ADD TO CART</button>
       </article>
     </div>
     <h1>Trending</h1>
     <div class="landing-category flex-row">
-      <article class="product" data-id="" data-name="">
+      <article
+        class="product"
+        data-id="123"
+        data-name="MacBook Pro"
+        stock="10"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+      >
         <img
           src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
           alt="product"
         />
         <h3>MacBook Pro</h3>
         <p>$1299.99</p>
+        <button class="add-to-cart">ADD TO CART</button>
       </article>
-      <article class="product" data-id="" data-name="">
+      <article
+        class="product"
+        data-id="123"
+        data-name="MacBook Pro"
+        stock="10"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+      >
         <img
           src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
           alt="product"
         />
         <h3>MacBook Pro</h3>
         <p>$1299.99</p>
+        <button class="add-to-cart">ADD TO CART</button>
       </article>
-      <article class="product" data-id="" data-name="">
+      <article
+        class="product"
+        data-id="123"
+        data-name="MacBook Pro"
+        stock="10"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+      >
         <img
           src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
           alt="product"
         />
         <h3>MacBook Pro</h3>
         <p>$1299.99</p>
+        <button class="add-to-cart">ADD TO CART</button>
       </article>
-      <article class="product" data-id="" data-name="">
+      <article
+        class="product"
+        data-id="123"
+        data-name="MacBook Pro"
+        stock="10"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+      >
         <img
           src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
           alt="product"
         />
         <h3>MacBook Pro</h3>
         <p>$1299.99</p>
+        <button class="add-to-cart">ADD TO CART</button>
       </article>
     </div>
     <h1>Fashion</h1>
     <div class="landing-category flex-row">
-      <article class="product" data-id="" data-name="">
+      <article
+        class="product"
+        data-id="123"
+        data-name="MacBook Pro"
+        stock="10"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+      >
         <img
           src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
           alt="product"
         />
         <h3>MacBook Pro</h3>
         <p>$1299.99</p>
+        <button class="add-to-cart">ADD TO CART</button>
       </article>
-      <article class="product" data-id="" data-name="">
+      <article
+        class="product"
+        data-id="123"
+        data-name="MacBook Pro"
+        stock="10"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+      >
         <img
           src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
           alt="product"
         />
         <h3>MacBook Pro</h3>
         <p>$1299.99</p>
+        <button class="add-to-cart">ADD TO CART</button>
       </article>
-      <article class="product" data-id="" data-name="">
+      <article
+        class="product"
+        data-id="123"
+        data-name="MacBook Pro"
+        stock="10"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+      >
         <img
           src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
           alt="product"
         />
         <h3>MacBook Pro</h3>
         <p>$1299.99</p>
+        <button class="add-to-cart">ADD TO CART</button>
+      </article>
+      <article
+        class="product"
+        data-id="123"
+        data-name="MacBook Pro"
+        stock="10"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+      >
+        <img
+          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
+          alt="product"
+        />
+        <h3>MacBook Pro</h3>
+        <p>$1299.99</p>
+        <button class="add-to-cart">ADD TO CART</button>
       </article>
     </div>
     <h1>On a budget</h1>
     <div class="landing-category flex-row">
-      <article class="product" data-id="" data-name="">
+      <article
+        class="product"
+        data-id="123"
+        data-name="MacBook Pro"
+        stock="10"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+      >
         <img
           src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
           alt="product"
         />
         <h3>MacBook Pro</h3>
         <p>$1299.99</p>
+        <button class="add-to-cart">ADD TO CART</button>
       </article>
-      <article class="product" data-id="" data-name="">
+      <article
+        class="product"
+        data-id="123"
+        data-name="MacBook Pro"
+        stock="10"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+      >
         <img
           src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
           alt="product"
         />
         <h3>MacBook Pro</h3>
         <p>$1299.99</p>
+        <button class="add-to-cart">ADD TO CART</button>
       </article>
-      <article class="product" data-id="" data-name="">
+      <article
+        class="product"
+        data-id="123"
+        data-name="MacBook Pro"
+        stock="10"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+      >
         <img
           src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
           alt="product"
         />
         <h3>MacBook Pro</h3>
         <p>$1299.99</p>
+        <button class="add-to-cart">ADD TO CART</button>
+      </article>
+      <article
+        class="product"
+        data-id="123"
+        data-name="MacBook Pro"
+        stock="10"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+      >
+        <img
+          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
+          alt="product"
+        />
+        <h3>MacBook Pro</h3>
+        <p>$1299.99</p>
+        <button class="add-to-cart">ADD TO CART</button>
       </article>
     </div>
   </section>
+  {% endblock %}
 </main>
-{% endblock %}
 <!-- Footer section -->
-{% block footer %}
 <footer>
+  {% block footer %}
   <section class="footer-nav container flex-row">
     <div class="socials flex-row">
       Stay in touch with us
@@ -464,8 +572,10 @@
       <a href="{{ url_for('customer_views.faq') }}">FAQ</a>
     </nav>
     {% if current_user.is_authenticated %}
-    <!-- Messanger -->
-    <div class="messanger">
+    <!-- prettier-ignore -->
+    {% block messenger %}
+    <!-- Messenger -->
+    <div class="messenger">
       <div class="message-header flex-row">
         <i class="fa-regular fa-message fa-lg"><span>Messages</span></i>
         <i class="fa-solid fa-angles-up fa-lg arrow"></i>
@@ -476,7 +586,7 @@
           <div class="seller-image">
             <i class="fa-solid fa-shop fa-2xl"></i>
           </div>
-          <span class="seller-name">Top Seller 1</span>
+          <span class="seller-name">Wu Hang Electronics</span>
           <span class="date">
             5 Jan 2023 <i class="fa-solid fa-ellipsis"></i
           ></span>
@@ -493,7 +603,7 @@
           <div class="seller-image">
             <i class="fa-solid fa-shop fa-2xl"></i>
           </div>
-          <span class="seller-name">Top Seller 2</span>
+          <span class="seller-name">El Fuse Lighting Solutions</span>
           <span class="date"
             >5 Jan 2023 <i class="fa-solid fa-ellipsis"></i
           ></span>
@@ -510,7 +620,7 @@
           <div class="seller-image">
             <i class="fa-solid fa-shop fa-2xl"></i>
           </div>
-          <span class="seller-name">Top Seller 3</span>
+          <span class="seller-name">Manji Brick and Mortar</span>
           <span class="date"
             >5 Jan 2023 <i class="fa-solid fa-ellipsis"></i
           ></span>
@@ -527,7 +637,7 @@
           <div class="seller-image">
             <i class="fa-solid fa-shop fa-2xl"></i>
           </div>
-          <span class="seller-name">Top Seller 4</span>
+          <span class="seller-name">Trendy Fashion Co.</span>
           <span class="date"
             >5 Jan 2023 <i class="fa-solid fa-ellipsis"></i
           ></span>
@@ -544,7 +654,7 @@
           <div class="seller-image">
             <i class="fa-solid fa-shop fa-2xl"></i>
           </div>
-          <span class="seller-name">Top Seller 5</span>
+          <span class="seller-name">Pet Supplies Ltd</span>
           <span class="date"
             >5 Jan 2023<i class="fa-solid fa-ellipsis"></i
           ></span>
@@ -561,7 +671,7 @@
           <div class="seller-image">
             <i class="fa-solid fa-shop fa-2xl"></i>
           </div>
-          <span class="seller-name">Top Seller 6</span>
+          <span class="seller-name">Smart Baby Apparels</span>
           <span class="date"
             >5 Jan 2023<i class="fa-solid fa-ellipsis"></i
           ></span>
@@ -578,7 +688,7 @@
           <div class="seller-image">
             <i class="fa-solid fa-shop fa-2xl"></i>
           </div>
-          <span class="seller-name">Top Seller 7</span>
+          <span class="seller-name">Snack Shop</span>
           <span class="date"
             >5 Jan 2023<i class="fa-solid fa-ellipsis"></i
           ></span>
@@ -632,7 +742,8 @@
         </div>
       </article>
     </div>
-    {% endif %}
+    {% endblock %} {% endif %}
   </section>
+  {% endblock %}
 </footer>
-{% endblock %} {% endblock %}
+{% endblock %}

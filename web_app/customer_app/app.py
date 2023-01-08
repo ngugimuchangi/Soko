@@ -6,6 +6,7 @@ from flask import Flask, jsonify, make_response, render_template
 from flask_login import LoginManager
 from models import storage
 from models.customer import Customer
+from uuid import uuid4
 from os import getenv
 from web_app.customer_app.views import customer_views
 

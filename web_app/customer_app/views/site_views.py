@@ -5,7 +5,7 @@ from uuid import uuid4
 from web_app.customer_app.views import customer_views
 
 
-@customer_views.route("/")
+@customer_views.route("/", strict_slashes=True)
 def home():
     """ Soko home route. Accessible without login
         Args: none
@@ -14,7 +14,16 @@ def home():
     return render_template("index.html", title="Home", cache_id=uuid4().hex)
 
 
-@customer_views.route("/about", strict_slashes=False)
+@customer_views.route("/home", strict_slashes=True)
+def redirect_home():
+    """ Redirect to home page
+        Args: none
+        Return: home page
+    """
+    return redirect(url_for('customer_views.home'))
+
+
+@customer_views.route("/about", strict_slashes=True)
 def about():
     """ About route
         Args: none
@@ -32,7 +41,7 @@ def contacts():
     return render_template("contact.html", title="Contacts", cache_id=uuid4().hex)
 
 
-@customer_views.route("/faq", strict_slashes=False)
+@customer_views.route("/faq", strict_slashes=True)
 def faq():
     """ About route
         Args: none
@@ -41,7 +50,7 @@ def faq():
     return render_template("faq.html", title="FAQ", cache_id=uuid4().hex)
 
 
-@customer_views.route("/product/<product_name>", strict_slashes=False)
+@customer_views.route("/product/<product_name>", strict_slashes=True)
 def view_product(product_name):
     """ Product view route
         Args: product_name(str): name of the product
@@ -59,7 +68,7 @@ def search_products():
     return render_template("product_search.html", title="Search",cache_id=uuid4().hex)
 
 
-@customer_views.route("/<subcategory_name>", strict_slashes=False)
+@customer_views.route("/<subcategory_name>", strict_slashes=True)
 def get_products_by_category(subcategory_name):
     """ Route for getting all products belonging
         to a selected category
@@ -68,7 +77,7 @@ def get_products_by_category(subcategory_name):
     return render_template("product_by_categories.html", title=subcategory_name,cache_id=uuid4().hex)
 
 
-@customer_views.route("/checkout", strict_slashes=False)
+@customer_views.route("/checkout", strict_slashes=True)
 def checkout():
     """ Checkout route
         Args: none
