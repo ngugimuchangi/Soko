@@ -1043,6 +1043,16 @@ div.price-and-name {
   display: inline-block;
   position: relative;
 }
+.status-and-view-details{
+  width: 100%;
+}
+.view-order{
+  color: #26415f;
+  cursor: pointer;
+}
+.view-order:hover{
+  color: #fc870b;
+}
 .order h4 {
   color: #26415f;
   margin-bottom: 5px;

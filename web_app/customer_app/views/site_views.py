@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-from flask import redirect, render_template, request, url_for
+from datetime import datetime
+from flask import make_response, redirect, render_template, request, url_for
 from models import storage
 from uuid import uuid4
 from web_app.customer_app.views import customer_views
@@ -56,7 +57,13 @@ def view_product(product_name):
         Args: product_name(str): name of the product
         Return: product information page
     """
-    return render_template("view_product.html", title=product_name, cache_id=uuid4().hex)
+    
+    response = make_response(render_template("view_product.html",
+                             title=product_name, cache_id=uuid4().hex))
+    expiry_date = datetime.now()
+    expiry_date = expiry_date.replace(year = expiry_date.year + 1)
+    response.set_cookie("uprod", product_name, expires=expiry_date)
+    return response
 
 
 @customer_views.route("/search", strict_slashes=False)
@@ -65,7 +72,11 @@ def search_products():
         Args: none
         Return: page with items that match search criteria
     """
-    return render_template("product_search.html", title="Search",cache_id=uuid4().hex)
+    response = make_response(render_template("product_search.html",
+                             title="Search",cache_id=uuid4().hex))
+
+    response.set_cookie("search", request.args.values())
+    return response
 
 
 @customer_views.route("/<subcategory_name>", strict_slashes=True)
