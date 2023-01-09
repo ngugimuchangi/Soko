@@ -21,7 +21,7 @@ def login():
         # Customer doesn't exist, i.e, wrong email
         if not customer:
             flash("Please check your login details and try again")
-            return render_template("login.html", title="Login", cache_id=uuid4().hex)
+            return render_template("login.html", title="Login", cache_id=uuid4().hex), 401
         password = sha256("{}{}".format(password, customer.salt).
         encode("utf-8")).hexdigest()
         # Correct email and password
@@ -31,7 +31,7 @@ def login():
         # Wrong password
         flash("Please check your login details and try again")
         return render_template("login.html", title="Login",
-                               cache_id=uuid4().hex)
+                               cache_id=uuid4().hex), 401
     # Get request
     return render_template("login.html", title="Login",
                            cache_id=uuid4().hex)
@@ -47,7 +47,8 @@ def signup():
     email = request.form.get("email", None)
     if storage.session.query(Customer).filter_by(email=email).first():
         flash("An account associated with this email already exists")
-        return redirect(url_for("customer_views.signup"))
+        return render_template("signup.html",
+                               cache_id=uuid4().hex), 403
     new_customer = Customer(**request.form)
     new_customer.save()
     return redirect(url_for("customer_views.login"))

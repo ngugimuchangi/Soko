@@ -135,7 +135,7 @@ $("document").ready(function () {
   cartButtonStatus();
 
   // Add item to cart
-  $("product .add-to-cart").click(function (event) {
+  $(".product .add-to-cart").click(function (event) {
     event.stopPropagation();
     const product = $(this).parent();
     const img = $(this).siblings("img").attr("src");

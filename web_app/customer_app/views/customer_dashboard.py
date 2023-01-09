@@ -16,6 +16,6 @@ def customer_dashboard(section):
                        'pending-reviews', 'messages',
                        'notifications', 'settings']:
         abort(404)
-    return render_template("dashboard.html", title="Customer Dashboard",
+    return render_template("dashboard.html", title="Dashboard",
                            cache_id=uuid4().hex, section=section)
                 
