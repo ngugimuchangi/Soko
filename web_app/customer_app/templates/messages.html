@@ -1,0 +1,199 @@
+{% extends "profile.html" %} {% block dashboard_content %} {# Messenger section
+#}
+<section class="messages">
+  <h3 class="dashboard-section-header">Messages</h3>
+  <div class="dashboard-messenger box-shadow">
+    <ul class="dashboard-chats">
+      <li class="chat" data-id="">
+        <div class="seller-image">
+          <img
+            src="{{ url_for('static', filename='images/seller_profile/wu-hang-electronics.jpg') }}"
+            alt="wu-hang-electronics"
+          />
+        </div>
+        <span class="seller-name">Wu Hang Electronics</span>
+        <span class="date">
+          5 Jan 2023 <i class="fa-solid fa-ellipsis chat-options-toggle"></i
+        ></span>
+        <div class="delete-chat">
+          <i class="fa-solid fa-trash-can fa-lg"></i
+          ><span> Delete Conversation</span>
+        </div>
+        <p class="last-message">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores,
+          quibusdam.
+        </p>
+      </li>
+      <li class="chat" data-id="">
+        <div class="seller-image">
+          <img
+            src="{{ url_for('static', filename='images/seller_profile/el-fuse-lighting-solutions.jpg') }}"
+            alt="el-fuse-lighting-solutions"
+          />
+        </div>
+        <span class="seller-name">El Fuse Lighting Solutions</span>
+        <span class="date"
+          >5 Jan 2023 <i class="fa-solid fa-ellipsis chat-options-toggle"></i
+        ></span>
+        <div class="delete-chat">
+          <i class="fa-solid fa-trash-can fa-lg"></i
+          ><span> Delete Conversation</span>
+        </div>
+        <p class="last-message">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores,
+          quibusdam.
+        </p>
+      </li>
+      <li class="chat" data-id="">
+        <div class="seller-image">
+          <img
+            src="{{ url_for('static', filename='images/seller_profile/manji-brick-and-mortar.jpg') }}"
+            alt="manji-brick-and-mortar"
+          />
+        </div>
+        <span class="seller-name">Manji Brick and Mortar</span>
+        <span class="date"
+          >5 Jan 2023 <i class="fa-solid fa-ellipsis chat-options-toggle"></i
+        ></span>
+        <div class="delete-chat">
+          <i class="fa-solid fa-trash-can fa-lg"></i
+          ><span> Delete Conversation</span>
+        </div>
+        <p class="last-message">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores,
+          quibusdam.
+        </p>
+      </li>
+      <li class="chat" data-id="">
+        <div class="seller-image">
+          <img
+            src="{{ url_for('static', filename='images/seller_profile/trendy-fashion-co.jpg') }}"
+            alt="trendy-fashion-co"
+          />
+        </div>
+        <span class="seller-name">Trendy Fashion Co.</span>
+        <span class="date"
+          >5 Jan 2023 <i class="fa-solid fa-ellipsis chat-options-toggle"></i
+        ></span>
+        <div class="delete-chat">
+          <i class="fa-solid fa-trash-can fa-lg"></i
+          ><span> Delete Conversation</span>
+        </div>
+        <p class="last-message">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores,
+          quibusdam.
+        </p>
+      </li>
+      <li class="chat" data-id="">
+        <div class="seller-image">
+          <img
+            src="{{ url_for('static', filename='images/seller_profile/pet-supplies-ltd.jpg') }}"
+            alt="pet-supplies-ltd"
+          />
+        </div>
+        <span class="seller-name">Pet Supplies Ltd</span>
+        <span class="date"
+          >5 Jan 2023<i class="fa-solid fa-ellipsis chat-options-toggle"></i
+        ></span>
+        <div class="delete-chat">
+          <i class="fa-solid fa-trash-can fa-lg"></i
+          ><span> Delete Conversation</span>
+        </div>
+        <p class="last-message">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores,
+          quibusdam.
+        </p>
+      </li>
+      <li class="chat" data-id="">
+        <div class="seller-image">
+          <img
+            src="{{ url_for('static', filename='images/seller_profile/smart-baby-apparels.jpg') }}"
+            alt="smart-baby-apparels"
+          />
+        </div>
+        <span class="seller-name">Smart Baby Apparels</span>
+        <span class="date"
+          >5 Jan 2023<i class="fa-solid fa-ellipsis chat-options-toggle"></i
+        ></span>
+        <div class="delete-chat">
+          <i class="fa-solid fa-trash-can fa-lg"></i
+          ><span> Delete Conversation</span>
+        </div>
+        <p class="last-message">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores,
+          quibusdam.
+        </p>
+      </li>
+      <li class="chat" data-id="">
+        <div class="seller-image">
+          <img
+            src="{{ url_for('static', filename='images/seller_profile/snack-shop.jpg') }}"
+            alt="snack-shop"
+          />
+        </div>
+        <span class="seller-name">Snack Shop</span>
+        <span class="date"
+          >5 Jan 2023<i class="fa-solid fa-ellipsis chat-options-toggle"></i
+        ></span>
+        <div class="delete-chat">
+          <i class="fa-solid fa-trash-can fa-lg"></i
+          ><span> Delete Conversation</span>
+        </div>
+        <p class="last-message">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores,
+          quibusdam.
+        </p>
+      </li>
+    </ul>
+    <!-- Chat history and message textarea -->
+    <article class="chat-active">
+      <div class="dashboard-chat-header">
+        <span class="back-to-chat-list">&#10094;</span
+        ><span class="seller-name"></span>
+      </div>
+      <div class="chat-history" data-id="">
+        <div class="customer-message-container">
+          <p class="customer-message">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti,
+            voluptates.
+          </p>
+        </div>
+        <p class="seller-message">Lorem ipsum dolor sit amet.</p>
+        <div class="customer-message-container">
+          <p class="customer-message">
+            Lorem ipsum dolor sit amet, co ns ecte ur adipisicing elit.
+            Corrupti, voluptates.
+          </p>
+        </div>
+        <p class="seller-message">Lorem ipsum dolor sit amet.</p>
+        <div class="customer-message-container">
+          <p class="customer-message">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti,
+            voluptates.
+          </p>
+        </div>
+        <p class="seller-message">
+          Lorem ipsum dolor sit amet. Lorem ipsum dolor, sit amet consectetur
+          adipisicing elit. Reiciendis deleniti vero expedita nobis tempora quam
+          neque ex vitae possimus, ipsum sunt quae! Sint accusamus porro debitis
+          deserunt quia? Ratione, cupiditate?
+        </p>
+        <div class="customer-message-container">
+          <p class="customer-message">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti,
+            voluptates.
+          </p>
+        </div>
+        <div class="customer-message-container">
+          <p class="customer-message">Lorem</p>
+        </div>
+      </div>
+      <div class="chat-message">
+        <textarea name="message" id="message" cols="40" rows="3"></textarea>
+        <i class="fa-solid fa-face-smile fa-lg"></i>
+        <i class="fa-solid fa-paper-plane fa-lg"></i>
+      </div>
+    </article>
+  </div>
+</section>
+{% endblock %}

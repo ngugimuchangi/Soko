@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from datetime import datetime
 from flask import make_response, redirect, render_template, request, url_for
+from flask_login import login_required
 from models import storage
 from uuid import uuid4
 from web_app.customer_app.views import customer_views
@@ -94,4 +95,18 @@ def checkout():
         Args: none
         Return: checkout page
     """
-    return render_template("product_by_categories.html", title="Checkout",cache_id=uuid4().hex)
+    return render_template("checkout.html", title="Checkout",
+    cache_id=uuid4().hex)
+
+
+@customer_views.route("/order/<order_number>", strict_slashes=True)
+@login_required
+def confirming_new_orders(order_number):
+    """ Order confirmation route
+        Args: order_number
+        Return: order confirmation page
+    """
+    return render_template("order-confirmed.html",
+                           order_number=order_number,
+                           title="Order " + order_number,
+                           cache_id=uuid4().hex)

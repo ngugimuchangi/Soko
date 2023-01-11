@@ -21,6 +21,11 @@
   src="{{ url_for('static', filename='scripts/index.js') + '?' + cache_id}}"
   defer
 ></script>
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename='scripts/messenger.js') + '?' + cache_id}}"
+  defer
+></script>
 {%endblock %}
 
 <!-- prettier-ignore -->
@@ -193,11 +198,14 @@
       <div class="notification-menu">
         <div class="notification-options flex-row">
           <a href="javascript:void(0)">Mark all as read</a>
-          <a href="{{ url_for('customer_views.customer_dashboard', section='notifications') }}">View all</a>
+          <a
+            href="{{ url_for('customer_views.customer_dashboard', section='notifications') }}"
+            >View all</a
+          >
         </div>
       </div>
       {% endif %}
-      <!-- Cart sections -->
+      <!-- Cart section -->
       <i class="fa-solid fa-cart-shopping fa-lg icon"></i>
     </nav>
     {% endblock %}
@@ -206,8 +214,11 @@
     <aside class="slide-cart">
       <div class="cart-num">Cart(1)</div>
       <div class="cart-container flex-column">
-        <article class="cart-item" data-name="MacBook-Pro" , data-id="123">
-          <img src="../static/images/site/macbook.jpeg" alt="product" />
+        <article class="cart-item" data-name="macBook-pro" , data-id="071">
+          <img
+            src="{{ url_for('static', filename='images/products/trending/macbook.jpeg') }}"
+            alt="macBook-pro"
+          />
           <h3>MacBook Pro</h3>
           <span class="price" data-name="price">$1299.99</span>
           <div class="add-subtract">
@@ -217,10 +228,13 @@
           </div>
           <i class="fa-solid fa-trash-can fa-lg delete-item"></i>
         </article>
-        <article class="cart-item" data-name="Mac-Book-Pro" , data-id="13">
-          <img src="../static/images/site/macbook.jpeg" alt="product" />
-          <h3>MacBook Pro</h3>
-          <span class="price">$1299.99</span>
+        <article class="cart-item" data-name="amazon-alexa" , data-id="091">
+          <img
+            src="{{ url_for('static', filename='images/products/budget/amazon-alexa.jpg') }}"
+            alt="amazon-alexa"
+          />
+          <h3>Amazon Alexa</h3>
+          <span class="price">$74.99</span>
           <div class="add-subtract">
             <i class="fa-solid fa-minus fa-lg subtract"></i>
             <input type="text" class="quantity" disabled value="1" />
@@ -231,7 +245,7 @@
       </div>
       <div class="subtotal flex-row">
         <span>Subtotal:</span>
-        <span class="cart-subtotal"> $12999.90 </span>
+        <span class="cart-subtotal"></span>
       </div>
       <div class="disclaimer">
         <i class="fa-solid fa-circle-exclamation fa-lg"></i>
@@ -289,267 +303,254 @@
     <div class="landing-category flex-row">
       <article
         class="product"
-        data-id="123"
-        data-name="MacBook Pro"
+        data-id="061"
+        data-name="all-in-one-christmas-gift"
         stock="0"
-        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='all-in-one-christmas-gift')}}'"
       >
         <img
-          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
-          alt="product"
+          src="{{ url_for('static', filename='images/products/christmas/all-in-one-christmas-gift.jpg') }}"
+          alt="all-in-one-christmas-gift"
         />
-        <h3>MacBook Pro</h3>
-        <p>$1299.99</p>
-        <button class="add-to-cart">ADD TO CART</button>
+        <h3>All-in-one Christmas Gift</h3>
+        <p>$49.99</p>
+        <!-- <button class="add-to-cart">ADD TO CART</button> -->
       </article>
       <article
         class="product"
-        data-id="123"
-        data-name="MacBook Pro"
+        data-id="062"
+        data-name="christmas-decoration"
         stock="0"
-        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='christmas-decoration')}}'"
       >
         <img
-          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
-          alt="product"
+          src="{{ url_for('static', filename='images/products/christmas/christmas-decoration.jpg') }}"
+          alt="christmas-decoration"
         />
-        <h3>MacBook Pro</h3>
-        <p>$1299.99</p>
-        <button class="add-to-cart">ADD TO CART</button>
+        <h3>Christmas Decoration</h3>
+        <p>$12.99</p>
       </article>
       <article
         class="product"
-        data-id="123"
-        data-name="MacBook Pro"
+        data-id="063"
+        data-name="christmas-cookies"
         stock="10"
-        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='christmas-cookies')}}'"
       >
         <img
-          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
-          alt="product"
+          src="{{ url_for('static', filename='images/products/christmas/cookies.jpg') }}"
+          alt="cookies"
         />
-        <h3>MacBook Pro</h3>
-        <p>$1299.99</p>
-        <button class="add-to-cart">ADD TO CART</button>
+        <h3>Delicious Holiday Cookies</h3>
+        <p>$10.99</p>
       </article>
       <article
         class="product"
-        data-id="123"
-        data-name="MacBook Pro"
+        data-id="064"
+        data-name="cabernet-sauvignon"
         stock="10"
-        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='cabernet-sauvignon')}}'"
       >
         <img
-          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
-          alt="product"
+          src="{{ url_for('static', filename='images/products/christmas/wine.jpg') }}"
+          alt="cabernet-sauvignon"
         />
-        <h3>MacBook Pro</h3>
-        <p>$1299.99</p>
-        <button class="add-to-cart">ADD TO CART</button>
+        <h3>Cabernet Sauvignon</h3>
+        <p>$5.99</p>
       </article>
       <article
         class="product"
-        data-id="123"
-        data-name="MacBook Pro"
+        data-id="065"
+        data-name="playstation-5"
         stock="10"
-        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='playstation-5')}}'"
       >
         <img
-          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
-          alt="product"
+          src="{{ url_for('static', filename='images/products/christmas/ps-5.jpg') }}"
+          alt="playstation-5"
         />
-        <h3>MacBook Pro</h3>
-        <p>$1299.99</p>
-        <button class="add-to-cart">ADD TO CART</button>
+        <h3>PlayStation 5</h3>
+        <p>$499.99</p>
       </article>
     </div>
     <h1>Trending</h1>
     <div class="landing-category flex-row">
       <article
         class="product"
-        data-id="123"
-        data-name="MacBook Pro"
+        data-id="071"
+        data-name="macbook-pro"
         stock="10"
-        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='macBook-pro')}}'"
       >
         <img
-          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
+          src="{{ url_for('static', filename='images/products/trending/macbook.jpeg') }}"
           alt="product"
         />
         <h3>MacBook Pro</h3>
         <p>$1299.99</p>
-        <button class="add-to-cart">ADD TO CART</button>
       </article>
       <article
         class="product"
-        data-id="123"
+        data-id="072"
         data-name="MacBook Pro"
         stock="10"
-        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='google-pixel-7')}}'"
       >
         <img
-          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
-          alt="product"
+          src="{{ url_for('static', filename='images/products/trending/google-pixel-7.jpg') }}"
+          alt="google-pixel-7"
         />
-        <h3>MacBook Pro</h3>
-        <p>$1299.99</p>
-        <button class="add-to-cart">ADD TO CART</button>
+        <h3>Google Pixel 7</h3>
+        <p>$799.49</p>
       </article>
       <article
         class="product"
-        data-id="123"
-        data-name="MacBook Pro"
+        data-id="073"
+        data-name="iphone-12"
         stock="10"
-        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='iphone-12')}}'"
       >
         <img
-          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
-          alt="product"
+          src="{{ url_for('static', filename='images/products/trending/iphone-12.jpg') }}"
+          alt="iphone-12"
         />
-        <h3>MacBook Pro</h3>
-        <p>$1299.99</p>
-        <button class="add-to-cart">ADD TO CART</button>
+        <h3>iPhone 12</h3>
+        <p>$899.99</p>
       </article>
       <article
         class="product"
-        data-id="123"
-        data-name="MacBook Pro"
+        data-id="074"
+        data-name="trendy-shirt"
         stock="10"
-        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='trendy-shirt')}}'"
       >
         <img
-          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
+          src="{{ url_for('static', filename='images/products/trending/black-graphic-tshirt-trendy-design.jpg') }}"
           alt="product"
         />
-        <h3>MacBook Pro</h3>
-        <p>$1299.99</p>
-        <button class="add-to-cart">ADD TO CART</button>
+        <h3>Black Trendy Shirt</h3>
+        <p>$23.19</p>
       </article>
     </div>
     <h1>Fashion</h1>
     <div class="landing-category flex-row">
       <article
         class="product"
-        data-id="123"
-        data-name="MacBook Pro"
+        data-id="081"
+        data-name="leather-jacket"
         stock="10"
-        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='leather-jacket')}}'"
       >
         <img
-          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
-          alt="product"
+          src="{{ url_for('static', filename='images/products/fashion/leather-jacket.jpg') }}"
+          alt="leather-collection"
         />
-        <h3>MacBook Pro</h3>
-        <p>$1299.99</p>
-        <button class="add-to-cart">ADD TO CART</button>
+        <h3>Leather Jacket</h3>
+        <p>$80.99</p>
       </article>
       <article
         class="product"
-        data-id="123"
-        data-name="MacBook Pro"
+        data-id="082"
+        data-name="sunglasses"
         stock="10"
-        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='sunglasses')}}'"
       >
         <img
-          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
-          alt="product"
+          src="{{ url_for('static', filename='images/products/fashion/sunglasses.jpg') }}"
+          alt="sunglasses"
         />
-        <h3>MacBook Pro</h3>
-        <p>$1299.99</p>
-        <button class="add-to-cart">ADD TO CART</button>
+        <h3>Sunglasses</h3>
+        <p>$12.00</p>
       </article>
       <article
         class="product"
-        data-id="123"
-        data-name="MacBook Pro"
+        data-id="083"
+        data-name="trendy-top"
         stock="10"
-        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='trendy-top')}}'"
       >
         <img
-          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
-          alt="product"
+          src="{{ url_for('static', filename='images/products/fashion/trendy-top-design-mockup-presented-wooden-hanger.jpg') }}"
+          alt="trendy-top"
         />
-        <h3>MacBook Pro</h3>
-        <p>$1299.99</p>
-        <button class="add-to-cart">ADD TO CART</button>
+        <h3>Trendy Top</h3>
+        <p>$35.99</p>
       </article>
       <article
         class="product"
-        data-id="123"
-        data-name="MacBook Pro"
+        data-id="084"
+        data-name="yellow-graphic-shirt"
         stock="10"
-        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='yellow-graphic-shirt')}}'"
       >
         <img
-          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
+          src="{{ url_for('static', filename='images/products/fashion/yellow-graphic-shirt-trendy-design.jpg') }}"
           alt="product"
         />
-        <h3>MacBook Pro</h3>
-        <p>$1299.99</p>
-        <button class="add-to-cart">ADD TO CART</button>
+        <h3>Trendy Graphic Shirt</h3>
+        <p>$45.50</p>
       </article>
     </div>
     <h1>On a budget</h1>
     <div class="landing-category flex-row">
       <article
         class="product"
-        data-id="123"
-        data-name="MacBook Pro"
+        data-id="091"
+        data-name="amazon-alexa"
         stock="10"
-        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='amazon-alexa')}}'"
       >
         <img
-          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
-          alt="product"
+          src="{{ url_for('static', filename='images/products/budget/amazon-alexa.jpg') }}"
+          alt="amazon-alexa"
         />
-        <h3>MacBook Pro</h3>
-        <p>$1299.99</p>
-        <button class="add-to-cart">ADD TO CART</button>
+        <h3>Amazon Alexa</h3>
+        <p>$74.99</p>
+      </article>
+      <!-- <button class="add-to-cart">ADD TO CART</button> -->
+
+      <article
+        class="product"
+        data-id="092"
+        data-name="mixer"
+        stock="10"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='mixer')}}'"
+      >
+        <img
+          src="{{ url_for('static', filename='images/products/budget/mixer.jpg') }}"
+          alt="mixer"
+        />
+        <h3>Mixer</h3>
+        <p>$126.98</p>
       </article>
       <article
         class="product"
-        data-id="123"
-        data-name="MacBook Pro"
+        data-id="093"
+        data-name="starbucks-coffee"
         stock="10"
-        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='starbucks-coffee')}}'"
       >
         <img
-          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
-          alt="product"
+          src="{{ url_for('static',
+        filename='images/products/budget/starbucks-coffee.jpg') }}"
+          alt="starbucks-coffee"
         />
-        <h3>MacBook Pro</h3>
-        <p>$1299.99</p>
-        <button class="add-to-cart">ADD TO CART</button>
+        <h3>Starbucks French Roast</h3>
+        <p>$22.20</p>
       </article>
       <article
         class="product"
-        data-id="123"
-        data-name="MacBook Pro"
+        data-id="094"
+        data-name="olive-oil"
         stock="10"
         onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
       >
         <img
-          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
-          alt="product"
+          src="{{ url_for('static', filename='images/products/budget/olive-oil.jpg') }}"
+          alt="olive-oil"
         />
-        <h3>MacBook Pro</h3>
-        <p>$1299.99</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </article>
-      <article
-        class="product"
-        data-id="123"
-        data-name="MacBook Pro"
-        stock="10"
-        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='MacBook-Pro')}}'"
-      >
-        <img
-          src="{{ url_for('static', filename='images/site/macbook.jpeg') }}"
-          alt="product"
-        />
-        <h3>MacBook Pro</h3>
-        <p>$1299.99</p>
-        <button class="add-to-cart">ADD TO CART</button>
+        <h3>Fresh Olive Oil</h3>
+        <p>$25.50</p>
       </article>
     </div>
   </section>
@@ -582,15 +583,18 @@
       </div>
       <!-- List of Chats -->
       <ul class="chats">
-        <li class="chat">
+        <li class="chat" data-id="">
           <div class="seller-image">
-            <i class="fa-solid fa-shop fa-2xl"></i>
+            <img
+              src="{{ url_for('static', filename='images/seller_profile/wu-hang-electronics.jpg') }}"
+              alt="wu-hang-electronics"
+            />
           </div>
           <span class="seller-name">Wu Hang Electronics</span>
           <span class="date">
-            5 Jan 2023 <i class="fa-solid fa-ellipsis"></i
+            5 Jan 2023 <i class="fa-solid fa-ellipsis chat-options-toggle"></i
           ></span>
-          <div class="delete">
+          <div class="delete-chat">
             <i class="fa-solid fa-trash-can fa-lg"></i
             ><span> Delete Conversation</span>
           </div>
@@ -599,15 +603,18 @@
             Asperiores, quibusdam.
           </p>
         </li>
-        <li class="chat">
+        <li class="chat" data-id="">
           <div class="seller-image">
-            <i class="fa-solid fa-shop fa-2xl"></i>
+            <img
+              src="{{ url_for('static', filename='images/seller_profile/el-fuse-lighting-solutions.jpg') }}"
+              alt="el-fuse-lighting-solutions"
+            />
           </div>
           <span class="seller-name">El Fuse Lighting Solutions</span>
           <span class="date"
-            >5 Jan 2023 <i class="fa-solid fa-ellipsis"></i
+            >5 Jan 2023 <i class="fa-solid fa-ellipsis chat-options-toggle"></i
           ></span>
-          <div class="delete">
+          <div class="delete-chat">
             <i class="fa-solid fa-trash-can fa-lg"></i
             ><span> Delete Conversation</span>
           </div>
@@ -616,15 +623,18 @@
             Asperiores, quibusdam.
           </p>
         </li>
-        <li class="chat">
+        <li class="chat" data-id="">
           <div class="seller-image">
-            <i class="fa-solid fa-shop fa-2xl"></i>
+            <img
+              src="{{ url_for('static', filename='images/seller_profile/manji-brick-and-mortar.jpg') }}"
+              alt="manji-brick-and-mortar"
+            />
           </div>
           <span class="seller-name">Manji Brick and Mortar</span>
           <span class="date"
-            >5 Jan 2023 <i class="fa-solid fa-ellipsis"></i
+            >5 Jan 2023 <i class="fa-solid fa-ellipsis chat-options-toggle"></i
           ></span>
-          <div class="delete">
+          <div class="delete-chat">
             <i class="fa-solid fa-trash-can fa-lg"></i
             ><span> Delete Conversation</span>
           </div>
@@ -633,15 +643,18 @@
             Asperiores, quibusdam.
           </p>
         </li>
-        <li class="chat">
+        <li class="chat" data-id="">
           <div class="seller-image">
-            <i class="fa-solid fa-shop fa-2xl"></i>
+            <img
+              src="{{ url_for('static', filename='images/seller_profile/trendy-fashion-co.jpg') }}"
+              alt="trendy-fashion-co"
+            />
           </div>
           <span class="seller-name">Trendy Fashion Co.</span>
           <span class="date"
-            >5 Jan 2023 <i class="fa-solid fa-ellipsis"></i
+            >5 Jan 2023 <i class="fa-solid fa-ellipsis chat-options-toggle"></i
           ></span>
-          <div class="delete">
+          <div class="delete-chat">
             <i class="fa-solid fa-trash-can fa-lg"></i
             ><span> Delete Conversation</span>
           </div>
@@ -650,15 +663,18 @@
             Asperiores, quibusdam.
           </p>
         </li>
-        <li class="chat">
+        <li class="chat" data-id="">
           <div class="seller-image">
-            <i class="fa-solid fa-shop fa-2xl"></i>
+            <img
+              src="{{ url_for('static', filename='images/seller_profile/pet-supplies-ltd.jpg') }}"
+              alt="pet-supplies-ltd"
+            />
           </div>
           <span class="seller-name">Pet Supplies Ltd</span>
           <span class="date"
-            >5 Jan 2023<i class="fa-solid fa-ellipsis"></i
+            >5 Jan 2023<i class="fa-solid fa-ellipsis chat-options-toggle"></i
           ></span>
-          <div class="delete">
+          <div class="delete-chat">
             <i class="fa-solid fa-trash-can fa-lg"></i
             ><span> Delete Conversation</span>
           </div>
@@ -667,15 +683,18 @@
             Asperiores, quibusdam.
           </p>
         </li>
-        <li class="chat">
+        <li class="chat" data-id="">
           <div class="seller-image">
-            <i class="fa-solid fa-shop fa-2xl"></i>
+            <img
+              src="{{ url_for('static', filename='images/seller_profile/smart-baby-apparels.jpg') }}"
+              alt="smart-baby-apparels"
+            />
           </div>
           <span class="seller-name">Smart Baby Apparels</span>
           <span class="date"
-            >5 Jan 2023<i class="fa-solid fa-ellipsis"></i
+            >5 Jan 2023<i class="fa-solid fa-ellipsis chat-options-toggle"></i
           ></span>
-          <div class="delete">
+          <div class="delete-chat">
             <i class="fa-solid fa-trash-can fa-lg"></i
             ><span> Delete Conversation</span>
           </div>
@@ -684,15 +703,18 @@
             Asperiores, quibusdam.
           </p>
         </li>
-        <li class="chat">
+        <li class="chat" data-id="">
           <div class="seller-image">
-            <i class="fa-solid fa-shop fa-2xl"></i>
+            <img
+              src="{{ url_for('static', filename='images/seller_profile/snack-shop.jpg') }}"
+              alt="snack-shop"
+            />
           </div>
           <span class="seller-name">Snack Shop</span>
           <span class="date"
-            >5 Jan 2023<i class="fa-solid fa-ellipsis"></i
+            >5 Jan 2023<i class="fa-solid fa-ellipsis chat-options-toggle"></i
           ></span>
-          <div class="delete">
+          <div class="delete-chat">
             <i class="fa-solid fa-trash-can fa-lg"></i
             ><span> Delete Conversation</span>
           </div>
@@ -704,7 +726,7 @@
       </ul>
       <!-- Chat history and message textarea -->
       <article class="chat-active">
-        <div class="chat-history">
+        <div class="chat-history" data-id="">
           <div class="customer-message-container">
             <p class="customer-message">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.

@@ -1,11 +1,6 @@
-{% extends "index.html" %}
-<!-- prettier-ignore -->
-{% block header_nav %}{% endblock %} 
-{% block main%}
+{% extends "index.html" %} {% block header_nav %}{% endblock %} {% block main%}
 <img src="../static/images/site/camp_404.png" alt="404" class="error-page" />
-<div class="container flex-row go-back-home">
-  <button onclick="window.location.href='{{url_for('customer_views.home') }}'">
-    GO BACK HOME
-  </button>
-</div>
-{% endblock %} {% block messanger %} {% endblock %}
+<a href="{{url_for('customer_views.home') }}" class="go-back-home flex-row">
+  <button>GO BACK HOME</button>
+</a>
+{% endblock %} {% block messenger %} {% endblock %}

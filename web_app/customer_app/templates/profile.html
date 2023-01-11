@@ -1,0 +1,211 @@
+{% extends "index.html" %} {% block styles %} {{ super() }}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='styles/dashboard.css') + '?' + cache_id}}"
+/>
+{% endblock %} {% block scripts%}
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"
+  integrity="sha512-YeeA/Qxn5hYdkukScTCNNOhTrv1C2RubAGButJ1rmgQwZf/HdRaCGl+JAVkqsqaNRaYNHdheiuKKuPf9mDcqKg=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+  defer
+></script>
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename='scripts/dashboard.js') + '?' + cache_id}}"
+  defer
+></script>
+{% endblock %} {% block main %}
+<div class="dashboard-container container">
+  {% block dashboard_nav %}
+  <nav class="dashboard-nav box-shadow">
+    <ul>
+      <a
+        href="{{ url_for('customer_views.customer_dashboard', section='profile') }}"
+      >
+        {% if section == "profile" %}
+        <li id="profile" class="flex-row dashboard-active">{% else %}</li>
+        <li id="profile" class="flex-row">
+          {% endif %}
+          <i class="fa-regular fa-user fa-xl dashboard-nav-icon"></i>
+          <span>Profile</span>
+        </li>
+      </a>
+      <a
+        href="{{ url_for('customer_views.customer_dashboard', section='notifications') }}"
+      >
+        {% if section == "notifications" %}
+        <li id="notifications" class="flex-row dashboard-active">{% else %}</li>
+
+        <li id="notifications" class="flex-row">
+          {% endif %}
+          <i class="fa-regular fa-bell fa-xl dashboard-nav-icon"></i>
+          <span>Notifications</span>
+        </li>
+      </a>
+      <a
+        href="{{ url_for('customer_views.customer_dashboard', section='messages') }}"
+      >
+        {% if section == "messages" %}
+        <li id="messages" class="flex-row dashboard-active">{% else %}</li>
+
+        <li id="messages" class="flex-row">
+          {% endif %}
+          <i class="fa-regular fa-message fa-xl dashboard-nav-icon"></i>
+          <span>Messages</span>
+        </li>
+      </a>
+      <a
+        href="{{ url_for('customer_views.customer_dashboard', section='saved-items') }}"
+      >
+        {% if section == "saved-items" %}
+        <li id="saved-items" class="flex-row dashboard-active">{% else %}</li>
+
+        <li id="saved-items" class="flex-row">
+          {% endif %}
+          <i class="fa-regular fa-heart fa-xl dashboard-nav-icon"></i>
+          <span>Saved Items</span>
+        </li>
+      </a>
+      <a
+        href="{{ url_for('customer_views.customer_dashboard', section='orders') }}"
+      >
+        {% if section == "orders" %}
+        <li id="orders" class="flex-row dashboard-active">{% else %}</li>
+
+        <li id="orders" class="flex-row">
+          {% endif %}
+          <i class="fa-solid fa-list-ul fa-xl dashboard-nav-icon"></i>
+          <span>Orders</span>
+        </li>
+      </a>
+      <a
+        href="{{ url_for('customer_views.customer_dashboard', section='pending-reviews') }}"
+      >
+        {% if section == "pending-reviews" %}
+        <li id="reviews" class="flex-row dashboard-active">{% else %}</li>
+
+        <li id="reviews" class="flex-row">
+          {% endif %}
+          <i class="fa-solid fa-pen-to-square fa-xl dashboard-nav-icon"></i>
+          <span>Pending Reviews</span>
+        </li>
+      </a>
+      <a
+        href="{{ url_for('customer_views.customer_dashboard', section='settings') }}"
+      >
+        {% if section == "settings" %}
+        <li id="settings" class="flex-row dashboard-active">{% else %}</li>
+
+        <li id="settings" class="flex-row">
+          {% endif %}
+          <i class="fa-solid fa-gears fa-xl dashboard-nav-icon"></i>
+          <span>Settings</span>
+        </li>
+      </a>
+      <div class="separator"></div>
+      <li id="logout">
+        <a href="{{url_for('customer_views.logout') }}" class="flex-row">
+          <i
+            class="fa-solid fa-arrow-right-from-bracket fa-xl dashboard-nav-icon"
+          ></i>
+          <span> Logout</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  {% endblock %}
+  <div class="dashboard-content">
+    {% block dashboard_content %} {# Profile section #}
+    <section class="profile-content">
+      <section class="user-info">
+        <h3 class="dashboard-section-header">My Profile</h3>
+        <div class="user-info-div flex-column box-shadow">
+          <div class="user-name-and-edit flex-row">
+            <h3>
+              {% if current_user.first_name and current_user.last_name %} {{
+              current_user.first_name, current_user.last_name }} {% else %} Add
+              user name {% endif %}
+            </h3>
+            <i class="fa-solid fa-pen dashboard-content-icon edit"></i>
+          </div>
+          <div id="user-email">
+            <i class="fa-regular fa-envelope dashboard-content-icon"></i>
+            <span>{{ current_user.email }}</span>
+          </div>
+          <div class="user-phone-number">
+            <i class="fa-solid fa-phone dashboard-content-icon"></i>
+            <span>{{ current_user.phone_number }}</span>
+          </div>
+        </div>
+      </section>
+      <section class="user-addresses">
+        <h3 class="dashboard-section-header">Address Book</h3>
+        <div class="user-addresses-div flex-row box-shadow">
+          <article class="address user-item flex-column">
+            <div class="address-holder flex-row">
+              <p>Dennis Kinyua</p>
+              <i class="fa-solid fa-star default dashboard-content-icon"></i>
+            </div>
+            <p>+254701123345</p>
+            <p>Jay's Apartment, Block B</p>
+            <div class="delete-edit flex-row">
+              <i
+                class="fa-solid fa-trash-can dashboard-content-icon delete-address"
+              ></i>
+              <i class="fa-solid fa-pen dashboard-content-icon edit"></i>
+            </div>
+          </article>
+          <article class="address user-item flex-column">
+            <div class="address-holder flex-row">
+              <p>Emmanuel Chalo</p>
+              <i class="fa-regular fa-star dashboard-content-icon"></i>
+            </div>
+            <p>+254702345789</p>
+            <p>KICC Building, Nairobi CBD</p>
+            <div class="delete-edit flex-row">
+              <i
+                class="fa-solid fa-trash-can dashboard-content-icon delete-address"
+              ></i>
+              <i class="fa-solid fa-pen dashboard-content-icon edit"></i>
+            </div>
+          </article>
+          <article class="new-address new-user-item flex-column">
+            <i
+              class="fa-solid fa-plus fa-xl add-address dashboard-content-icon"
+            ></i>
+            <span>Add New Address</span>
+          </article>
+        </div>
+      </section>
+      <section class="user-card-details">
+        <h3 class="dashboard-section-header">Card Details</h3>
+        <div class="card-details-div flex-row box-shadow">
+          <article class="card user-item flex-column">
+            <div class="card-holder flex-row">
+              <p>Duncan Ngugi</p>
+              <i class="fa-solid fa-star dashboard-content-icon default"></i>
+            </div>
+            <p>XXXX-XXXX-XXXX-1234</p>
+            <p>Expires on: 12/23</p>
+            <div class="delete-edit flex-row">
+              <i
+                class="fa-solid fa-trash-can dashboard-content-icon delete-card"
+              ></i>
+              <i class="fa-solid fa-pen dashboard-content-icon edit"></i>
+            </div>
+          </article>
+          <article class="new-card new-user-item flex-column">
+            <i
+              class="fa-solid fa-plus fa-xl add-card dashboard-content-icon"
+            ></i>
+            <span>Add New Card</span>
+          </article>
+        </div>
+      </section>
+    </section>
+    {% endblock %}
+  </div>
+</div>
+{% endblock %} {% block messenger %} {% endblock %}

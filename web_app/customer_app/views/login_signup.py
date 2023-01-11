@@ -4,6 +4,7 @@ from flask import flash, redirect, render_template, request, url_for
 from flask_login import login_required, login_user, logout_user
 from models import storage
 from models.customer import Customer
+from models import storage
 from uuid import uuid4
 from web_app.customer_app.views import customer_views
 

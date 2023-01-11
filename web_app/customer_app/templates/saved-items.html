@@ -1,0 +1,89 @@
+{% extends "profile.html"%} {% block dashboard_content %} {# Saved Items #}
+<section class="saved-items">
+  <h3 class="dashboard-section-header">Saved Items</h3>
+  <article
+    class="saved-item box-shadow flex-row"
+    data-name="summer-collection"
+    data-id="075"
+    stock="9"
+  >
+    <div class="saved-item-details flex-row">
+      <a
+        href="{{ url_for('customer_views.view_product', product_name='summer-collection') }}"
+      >
+        <img
+          src="{{ url_for('static', filename='images/products/trending/summer-collection.jpg') }}"
+          alt="summer-collection"
+        />
+      </a>
+      <div class="price-and-name flex-column">
+        <h3>Summer-collection</h3>
+        <span>$699.35</span>
+      </div>
+    </div>
+    <button class="add-to-cart">ADD TO CART</button>
+    <div class="stock-and-delete-from-cart flex-column">
+      <span class="stock in-stock">9 In Stock</span>
+      <i
+        class="fa-solid fa-trash-can fa-lg dashboard-content-icon delete-saved-item"
+      ></i>
+    </div>
+  </article>
+  <article
+    class="saved-item box-shadow flex-row"
+    data-name="white-high-top-sneakers-unisex-footwear-fashion"
+    data-id="076"
+    stock="10"
+  >
+    <div class="saved-item-details flex-row">
+      <a
+        href="{{ url_for('customer_views.view_product', product_name='white-high-top-sneakers-unisex-footwear-fashion') }}"
+      >
+        <img
+          src="{{ url_for('static', filename='images/products/trending/white-high-top-sneakers-unisex-footwear-fashion.jpg') }}"
+          alt="MacBook-Pro"
+        />
+      </a>
+      <div class="price-and-name flex-column">
+        <h3>Unisex High Top Sneakers</h3>
+        <span>$45.99</span>
+      </div>
+    </div>
+    <button class="add-to-cart">ADD TO CART</button>
+    <div class="stock-and-delete-from-cart flex-column">
+      <span class="stock in-stock">10 In Stock</span>
+      <i
+        class="fa-solid fa-trash-can fa-lg dashboard-content-icon delete-saved-item"
+      ></i>
+    </div>
+  </article>
+  <article
+    class="saved-item box-shadow flex-row"
+    data-name="christmas-trees"
+    data-id="066"
+    stock="0"
+  >
+    <div class="saved-item-details flex-row">
+      <a
+        href="{{ url_for('customer_views.view_product', product_name='christmas-trees') }}"
+      >
+        <img
+          src="{{ url_for('static', filename='images/products/christmas/christmas-trees.jpg') }}"
+          alt="christmas-trees"
+        />
+      </a>
+      <div class="price-and-name flex-column">
+        <h3>Christmas Trees</h3>
+        <span>$12.99</span>
+      </div>
+    </div>
+    <button class="add-to-cart">ADD TO CART</button>
+    <div class="stock-and-delete-from-cart flex-column">
+      <span class="stock out-of-stock">Out of Stock</span>
+      <i
+        class="fa-solid fa-trash-can fa-lg dashboard-content-icon delete-saved-item"
+      ></i>
+    </div>
+  </article>
+</section>
+{% endblock %}

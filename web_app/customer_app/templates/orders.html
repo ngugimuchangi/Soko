@@ -1,0 +1,133 @@
+{% extends "profile.html" %} {% block dashboard_content %} {# Customer orders
+section #}
+<section class="orders">
+  <h3 class="dashboard-section-header">My Orders</h3>
+  <i
+    class="fa-solid fa-chevron-down dashboard-content-icon dashboard-filter-toggle"
+  ></i>
+  <ul class="order-filters dashboard-filters">
+    <li id="all-orders">All</li>
+    <li id="shipped-orders">Shipped</li>
+    <li id="completed-orders">Completed</li>
+  </ul>
+  <article class="order" data-id="123456" status="shipped">
+    <h4 class="order-id">Order No: 1234</h4>
+    <div class="order-details flex-column box-shadow">
+      <div class="status-and-view-details flex-row">
+        <span class="order-status"
+          >Status: Shipped on Fri, December 30, 2022, 10:00 AM</span
+        >
+        <span class="view-order">View Details</span>
+      </div>
+      <span class="order-item-number">4 items</span>
+      <div class="order-products flex-row">
+        <a
+          href="{{ url_for('customer_views.view_product', product_name='macbook-pro') }}"
+          class="order-product flex-row"
+        >
+          <img
+            src="{{ url_for('static', filename='images/products/trending/macbook.jpeg') }}"
+            alt="macbook-pro"
+          />
+          <div class="order-product-name-and-price flex-column">
+            <h5>MacBook Pro</h5>
+            <span>$1299.99</span>
+          </div>
+        </a>
+        <a
+          href="{{ url_for('customer_views.view_product', product_name='all-in-one-christmas-gift') }}"
+          class="order-product flex-row"
+        >
+          <img
+            src="{{ url_for('static', filename='images/products/christmas/all-in-one-christmas-gift.jpg') }}"
+            alt="all-in-one-christmas-gift"
+          />
+          <div class="order-product-name-and-price flex-column">
+            <h5>All-in-one Christmas Gift</h5>
+            <span>$49.99</span>
+          </div>
+        </a>
+        <a
+          href="{{ url_for('customer_views.view_product', product_name='trendy-top') }}"
+          class="order-product flex-row"
+        >
+          <img
+            src="{{ url_for('static', filename='images/products/fashion/trendy-top-design-mockup-presented-wooden-hanger.jpg') }}"
+            alt="trendy-top"
+          />
+          <div class="order-product-name-and-price flex-column">
+            <h5>Trendy Top</h5>
+            <span>$35.99</span>
+          </div>
+        </a>
+        <a
+          href="{{ url_for('customer_views.view_product', product_name='leather-collection') }}"
+          class="order-product flex-row"
+        >
+          <img
+            src="{{ url_for('static', filename='images/products/fashion/leather-collection.jpg') }}"
+            alt="leather-collection"
+          />
+          <div class="order-product-name-and-price flex-column">
+            <h5>Leather Collection</h5>
+            <span>$110.50</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </article>
+  <article class="order" data-id="123456" status="completed">
+    <h4 class="order-id">Order No: 5678</h4>
+    <div class="order-details flex-column box-shadow">
+      <div class="status-and-view-details flex-row">
+        <span class="order-status"
+          >Status: Delivered on Mon, Jan 1, 2022, 8:00PM</span
+        >
+        <span class="view-order">View Details</span>
+      </div>
+      <span class="order-item-number">3 items</span>
+      <div class="order-products flex-row">
+        <a
+          href="{{ url_for('customer_views.view_product', product_name='cabernet-sauvignon') }}"
+          class="order-product flex-row"
+        >
+          <img
+            src="{{ url_for('static', filename='images/products/christmas/wine.jpg') }}"
+            alt="cabernet-sauvignon"
+          />
+          <div class="order-product-name-and-price flex-column">
+            <h5>Cabernet Sauvignon</h5>
+            <span>$5.99</span>
+          </div>
+        </a>
+        <a
+          href="{{url_for('customer_views.view_product', product_name='sunglasses')}}"
+          class="order-product flex-row"
+        >
+          <img
+            src="{{ url_for('static', filename='images/products/fashion/sunglasses.jpg') }}"
+            alt="sunglasses"
+          />
+          <div class="order-product-name-and-price flex-column">
+            <h5>Sunglasses</h5>
+            <span>$12.00</span>
+          </div>
+        </a>
+        <a
+          href="{{ url_for('customer_views.view_product', product_name='christmas-cookies') }}"
+          class="order-product flex-row"
+        >
+          <img
+            src="{{ url_for('static', filename='images/products/christmas/cookies.jpg') }}"
+            alt="cookies"
+          />
+          <div class="order-product-name-and-price flex-column">
+            <h5>Delicious Holiday Cookies</h5>
+            <span>$10.99</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </article>
+</section>
+{% endblock %}

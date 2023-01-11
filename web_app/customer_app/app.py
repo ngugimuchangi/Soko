@@ -2,7 +2,7 @@
 """ Soko Customer App
 """
 from dotenv import load_dotenv
-from flask import Flask, jsonify, make_response, render_template
+from flask import Flask
 from flask_login import LoginManager
 from models import storage
 from models.customer import Customer
@@ -39,4 +39,4 @@ def teardown(error):
 if __name__ == "__main__":
     host = getenv("SOKO_CUSTOMER_APP_HOST")
     port = getenv("SOKO_CUSTOMER_APP_PORT")
-    app.run(host=host, port=port, debug=True)
+    app.run(host=host, port=port, debug=True, threaded=True)

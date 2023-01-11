@@ -1,0 +1,567 @@
+/* START OF DASHBOARD CONTAINER STYLES */
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 210px minmax(600px, 900px);
+  grid-template-rows: 750px;
+  align-items: start;
+  justify-items: start;
+  overflow: hidden;
+}
+/* END OF DASHBOARD CONTAINER STYLES */
+
+/* START OF DASHBOARD NAVIGATION STYLES */
+.dashboard-nav {
+  display: inline-block;
+  height: fit-content;
+  width: 210px;
+  background-color: #fff;
+  align-self: start;
+  position: sticky;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.dashboard-nav ul {
+  padding-top: 20px;
+  width: 100%;
+}
+.dashboard-nav li {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  justify-content: flex-start;
+}
+.dashboard-nav a {
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+}
+.dashboard-nav a:hover {
+  color: #fc870b;
+}
+.dashboard-nav li:hover {
+  background-color: #cdd2d8;
+  color: #fc870b;
+}
+.dashboard-nav li#logout {
+  margin-top: 10px;
+}
+.dashboard-nav-icon {
+  width: 30px;
+  margin-right: 10px;
+}
+
+.dashboard-active {
+  color: #fc870b;
+}
+/* END OF DASHBOARD NAVIGATION STYLES */
+
+/* START OF DASHBOARD CONTENT SHARED STYLES*/
+
+.dashboard-content {
+  display: inline-block;
+  padding: 0 10px 20px 30px;
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+}
+.dashboard-section-header {
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #26415f;
+}
+/* END OF DASHBOARD CONTENT SHARED STYLES*/
+
+/* START OF USER PROFILE SECTION */
+/* Shared styles for the profile section */
+.profile-content > section {
+  width: 550px;
+  margin-bottom: 30px;
+}
+.user-info-div,
+.user-addresses-div,
+.card-details-div {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+.user-addresses-div,
+.card-details-div {
+  padding-bottom: 0;
+}
+.box-shadow {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+.edit:hover,
+.add-address:hover,
+.add-card:hover {
+  color: #fc870b;
+}
+.dashboard-content-icon {
+  color: #26415f;
+  margin-right: 10px;
+}
+/* User-info */
+.user-info-div {
+  height: 120px;
+}
+.user-name-and-edit {
+  width: 100%;
+}
+/* Addresses */
+.user-addresses-div {
+  min-height: 170px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.user-item,
+.new-user-item {
+  width: 250px;
+  height: 150px;
+  padding: 10px 0 10px 10px;
+  border-radius: 8px;
+  border: 1px solid #cdd2d8;
+  margin-bottom: 10px;
+}
+.new-user-item {
+  border: 2px dotted #cdd2d8;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.address p {
+  max-width: 200px;
+  max-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.address .address-holder,
+.address .delete-edit,
+.card-holder {
+  width: 100%;
+}
+.default {
+  color: #fc870b;
+}
+/* Card details */
+.card-details-div {
+  min-height: 170px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.card-details-div .delete-edit {
+  width: 100%;
+}
+/* END OF PROFILE SECTION */
+
+/* START OF SHARED DASHBOARD FILTER TOGGLES */
+/* These styles are shared between the notifications
+ * and orders sections' filters
+ */
+.dashboard-filters {
+  background-color: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  display: none;
+  position: absolute;
+  top: 20px;
+  padding: 5px;
+  z-index: 2;
+}
+.dashboard-filter-toggle,
+.dashboard-filters li {
+  cursor: pointer;
+}
+.dashboard-filters li {
+  width: 100%;
+  padding: 5px;
+}
+.dashboard-filters li:hover {
+  color: #fc870b;
+}
+/* START OF SHARED DASHBOARD FILTERS TOGGLES */
+
+/* START OF NOTIFICATIONS SECTION */
+.notifications-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.notifications-container > h3 {
+  display: inline-block;
+  margin-bottom: 25px;
+}
+.notifications-filters {
+  left: 50px;
+}
+.notifications {
+  width: 100%;
+  height: 92%;
+  border-radius: 8px;
+  padding: 10px 20px;
+  background-color: #fff;
+  overflow: scroll;
+}
+#mark-all-as-read {
+  color: #26415f;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 20px;
+}
+#mark-all-as-read:hover {
+  color: #fc870b;
+}
+.notification {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  border-radius: 4px;
+  border-bottom: 1px solid #cdd2d8;
+}
+.notification:last-child {
+  border-bottom: 0;
+}
+.notification:hover {
+  background-color: #cdd7e5;
+}
+.notification-content {
+  display: inline-block;
+  width: 95%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 10px 5px;
+  color: #1f0f0f;
+}
+.notification-options-toggle {
+  color: #26415f;
+  margin-left: 0;
+  position: relative;
+  bottom: 10px;
+  cursor: pointer;
+}
+.notification-options-toggle:hover {
+  color: #fc870b;
+}
+.notification-options-pop-up {
+  color: #26415f;
+  width: fit-content;
+  height: 60px;
+  display: none;
+  padding: 10px;
+  border: 4px;
+  background-color: #fff;
+  position: absolute;
+  right: 0;
+  top: 25px;
+  cursor: pointer;
+  border-radius: 4px;
+  z-index: 2;
+}
+.notification-options-pop-up li:first-child {
+  margin-bottom: 10px;
+}
+.notification-options-pop-up li.mark-read:hover {
+  color: #fc870b;
+}
+.notification-options-pop-up li.delete-notification:hover {
+  color: #bb0a1e;
+}
+.notification-options-pop-up i {
+  margin-right: 10px;
+}
+.unread {
+  font-weight: 600;
+}
+/* END OF NOTIFICATIONS SECTION */
+
+/* START OF DASHBOARD MESSAGES SECTION */
+.messages {
+  height: 100%;
+}
+.dashboard-messenger {
+  height: 95%;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 10px 10px;
+  overflow: scroll;
+}
+.dashboard-chats .chat {
+  grid-template-columns: 60px 42% 46%;
+}
+
+.dashboard-messenger .chat-active,
+.dashboard-messenger .chat-history {
+  width: 100%;
+  height: 100%;
+}
+.dashboard-messenger .chat-history {
+  height: 85%;
+  padding-left: 5px;
+  margin-bottom: 5px;
+}
+.dashboard-messenger .customer-message-container {
+  width: 400px;
+  left: 37%;
+}
+.dashboard-messenger textarea#message {
+  width: 88%;
+}
+.dashboard-chat-header {
+  width: 100%;
+  height: 30px;
+  padding-bottom: 10px;
+}
+.dashboard-messenger .customer-message,
+.dashboard-messenger .seller-message {
+  width: fit-content;
+  max-width: 350px;
+  min-height: 20px;
+}
+.dashboard-messenger .delete-chat {
+  width: 190px;
+}
+/* Responsive Design for messenger */
+@media only screen and (min-width: 1000px) {
+  .dashboard-chats .chat {
+    grid-template-columns: 60px 45% 46%;
+  }
+  .dashboard-messenger .customer-message-container {
+    width: 500px;
+    left: 39%;
+  }
+  .dashboard-messenger textarea#message {
+    width: 90%;
+  }
+  .customer-message,
+  .seller-message {
+    max-width: 500px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .dashboard-messenger .customer-message-container {
+    left: 31%;
+  }
+}
+/* END OF DASHBOARD MESSAGES SECTION */
+
+/* START OF SAVED ITEMS SECTION*/
+.saved-items {
+  width: 100%;
+}
+.saved-item {
+  max-width: 100%;
+  height: 220px;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+.saved-item img {
+  width: 200px;
+  height: 200px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+.saved-item .add-to-cart {
+  display: block;
+}
+.saved-item-details {
+  width: 350px;
+  height: 200px;
+  align-items: flex-start;
+}
+div.price-and-name {
+  min-width: 140px;
+  height: 100%;
+  padding-top: 10px;
+  justify-content: center;
+  font-weight: 600;
+  align-items: flex-start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
+}
+.price-and-name h3 {
+  max-height: 60px;
+  margin-bottom: 5px;
+}
+.stock-and-delete-from-cart {
+  height: 100%;
+  width: 100px;
+  padding-bottom: 30px;
+  padding-top: 10px;
+  align-content: flex-end;
+}
+.in-stock {
+  color: green;
+}
+.out-of-stock {
+  color: #bb0a1e;
+}
+/* END OF SAVED ITEMS SECTION*/
+
+/* START OF ORDERS SECTION*/
+.orders {
+  position: relative;
+}
+.orders > h3 {
+  display: inline-block;
+  position: relative;
+}
+
+.status-and-view-details {
+  width: 100%;
+}
+.view-order {
+  color: #26415f;
+  cursor: pointer;
+}
+.view-order:hover {
+  color: #fc870b;
+}
+.order h4 {
+  color: #26415f;
+  margin-bottom: 5px;
+}
+.order-details {
+  width: 100%;
+  height: 250px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+.order-products {
+  width: 100%;
+  height: 170px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow: scroll;
+  flex-grow: unset;
+}
+.order-product {
+  font-size: smaller;
+  font-weight: 500;
+  min-width: 250px;
+  height: 170px;
+  border: 1px solid #cdd2d8;
+  border-radius: 4px;
+  padding: 5px;
+  margin-right: 10px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.order-product:last-child {
+  margin-right: 0;
+}
+.order-product-name-and-price {
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+}
+.order-product-name-and-price h5 {
+  margin-bottom: 5px;
+}
+.order-product img {
+  min-width: 150px;
+  max-width: 150px;
+  height: 150px;
+  grid-row: 1 / span 2;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+/* END OF ORDERS SECTION */
+
+/* START OF PENDING REVIEWS SECTION */
+.pending-reviews {
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.product-review a {
+  width: 90%;
+  height: 70%;
+  margin: auto;
+}
+.product-review h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.product-review p {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.product-review {
+  max-width: 250px;
+  min-width: 250px;
+  height: 350px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 10px 5px 5px 5px;
+  border-radius: 8px;
+  background-color: #fff;
+  border: 1px solid #cdd2d8;
+}
+.product-review img {
+  width: 90%;
+  height: 70%;
+  margin-bottom: 5px;
+  border-radius: 4px;
+}
+.review-btn {
+  text-align: center;
+  margin-top: 10px;
+  margin: auto;
+  cursor: pointer;
+}
+/* END OF PENDING REVIEWS SECTION */
+
+/* START OF USER SETTINGS */
+.settings-content {
+  width: 600px;
+}
+.user-settings {
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+.setting-section {
+  display: grid;
+  grid-template-columns: 150px 100px;
+  grid-template-rows: 30px;
+  margin-bottom: 40px;
+  column-gap: 350px;
+  row-gap: 5px;
+}
+.setting-section h3 {
+  font-weight: 600;
+}
+.setting-section a {
+  color: #26415f;
+}
+.setting-section a:hover {
+  color: #fc870b;
+}
+.delete-account-btn {
+  color: #fff;
+  background-color: #26415f;
+}
+.delete-account-btn:hover {
+  background: #315985;
+}
+.delete-account {
+  height: 100px;
+}
+.delete-account h3 {
+  font-weight: 600;
+}
+/* END OF USER SETTING */
