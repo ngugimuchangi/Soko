@@ -978,7 +978,6 @@ h2 + p {
   border-radius: 50%;
   position: relative;
   top: -75px;
-  z-index: 2;
 }
 .contributor-socials {
   position: absolute;
