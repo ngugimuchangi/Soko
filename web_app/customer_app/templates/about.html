@@ -1,1 +1,111 @@
-{% extends "index.html" %}
+{% extends "index.html" %} {% block header_nav %}{% endblock %} {% block main%}
+{# About section #}
+<h2>About Soko</h2>
+
+<p>
+  Soko is the number one online shopping platform. Our goals is to
+  <strong>make online shopping an wholesome experience.</strong> Soko is the one
+  stop platform for all your shopping needs
+</p>
+<section class="about">
+  <img
+    src="{{ url_for('static', filename='images/landing_page/landing-page-carousel.png') }}"
+    alt="landing-page-carousel"
+  />
+  <p>Get the latest deals</p>
+  <img
+    src="{{ url_for('static', filename='images/landing_page/landing-page-products.png') }}"
+    alt="landing-page-products"
+  />
+  <p>Checkout products at friendly prices</p>
+  <img
+    src="{{ url_for('static', filename='images/landing_page/messenger-chat-list.png') }}"
+    alt="messenger-chat-list"
+  />
+  <p>Real-time communication with sellers</p>
+  <img
+    src="{{ url_for('static', filename='images/landing_page/messenger-messages.png') }}"
+    alt="messenger-messages"
+  />
+  <p>
+    Get all the latest update of new products directly from sellers. Negotiate
+    for friendly prices
+  </p>
+  <img
+    src="{{ url_for('static', filename='images/landing_page/cart.png') }}"
+    alt="cart"
+  />
+  <p>Add items to the your cart easily</p>
+  <img
+    src="{{ url_for('static', filename='images/landing_page/order_confirmed.png') }}"
+    alt="order_confirmed"
+  />
+  <p>Make an order and have it delivered within days</p>
+  <img
+    src="{{ url_for('static', filename='images/landing_page/notifications.png') }}"
+    alt="notifications"
+  />
+  <p>Get notified about your order fulfillment process and all amazing deals</p>
+</section>
+{# Team section #}
+<h2>Meet Our Team</h2>
+<section class="contributors flex-row">
+  <article class="contributor">
+    <div class="back-splash"></div>
+    <img
+      src="{{ url_for('static', filename='images/site/duncan.jpeg') }}"
+      alt="duncan"
+    />
+    <div class="contributor-socials flex-column">
+      <a href="https://github.com/ngugimuchangi" target="_blank"
+        ><i class="fa-brands fa-github fa-lg"></i
+      ></a>
+      <a href="https://twitter.com/ngugi_muchangi" target="_blank"
+        ><i class="fa-brands fa-twitter fa-lg"></i
+      ></a>
+      <a
+        href="https://www.linkedin.com/in/duncan-ngugi-a96396a9/"
+        target="_blank"
+        ><i class="fa-brands fa-linkedin fa-lg"></i
+      ></a>
+    </div>
+    <span class="contributor-name">Duncan Ngugi</span>
+  </article>
+
+  <article class="contributor">
+    <div class="back-splash"></div>
+    <img
+      src="{{ url_for('static', filename='images/site/chalo.jpeg') }}"
+      alt="chalo"
+    />
+    <div class="contributor-socials flex-column">
+      <a href="https://github.com/Chalo1996" target="_blank"
+        ><i class="fa-brands fa-github fa-lg"></i
+      ></a>
+      <a href="#" target="_blank"><i class="fa-brands fa-twitter fa-lg"></i></a>
+      <a href="#" target="_blank"
+        ><i class="fa-brands fa-linkedin fa-lg"></i
+      ></a>
+    </div>
+    <span class="contributor-name">Emmanuel Challo</span>
+  </article>
+
+  <article class="contributor">
+    <div class="back-splash"></div>
+    <img
+      src="{{ url_for('static', filename='images/site/dennis.jpeg') }}"
+      alt="dennis"
+    />
+    <div class="contributor-socials flex-column">
+      <a href="https://github.com/denkin14" target="_blank"
+        ><i class="fa-brands fa-github fa-lg"></i
+      ></a>
+      <a href="#" target="_blank"><i class="fa-brands fa-twitter fa-lg"></i></a>
+      <a href="#" target="_blank"
+        ><i class="fa-brands fa-linkedin fa-lg"></i
+      ></a>
+    </div>
+    <span class="contributor-name">Dennis Kinyua</span>
+  </article>
+</section>
+{% endblock %} {% block messenger %} {% endblock %}

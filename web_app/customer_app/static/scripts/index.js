@@ -2,7 +2,6 @@
 // 1. Banner animation
 // 2. Cart function
 $("document").ready(function () {
-  
   // Scroll to the top of the window
   $(window).stop(true, true);
   // START OF BANNER ANIMATION
