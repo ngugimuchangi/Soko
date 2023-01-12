@@ -4,8 +4,8 @@
         and methods
 """
 from models.base_model import Base, BaseModel
-from sqlalchemy import (Column, CheckConstraint, ForeignKey,
-                        Integer, Numeric, String, Text)
+from sqlalchemy import (Column,ForeignKey, Integer,
+                        Numeric, String, Text)
 from sqlalchemy.orm import relationship
 
 
@@ -13,7 +13,7 @@ class Product(BaseModel, Base):
     """ Product class representing products table
         Attributes:
             product_name (str): Name of the product
-            category_id (str): foreign key to subcategorie's table's
+            category_id (str): foreign key to subcategories table's
                                id field
             seller_id (str): foreign key to sellers table's
                              id field
@@ -29,10 +29,7 @@ class Product(BaseModel, Base):
     seller_id = Column(String(60), ForeignKey('sellers.id'))
     product_description = Column(Text, nullable=False)
     stock = Column(Integer, nullable=False)
-    price = Column(Numeric(12, 2), CheckConstraint(
-                   "price >= 0.00",
-                   name='unit_cost_positive'),
-                   nullable=False)
+    price = Column(Numeric(12, 2), nullable=False)
     images = relationship("ProductImage", backref="product",
                           cascade="all,delete")
     reviews = relationship("Review", backref="product",

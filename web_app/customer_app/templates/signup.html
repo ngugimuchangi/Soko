@@ -43,11 +43,7 @@
     id="logo"
   />
   <div class="credentials pwd-check signup">
-    <form
-      action="{{ url_for('customer_views.signup') }}"
-      method="post"
-      autocomplete="off"
-    >
+    <form action="{{ url_for('customer_views.signup') }}" method="post">
       <label for="email"> Email </label>
       <input
         type="email"

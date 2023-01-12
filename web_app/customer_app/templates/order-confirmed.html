@@ -1,0 +1,21 @@
+{% extends "index.html" %} {% block header_nav %}{% endblock %} {% block main%}
+<div class="order-confirmed-container">
+  <img
+    src="{{ url_for('static', filename='images/site/order-confirmation.png') }}"
+    alt="order-confirmed"
+    class="order-confirmed flex-column"
+  />
+  <div class="order-details flex-column">
+    <span id="order-details"
+      >Order {{ order_number }} is on its ways. <br />
+      Thanks for shopping with us</span
+    >
+    <a
+      href="{{ url_for('customer_views.home') }}"
+      class="go-back-home flex-row"
+    >
+      <button>CONTINUE SHOPPING</button>
+    </a>
+  </div>
+</div>
+{% endblock %} {% block messenger %} {% endblock %}

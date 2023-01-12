@@ -1,0 +1,10 @@
+{% extends "index.html" %} {% block header_nav %}{% endblock %} {% block main%}
+<img
+  src="{{ url_for('static', filename='images/site/camp_404.png') }}"
+  alt="404"
+  class="error-page"
+/>
+<a href="{{url_for('customer_views.home') }}" class="go-back-home flex-row">
+  <button>GO BACK HOME</button>
+</a>
+{% endblock %} {% block messenger %} {% endblock %}

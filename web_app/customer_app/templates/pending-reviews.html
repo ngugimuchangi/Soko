@@ -1,0 +1,74 @@
+{% extends "profile.html" %} {% block dashboard_content %} {# Reviews Section #}
+<h3 class="dashboard-section-header">Pending Reviews</h3>
+<section class="flex-row pending-reviews">
+  <article class="product-review" data-id="071" data-name="macbook-pro">
+    <a
+      href="{{ url_for('customer_views.view_product', product_name='macbook-pro') }}"
+    >
+      <img
+        src="{{ url_for('static', filename='images/products/trending/macbook.jpeg') }}"
+        alt="macbook-pro"
+      />
+      <h3>MacBook Pro</h3>
+      <p>$1299.99</p>
+    </a>
+    <button class="review-btn">REVIEW</button>
+  </article>
+  <article class="product-review" data-id="083" data-name="trendy-top">
+    <a
+      href="{{ url_for('customer_views.view_product', product_name='trendy-top') }}"
+    >
+      <img
+        src="{{ url_for('static', filename='images/products/fashion/trendy-top-design-mockup-presented-wooden-hanger.jpg') }}"
+        alt="trendy-top"
+      />
+      <h3>Trendy Top</h3>
+      <p>$35.99</p>
+    </a>
+    <button class="review-btn">REVIEW</button>
+  </article>
+  <article class="product-review" data-id="087" data-name="leather-collection">
+    <a
+      href="{{ url_for('customer_views.view_product', product_name='leather-collection') }}"
+    >
+      <img
+        src="{{ url_for('static', filename='images/products/fashion/leather-collection.jpg') }}"
+        alt="leather-collection"
+      />
+      <h3>Leather Collection</h3>
+      <p>$110.50</p>
+    </a>
+    <button class="review-btn">REVIEW</button>
+  </article>
+  <article class="product-review" data-id="082" data-name="sunglasses">
+    <a
+      href="{{url_for('customer_views.view_product', product_name='sunglasses')}}"
+    >
+      <img
+        src="{{ url_for('static', filename='images/products/fashion/sunglasses.jpg') }}"
+        alt="sunglasses"
+      />
+      <h3>Sunglasses</h3>
+      <p>$12.00</p>
+    </a>
+    <button class="review-btn">REVIEW</button>
+  </article>
+  <article
+    class="product-review"
+    data-id="061"
+    data-name="all-in-one-christmas-gift"
+  >
+    <a
+      href="{{ url_for('customer_views.view_product', product_name='all-in-one-christmas-gift') }}"
+    >
+      <img
+        src="{{ url_for('static', filename='images/products/christmas/all-in-one-christmas-gift.jpg') }}"
+        alt="all-in-one-christmas-gift"
+      />
+      <h3>All-in-one Christmas Gift</h3>
+      <p>$49.99</p>
+    </a>
+    <button class="review-btn">REVIEW</button>
+  </article>
+</section>
+{% endblock %}

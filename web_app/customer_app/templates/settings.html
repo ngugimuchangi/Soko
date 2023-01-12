@@ -1,0 +1,46 @@
+{% extends "profile.html"%} {# Settings Section #} {% block dashboard_content %}
+<section
+  class="dashboard-content-container settings-content active-dashboard-content"
+>
+  <h3 class="dashboard-section-header">Profile Settings</h3>
+  <div class="user-settings box-shadow">
+    <div class="names setting-section">
+      <h3>Names</h3>
+      <a href="#">Edit</a>
+      <span id="user-names">
+        {% if current_user.first_name and current_user.last_name %} {{
+        current_user.first_name, current_user.last_name }} {% else %} Add user
+        name {% endif %}
+      </span>
+    </div>
+    <div class="email setting-section">
+      <h3>Email</h3>
+      <a href="#">Edit</a>
+      <span id="user-email"> {{ current_user.email}} </span>
+    </div>
+    <div class="phone-number setting-section">
+      <h3>Phone Number</h3>
+      <a href="#">Edit</a>
+      <span id="user-phone-number"> {{ current_user.phone_number }} </span>
+    </div>
+    <div class="password setting-section">
+      <h3>Password</h3>
+      <a href="#">Edit</a>
+      <span id="user-password"> ******* </span>
+    </div>
+    <div class="delete-account flex-column">
+      <h3>Delete your account</h3>
+      <div class="delete-disclaimer">
+        <i class="fa-solid fa-circle-exclamation dashboard-content-icon"></i>
+        <span
+          >Once you delete your account, there is no going back. Please be
+          certain.</span
+        >
+      </div>
+      <a href="{{ url_for('customer_views.delete') }}">
+        <button class="delete-account-btn">Delete your account</button>
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

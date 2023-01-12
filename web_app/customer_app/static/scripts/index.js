@@ -1,4 +1,9 @@
+//  SCRIPT FOR:
+// 1. Banner animation
+// 2. Cart function
 $("document").ready(function () {
+  // Scroll to the top of the window
+  $(window).stop(true, true);
   // START OF BANNER ANIMATION
   let slideIndex = 0;
   let timer;
@@ -33,7 +38,7 @@ $("document").ready(function () {
     }, 5000);
   }
 
-  //   Assigned fuctions for click events
+  //   Assigned functions for click events
   $(".next").click(() => nextSlide(1));
   $(".prev").click(() => nextSlide(-1));
   $(".banner-nav").click(function () {
@@ -42,111 +47,121 @@ $("document").ready(function () {
   });
   // END OF BANNER ANIMATION
 
-  // START OF MESSANGER
-  // Opening an closing window
-  const toggleArrow = $(".arrow");
-  const chatHistory = $(".chat-history");
-  const chatList = $(".chats");
-  let toggleSection = chatList;
-  let headerContent = $(".message-header .fa-message");
-  let tempContent;
-  let prevContent;
-  toggleArrow.click(function () {
-    if ($(this).hasClass("fa-angles-up")) {
-      $(this).removeClass("fa-angles-up");
-      $(this).addClass("fa-angles-down");
-      $(".messanger").addClass("messanger-size");
-      $(".message-header").addClass("message-header-properties");
-      toggleSection.show();
-      if (toggleSection.hasClass("chat-active")) {
-        headerContent.replaceWith(prevContent);
-        headerContent = prevContent;
-      }
-      $(".back-to-chat-list").click(() => goBack());
-    } else {
-      $(this).removeClass("fa-angles-down");
-      $(this).addClass("fa-angles-up");
-      $(".messanger").removeClass("messanger-size");
-      $(".message-header").removeClass("message-header-properties");
-      toggleSection.hide();
-      tempContent = $(
-        '<i class="fa-regular fa-message fa-lg"><span>Messages</span></i>'
+  // START OF SHOP NOW BUTTON
+  $("#shop-now").click(() => {
+    $(window).scrollTop(410);
+  });
+  // END OF SHOP NOW BUTTON
+
+  // START OF CART
+  const itemsOnCart = $(".cart-num");
+  const subtotalElement = $(".cart-subtotal");
+  let cartItemsIds = [];
+
+  // Get ids of items in cart
+  $(".cart-item").each(function () {
+    cartItemsIds.push($(this).attr("data-id"));
+  });
+
+  // Subtotal calculation
+  function calculateSubtotal() {
+    // let subtotal = parseFloat(subtotalElement.val.slice(1));
+    let subtotal = 0;
+    const cartItems = $(".cart-item");
+    itemsOnCart.text(`Cart(${cartItems.length})`);
+    cartItems.each(function () {
+      const price = parseFloat($(this).children(".price").text().slice(1));
+      const quantity = parseInt(
+        $(this).children(".add-subtract").children(".quantity").val()
       );
-      if (toggleSection.hasClass("chat-active")) {
-        prevContent = headerContent;
-        headerContent.replaceWith(tempContent);
-        headerContent = tempContent;
-      }
-    }
-  });
-
-  // Loading messages
-  const chat = $(".chat");
-  chat.click(function () {
-    toggleSection.hide();
-    toggleSection = $(".chat-active");
-    toggleSection.show();
-    chatHistory.scrollTop(chatHistory.prop("scrollHeight"));
-    tempContent = $(
-      `<div class="chat-active-header"><span class="back-to-chat-list">&#10094;</span><span class="seller-name">  ${$(
-        this
-      )
-        .children(".seller-name")
-        .text()} </span></div>`
-    );
-    $(".message-header .fa-message").replaceWith(tempContent);
-    headerContent = tempContent;
-    $(".back-to-chat-list").click(() => goBack());
-  });
-
-  // Navigating back to chat list
-  function goBack() {
-    toggleSection.hide();
-    toggleSection = chatList;
-    toggleSection.show();
-    $(".chat-active-header").replaceWith(
-      $('<i class="fa-regular fa-message fa-lg"><span>Messages</span></i>')
-    );
+      subtotal += price * quantity;
+    });
+    subtotalElement.text(`$${subtotal.toFixed(2)}`);
   }
+  calculateSubtotal();
 
-  // Sending message
-  const send = $(".fa-paper-plane");
-  send.click(function () {
-    const textArea = $("textarea#message");
-    if (textArea.val() === "") return;
-    let newMessage = $('<p class="customer-message"></p>');
-    if (
-      textArea.val().includes("http") &&
-      !textArea.val().includes("<script>")
-    ) {
-      // Add link as a tag
-    } else {
-      newMessage.text(textArea.val());
+  // Add or subtract quantity of cart item
+  function addOrSubtract(item, operation) {
+    if (operation === "add") {
+      item.val(parseInt(item.val()) + 1);
     }
-    newMessage = $('<div class="customer-message-container"></div>').append(
-      newMessage
+    if (operation === "subtract" && parseInt(item.val()) > 1) {
+      item.val(parseInt(item.val()) - 1);
+    }
+    calculateSubtotal();
+  }
+  $(document).on("click", ".add", function () {
+    addOrSubtract($(this).prev(), "add");
+  });
+
+  $(document).on("click", ".subtract", function () {
+    addOrSubtract($(this).next(), "subtract");
+  });
+  // Edit input
+  $(".quantity").click(function () {
+    $(this).prop("disabled", false);
+  });
+
+  // Delete cart-item
+  $(document).on("click", ".delete-item", function () {
+    cartItemsIds = cartItemsIds.filter(
+      (id) => id !== $(this).parent().attr("data-id")
     );
-    textArea.val("");
-    chatHistory.append(newMessage);
-    chatHistory.scrollTop(chatHistory.prop("scrollHeight"));
-  });
-
-  // Deleting message
-  // Show message on ellipsis click
-  $(".fa-ellipsis").click(() => {
-    $(".delete").show();
-  });
-  // Delete message on trash-can click
-  $(".delete .trash-can").click(function () {
-    $(this).parent().toggle();
-    $(this).parent().parent().remove();
-  });
-  // Hide delete option on click body
-  $("body *").click(() => {
-    if ($(".delete").css("display") === "block") {
-      $(".delete").hide();
+    $(this).parent().remove();
+    calculateSubtotal();
+    if ($(".cart-item").length === 0) {
+      $(".subtotal, .disclaimer").hide();
+      $(".checkout").prop("disabled", true);
     }
+    cartButtonStatus();
   });
 
-  // END OF MESSANGER
+  // Disable add to cart button if item
+  // is already in the cart or item is
+  // in stock Check item stock
+  function cartButtonStatus() {
+    const addToCartButtons = $(".add-to-cart");
+    addToCartButtons.each(function () {
+      if (parseInt($(this).parent().attr("stock")) === 0) {
+        $(this).prop("disabled", true);
+      } else if (cartItemsIds.includes($(this).parent().attr("data-id"))) {
+        $(this).prop("disabled", true);
+      } else {
+        $(this).prop("disabled", false);
+      }
+    });
+  }
+  cartButtonStatus();
+
+  // Add item to cart
+  $(".product .add-to-cart").click(function (event) {
+    event.stopPropagation();
+    const product = $(this).parent();
+    const img = $(this).siblings("img").attr("src");
+    const productName = $(this).siblings("h3").text();
+    const price = $(this).prev("p").text();
+    const dataName = product.attr("data-name");
+    const dataId = product.attr("data-id");
+    const newCartItem =
+      $(`<article class="cart-item data-name="${dataName}" data-id="${dataId}">
+          <img src="${img}" />
+          <h3>${productName}</h3>
+          <span class="price" data-name="price">${price}</span>
+          <div class="add-subtract">
+            <i class="fa-solid fa-minus fa-lg subtract"></i>
+            <input type="text" class="quantity" disabled value="1" />
+            <i class="fa-solid fa-plus fa-lg add"></i>
+          </div>
+          <i class="fa-solid fa-trash-can fa-lg delete-item"></i>
+        </article>`);
+    $(".cart-container").append(newCartItem);
+    cartItemsIds.push(dataId);
+    cartButtonStatus();
+    if ($(".cart-item").length > 0) {
+      $(".subtotal, .disclaimer").show();
+      $(".checkout").prop("disabled", false);
+    }
+    calculateSubtotal();
+  });
+  // END OF CART
 });
