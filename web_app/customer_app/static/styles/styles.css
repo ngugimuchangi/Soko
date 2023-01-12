@@ -901,6 +901,7 @@ textarea#message:focus {
   width: 600px;
   height: 608px;
   border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 .about p {
   font-size: 20px;
@@ -933,7 +934,6 @@ strong {
   font-weight: 500;
 }
 h2 + p {
-  /* text-align: center; */
   line-height: 24px;
   margin: auto;
   font-size: 20px;
@@ -953,10 +953,10 @@ h2 + p {
   border-radius: 8px;
   min-width: 250px;
   height: 250px;
-  border: 1px solid #cdd2d8;
   text-align: center;
   background-color: #fff;
   position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 .back-splash {
   border-radius: 8px 8px 0 0;
