@@ -76,18 +76,27 @@ def search_products():
     response = make_response(render_template("product_search.html",
                              title="Search",cache_id=uuid4().hex))
 
-    response.set_cookie("search", request.args.values())
+    response.set_cookie("search", request.args.get("q"))
     return response
 
 
-@customer_views.route("/<subcategory_name>", strict_slashes=True)
-def get_products_by_category(subcategory_name):
+@customer_views.route("/<category_name>", strict_slashes=True)
+def get_products_by_category(category_name):
     """ Route for getting all products belonging
         to a selected category
         Args: category_name(str): product subcategory name 
     """
-    return render_template("product_by_categories.html", title=subcategory_name,cache_id=uuid4().hex)
+    category = category_name.replace('-', " ").title()
+    return render_template("product_by_categories.html", title=category,cache_id=uuid4().hex)
 
+@customer_views.route("/<category_name>/<subcategory_name>", strict_slashes=True)
+def get_products_by_subcategory(category_name, subcategory_name):
+    """ Route for getting all products belonging
+        to a selected category
+        Args: category_name(str): product subcategory name 
+    """
+    subcategory = subcategory_name.replace('-', " ").title()
+    return render_template("product_by_categories.html", title=subcategory,cache_id=uuid4().hex)
 
 @customer_views.route("/checkout", strict_slashes=True)
 def checkout():

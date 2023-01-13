@@ -13,6 +13,16 @@
 ></script>
 <script
   type="text/javascript"
+  src="{{ url_for('static', filename='scripts/index.js') + '?' + cache_id}}"
+  defer
+></script>
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename='scripts/cart.js') + '?' + cache_id}}"
+  defer
+></script>
+<script
+  type="text/javascript"
   src="{{ url_for('static', filename='scripts/dashboard.js') + '?' + cache_id}}"
   defer
 ></script>
