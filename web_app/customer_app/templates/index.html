@@ -411,7 +411,7 @@
       <ul class="subcategories-container"></ul>
     </div>
     <!-- Search bar -->
-    <form action="/search" method="GET" class="search-div">
+    <div class="search-div">
       <input
         type="text"
         name="q"
@@ -419,7 +419,7 @@
         placeholder="Search products"
       />
       <button class="search">SEARCH</button>
-    </form>
+    </div>
     <!-- Navigation icons -->
     <nav class="nav-icons flex-row">
       {% if not current_user.is_authenticated %}

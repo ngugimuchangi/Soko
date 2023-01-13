@@ -109,9 +109,10 @@ $("document").ready(function () {
 
   // START OF SEARCH BUTTON
   $("button.search").click(function (event) {
-    if ($(this).prev("input").val() === "") {
-      event.preventDefault();
-    }
+    if ($(this).prev("input").val() === "") return;
+    let params = new URLSearchParams();
+    params.append("q", $("input.search").val());
+    location.href = "/search?" + params.toString();
   });
   // END OF SEARCH BUTTON
 });
