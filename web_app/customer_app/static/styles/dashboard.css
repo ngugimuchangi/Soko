@@ -366,7 +366,9 @@
   border-radius: 4px;
 }
 .saved-item .add-to-cart {
+  background-image: url(../images/icons/36/add-cart.svg);
   display: block;
+  padding-left: 30px;
 }
 .saved-item-details {
   width: 350px;

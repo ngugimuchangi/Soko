@@ -1,8 +1,62 @@
 //  SCRIPT FOR:
 // 1. Banner animation
-// 2. Cart function
+// 2. Categories menu
+// 3. Navigation functions including showing side cart
+// 4. Shop now button
 $("document").ready(function () {
-  // Scroll to the top of the window
+  // START OF CATEGORIES MENU
+  $(".product-nav").hover(function () {
+    $(".categories a").removeClass("color-on-hover");
+    $(".subcategories-container").html(
+      $(".categories").children("a:first-child + .subcategories").html()
+    );
+    $(".categories").children("a:first-child").addClass("color-on-hover");
+  });
+  $(".categories a").hover(function () {
+    $(this).siblings("a").removeClass("color-on-hover");
+    $(this).addClass("color-on-hover");
+    $(".subcategories-container").html($(this).next(".subcategories").html());
+  });
+  // END OF CATEGORIES MENU
+
+  // START OF NAVIGATION ICONS
+  // Notification menu
+  $(".notification-icon").click(function () {
+    $(".profile-icon").removeClass("color-on-hover");
+    $(".fa-cart-shopping").removeClass("color-on-hover");
+    $(".profile-menu").hide();
+    $(".slide-cart").removeClass("slide-cart-width");
+    $(this).toggleClass("color-on-hover");
+    $(".notification-menu").toggle();
+  });
+
+  // Profile menu
+  $(".profile-icon").click(function () {
+    $(".notification-icon").removeClass("color-on-hover");
+    $(".fa-cart-shopping").removeClass("color-on-hover");
+    $(".notification-menu").hide();
+    $(".slide-cart").removeClass("slide-cart-width");
+    $(this).toggleClass("color-on-hover");
+    $(".profile-menu").toggle();
+  });
+
+  // Slide-cart
+  $(".fa-cart-shopping").click(function () {
+    $(".notification-icon").removeClass("color-on-hover");
+    $(".profile-icon").removeClass("color-on-hover");
+    $(".notification-menu").hide();
+    $(".profile-menu").hide();
+    $(this).toggleClass("color-on-hover");
+    $(".slide-cart").toggleClass("slide-cart-width");
+    $(".slide-cart").height($(window).height() - 140);
+  });
+
+  $(".close-cart").click(function () {
+    $(".slide-cart").toggleClass("slide-cart-width");
+    $(".fa-cart-shopping").toggleClass("color-on-hover");
+  });
+  // END OF NAVIGATION ICONS
+
   $(window).stop(true, true);
   // START OF BANNER ANIMATION
   let slideIndex = 0;
@@ -53,115 +107,11 @@ $("document").ready(function () {
   });
   // END OF SHOP NOW BUTTON
 
-  // START OF CART
-  const itemsOnCart = $(".cart-num");
-  const subtotalElement = $(".cart-subtotal");
-  let cartItemsIds = [];
-
-  // Get ids of items in cart
-  $(".cart-item").each(function () {
-    cartItemsIds.push($(this).attr("data-id"));
-  });
-
-  // Subtotal calculation
-  function calculateSubtotal() {
-    // let subtotal = parseFloat(subtotalElement.val.slice(1));
-    let subtotal = 0;
-    const cartItems = $(".cart-item");
-    itemsOnCart.text(`Cart(${cartItems.length})`);
-    cartItems.each(function () {
-      const price = parseFloat($(this).children(".price").text().slice(1));
-      const quantity = parseInt(
-        $(this).children(".add-subtract").children(".quantity").val()
-      );
-      subtotal += price * quantity;
-    });
-    subtotalElement.text(`$${subtotal.toFixed(2)}`);
-  }
-  calculateSubtotal();
-
-  // Add or subtract quantity of cart item
-  function addOrSubtract(item, operation) {
-    if (operation === "add") {
-      item.val(parseInt(item.val()) + 1);
+  // START OF SEARCH BUTTON
+  $("button.search").click(function (event) {
+    if ($(this).prev("input").val() === "") {
+      event.preventDefault();
     }
-    if (operation === "subtract" && parseInt(item.val()) > 1) {
-      item.val(parseInt(item.val()) - 1);
-    }
-    calculateSubtotal();
-  }
-  $(document).on("click", ".add", function () {
-    addOrSubtract($(this).prev(), "add");
   });
-
-  $(document).on("click", ".subtract", function () {
-    addOrSubtract($(this).next(), "subtract");
-  });
-  // Edit input
-  $(".quantity").click(function () {
-    $(this).prop("disabled", false);
-  });
-
-  // Delete cart-item
-  $(document).on("click", ".delete-item", function () {
-    cartItemsIds = cartItemsIds.filter(
-      (id) => id !== $(this).parent().attr("data-id")
-    );
-    $(this).parent().remove();
-    calculateSubtotal();
-    if ($(".cart-item").length === 0) {
-      $(".subtotal, .disclaimer").hide();
-      $(".checkout").prop("disabled", true);
-    }
-    cartButtonStatus();
-  });
-
-  // Disable add to cart button if item
-  // is already in the cart or item is
-  // in stock Check item stock
-  function cartButtonStatus() {
-    const addToCartButtons = $(".add-to-cart");
-    addToCartButtons.each(function () {
-      if (parseInt($(this).parent().attr("stock")) === 0) {
-        $(this).prop("disabled", true);
-      } else if (cartItemsIds.includes($(this).parent().attr("data-id"))) {
-        $(this).prop("disabled", true);
-      } else {
-        $(this).prop("disabled", false);
-      }
-    });
-  }
-  cartButtonStatus();
-
-  // Add item to cart
-  $(".product .add-to-cart").click(function (event) {
-    event.stopPropagation();
-    const product = $(this).parent();
-    const img = $(this).siblings("img").attr("src");
-    const productName = $(this).siblings("h3").text();
-    const price = $(this).prev("p").text();
-    const dataName = product.attr("data-name");
-    const dataId = product.attr("data-id");
-    const newCartItem =
-      $(`<article class="cart-item data-name="${dataName}" data-id="${dataId}">
-          <img src="${img}" />
-          <h3>${productName}</h3>
-          <span class="price" data-name="price">${price}</span>
-          <div class="add-subtract">
-            <i class="fa-solid fa-minus fa-lg subtract"></i>
-            <input type="text" class="quantity" disabled value="1" />
-            <i class="fa-solid fa-plus fa-lg add"></i>
-          </div>
-          <i class="fa-solid fa-trash-can fa-lg delete-item"></i>
-        </article>`);
-    $(".cart-container").append(newCartItem);
-    cartItemsIds.push(dataId);
-    cartButtonStatus();
-    if ($(".cart-item").length > 0) {
-      $(".subtotal, .disclaimer").show();
-      $(".checkout").prop("disabled", false);
-    }
-    calculateSubtotal();
-  });
-  // END OF CART
+  // END OF SEARCH BUTTON
 });
