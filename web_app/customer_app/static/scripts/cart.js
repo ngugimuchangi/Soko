@@ -103,7 +103,6 @@ $(document).ready(function () {
         </article>`);
     $(".cart-container").append(newCartItem);
     cartItemsIds.push(dataId);
-    cartButtonStatus();
     if ($(".cart-item").length > 0) {
       $(".subtotal, .disclaimer").show();
       $(".checkout").prop("disabled", false);
@@ -113,11 +112,13 @@ $(document).ready(function () {
   //  Add items to cart from product section
   $(".product .add-to-cart").click(function (event) {
     event.stopPropagation();
+    if ($(this).hasClass("btn-disabled")) return;
     const product = $(this).parent();
     const img = $(this).siblings("img").attr("src");
     const productName = $(this).siblings("h3").text();
     const price = $(this).prev("p").text();
     addItemsToCart(productName, product, price, img);
+    cartButtonStatus();
   });
 
   // Add item to cart from saved items page
@@ -140,5 +141,6 @@ $(document).ready(function () {
       .children("span")
       .text();
     addItemsToCart(productName, product, price, img);
+    cartButtonStatus();
   });
 });
