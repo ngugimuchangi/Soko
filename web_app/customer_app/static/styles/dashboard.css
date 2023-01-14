@@ -275,6 +275,7 @@
 .unread {
   font-weight: 600;
 }
+
 /* END OF NOTIFICATIONS SECTION */
 
 /* START OF DASHBOARD MESSAGES SECTION */
@@ -448,6 +449,7 @@ div.price-and-name {
   font-size: smaller;
   font-weight: 500;
   min-width: 250px;
+  max-width: 250px;
   height: 170px;
   border: 1px solid #cdd2d8;
   border-radius: 4px;

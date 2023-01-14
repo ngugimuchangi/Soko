@@ -528,7 +528,9 @@
           </li>
         </ul>
         <div class="notification-options flex-row">
-          <a href="javascript:void(0)">Mark all as read</a>
+          <a href="javascript:void(0)" id="notification-menu-mark-all-as-read"
+            >Mark all as read</a
+          >
           <a
             href="{{ url_for('customer_views.customer_dashboard', section='notifications') }}"
             >View all</a
@@ -621,8 +623,14 @@
       </div>
       <div class="slide fade">
         <img
-          src="{{ url_for('static', filename='images/site/new-year-banner.jpg') }}"
-          alt="new-year-ad"
+          src="{{ url_for('static', filename='images/site/cyber-monday-banner.jpg') }}"
+          alt="cyber-monday-ad"
+        />
+      </div>
+      <div class="slide fade">
+        <img
+          src="{{ url_for('static', filename='images/site/fashion-banner.jpg') }}"
+          alt="fashion-ad"
         />
       </div>
       <div class="slide fade">
@@ -641,6 +649,7 @@
       <span class="banner-nav" slide-idx="0"></span>
       <span class="banner-nav" slide-idx="1"></span>
       <span class="banner-nav" slide-idx="2"></span>
+      <span class="banner-nav" slide-idx="3"></span>
     </div>
   </section>
   <section class="products">
@@ -808,16 +817,16 @@
       <article
         class="product"
         data-id="081"
-        data-name="leather-jacket"
+        data-name="college-jacket"
         stock="10"
-        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='leather-jacket')}}'"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='college-jacket')}}'"
       >
         <img
-          src="{{ url_for('static', filename='images/products/fashion/leather-jacket.jpg') }}"
-          alt="leather-collection"
+          src="{{ url_for('static', filename='images/products/fashion/college-jacket.jpg') }}"
+          alt="college-jacket"
         />
-        <h3>Leather Jacket</h3>
-        <p>$80.99</p>
+        <h3>College Jacket</h3>
+        <p>$45.99</p>
         <button class="add-to-cart">
           <i class="fa-solid fa-plus"></i>
         </button>
@@ -873,6 +882,23 @@
           <i class="fa-solid fa-plus"></i>
         </button>
       </article>
+      <article
+        class="product"
+        data-id="089"
+        data-name="brown-leather-shoes"
+        stock="10"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='brown-leather-shoes')}}'"
+      >
+        <img
+          src="{{ url_for('static', filename='images/products/fashion/brown-leather-shoes.jpg') }}"
+          alt="product"
+        />
+        <h3>Brown Leather Shoes</h3>
+        <p>$45.50</p>
+        <button class="add-to-cart">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </article>
     </div>
     <h1>On a budget</h1>
     <div class="landing-category flex-row">
@@ -917,14 +943,14 @@
         data-id="093"
         data-name="starbucks-coffee"
         stock="10"
-        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='starbucks-coffee')}}'"
+        onclick="window.location.href='{{url_for('customer_views.view_product', product_name='french-roast-coffee-beans')}}'"
       >
         <img
           src="{{ url_for('static',
-        filename='images/products/budget/starbucks-coffee.jpg') }}"
-          alt="starbucks-coffee"
+        filename='images/products/budget/french-roast-coffee-beans.jpg') }}"
+          alt="french-roast-coffee-beans"
         />
-        <h3>Starbucks French Roast</h3>
+        <h3>French Roast Coffee Beans</h3>
         <p>$22.20</p>
         <button class="add-to-cart">
           <i class="fa-solid fa-plus"></i>

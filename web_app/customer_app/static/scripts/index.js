@@ -115,4 +115,16 @@ $("document").ready(function () {
     location.href = "/search?" + params.toString();
   });
   // END OF SEARCH BUTTON
+  // START OF NOTIFICATIONS
+  $("#notification-menu-mark-all-as-read").click(function () {
+    const notifications = $(".pop-up-notification-content");
+    const noNotifications = $(
+      "<span class='no-notifications'>No notifications</span>"
+    );
+    notifications.animate({ left: "100%" }, 1000, function () {
+      $(this).remove();
+      $(".notification-menu").prepend(noNotifications);
+    });
+  });
+  // END OF NOTIFICATIONS
 });

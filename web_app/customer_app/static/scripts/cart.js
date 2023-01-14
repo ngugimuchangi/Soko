@@ -124,6 +124,7 @@ $(document).ready(function () {
   // Add item to cart from saved items page
   $(".saved-item .add-to-cart").click(function (event) {
     event.stopPropagation();
+    if ($(this).hasClass("btn-disabled")) return;
     const product = $(this).parent();
     const img = $(this)
       .siblings(".saved-item-details")
