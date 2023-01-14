@@ -1,13 +1,19 @@
-{% extends "index.html" %} {% block header_nav %}{% endblock %} {% block main%}
-{# About section #}
-<h2>About Soko</h2>
-
+{% extends "index.html" %} {% block styles %} {{ super() }}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='styles/about.css') + '?' + cache_id }}"
+/>
+{% endblock %} {% block header_nav %} {% endblock %} {% block main%} {# About
+section #}
+<h2>Soko - Offering your a fulfilling shopping experience</h2>
 <p>
-  Soko is the number one online shopping platform. Our goals is to
-  <strong>make online shopping an wholesome experience.</strong> Soko is the one
-  stop platform for all your shopping needs
+  Soko is multi-shop online e-commerce platform that aims to revolutionize the
+  online shopping experience. The term, in Swahili, translates to
+  <em>'Market'</em>. Our goals is to make online shopping an wholesome
+  experience. Soko is the one stop platform for all your shopping needs
 </p>
-<section class="about">
+<h2>Features</h2>
+<section class="features">
   <img
     src="{{ url_for('static', filename='images/landing_page/landing-page-carousel.png') }}"
     alt="landing-page-carousel"
@@ -48,6 +54,45 @@
   <p>Get notified about your order fulfillment process and all amazing deals</p>
 </section>
 {# Team section #}
+<h2>About</h2>
+<section class="inspiration">
+  <p>
+    Online shopping has become a big part of our lives. It has broadened
+    commerce as people can buy products from anywhere at anytime. However, trade
+    is built on customer-seller interactions. Most online shopping platform lack
+    such interactivity features. Soko aims to solve this by providing real time
+    communication between customers and sellers. Customers can:
+  </p>
+  <ol>
+    <li>Make more informed decision when buying products</li>
+    <li>Track their oder fulfillment process</li>
+    <li>Get updated of new products and restocking of out of stock products</li>
+    <li>Gain more trust in the online shopping</li>
+  </ol>
+  <p>Soko also offers other features, including:"</p>
+  <ol>
+    <li>
+      An easily accessible shopping cart to resolve common cart abandonment
+      issues
+    </li>
+    <li>Instant checkout with the <strong>Buy Now</strong> option</li>
+    <li>
+      Updated order tracking through in-app and email notification-options
+    </li>
+    <li>Saving products for feature purchase</li>
+  </ol>
+  <p>
+    This project was inspired by the need to solve the above challenges of
+    contemporary online shopping platform. The code for this project can be
+    found on
+    <a
+      id="project-link"
+      href="https://github.com/ngugimuchangi/Soko"
+      target="_blank"
+      >GitHub</a
+    >.
+  </p>
+</section>
 <h2>Meet Our Team</h2>
 <section class="contributors flex-row">
   <article class="contributor">

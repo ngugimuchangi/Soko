@@ -109,9 +109,22 @@ $("document").ready(function () {
 
   // START OF SEARCH BUTTON
   $("button.search").click(function (event) {
-    if ($(this).prev("input").val() === "") {
-      event.preventDefault();
-    }
+    if ($(this).prev("input").val() === "") return;
+    let params = new URLSearchParams();
+    params.append("q", $("input.search").val());
+    location.href = "/search?" + params.toString();
   });
   // END OF SEARCH BUTTON
+  // START OF NOTIFICATIONS
+  $("#notification-menu-mark-all-as-read").click(function () {
+    const notifications = $(".pop-up-notification-content");
+    const noNotifications = $(
+      "<span class='no-notifications'>No notifications</span>"
+    );
+    notifications.animate({ left: "100%" }, 1000, function () {
+      $(this).remove();
+      $(".notification-menu").prepend(noNotifications);
+    });
+  });
+  // END OF NOTIFICATIONS
 });
