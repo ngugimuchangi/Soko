@@ -818,6 +818,7 @@ textarea#message {
   font-weight: 400;
   resize: none;
   padding: 5px;
+  width: 350px;
 }
 textarea#message:focus {
   outline: none;
