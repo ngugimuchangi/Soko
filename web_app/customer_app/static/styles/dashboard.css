@@ -78,6 +78,13 @@
   width: 550px;
   margin-bottom: 30px;
 }
+.add-card,
+.add-address,
+.delete-address,
+.delete-card,
+.edit {
+  cursor: pointer;
+}
 .user-info-div,
 .user-addresses-div,
 .card-details-div {
@@ -219,6 +226,7 @@
   height: 40px;
   border-radius: 4px;
   border-bottom: 1px solid #cdd2d8;
+  cursor: pointer;
 }
 .notification:last-child {
   border-bottom: 0;
@@ -403,6 +411,9 @@ div.price-and-name {
 }
 .out-of-stock {
   color: #bb0a1e;
+}
+.delete-saved-item {
+  cursor: pointer;
 }
 /* END OF SAVED ITEMS SECTION*/
 
