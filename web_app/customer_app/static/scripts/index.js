@@ -48,7 +48,11 @@ $("document").ready(function () {
     $(".profile-menu").hide();
     $(this).toggleClass("color-on-hover");
     $(".slide-cart").toggleClass("slide-cart-width");
-    $(".slide-cart").height($(window).height() - 140);
+    $(".slide-cart").height($(window).outerHeight() - 139);
+  });
+
+  $(window).on("zoom", function () {
+    $(".slide-cart").height($(window).outerHeight() - 139);
   });
 
   $(".close-cart").click(function () {
