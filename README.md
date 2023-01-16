@@ -1,6 +1,7 @@
-<img src="/web_app/customer_app/static/images/site/favicon-big.svg" style="margin: auto; display: block" alt="soko logo">
-<img src="/web_app/customer_app/static/images/site/logo-big.svg" style="margin: auto; display: block" alt="soko text">
-
+<div style="text-align: center">
+<img src="/web_app/customer_app/static/images/site/favicon-big.svg" alt="soko logo">
+<img src="/web_app/customer_app/static/images/site/logo-big.svg" alt="soko text">
+</div>
 ## About
 
 Soko is an e-commerce platform project. It offers some of the best features of online shopping, aiming to better customer experience through
