@@ -8,17 +8,12 @@ alt="soko text" width="200" height="51" style="margin: 0 auto; display: block;" 
 
 ## Table of Contents
 
-[About](#About)
-
-[Requirements](#Requirements)
-
-[Installation](#Installation)
-
-[Configuration](#Configuration)
-
-[Usage](#Usage)
-
-[Demo](#Demo)
+- [About](#About)
+- [Requirements](#Requirements)
+- [Installation](#Installation)
+- [Configuration](#Configuration)
+- [Usage](#Usage)
+- [Demo](#Demo)
 
 ## About
 
