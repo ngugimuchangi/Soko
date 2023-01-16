@@ -1,5 +1,6 @@
-<img src="/web_app/customer_app/static/images/site/favicon-big.svg" 
-alt="soko logo" width="59" height="66" style="margin: 0 auto; display: block" >
+<p align="center"><img src="/web_app/customer_app/static/images/site/favicon-big.svg" 
+alt="soko logo" width="59" height="66" >
+</p>
 <img src="/web_app/customer_app/static/images/site/logo-small.svg" 
 alt="soko text" width="200" height="51" style="margin: 0 auto; display: block;" >
 
