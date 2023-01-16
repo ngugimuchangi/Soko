@@ -1,8 +1,8 @@
 <div style="text-align: center;">
 <img src="/web_app/customer_app/static/images/site/favicon-big.svg" style="margin: auto; display: block;" alt="soko logo">
+</div>
 <img src="/web_app/customer_app/static/images/site/logo-small.svg" 
 style="margin: auto; display: block;" alt="soko text">
-</div>
 
 ## About
 
