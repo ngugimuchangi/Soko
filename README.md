@@ -1,6 +1,6 @@
 # Soko
 
-<center>![Soko Log](/web_app/customer_app/static/images/site/logo-big.svg)</center>
+![Soko Log](/web_app/customer_app/static/images/site/logo-big.svg)
 
 ## About
 
@@ -26,7 +26,7 @@ $ git clone https://github.com/ngugimuchangi/Soko.git
 
 The application works uses `MySQL` database and requires several python libraries and plugins. You can install the requirements one by one or run the [installation.sh](installation.sh) script for automatic installation
 
-### **Option A**
+### _*Option A*_
 
 Run installation script with sudo priveleges
 
@@ -34,7 +34,7 @@ Run installation script with sudo priveleges
 $ sudo installation.sh
 ```
 
-### **Option B**
+### _Option B_
 
 Step by step installation of requirements
 Install MySQl
@@ -141,7 +141,7 @@ CHAT_API_PORT="5008"
 
 ## Usage
 
-1. Set up the config a config file `[.env](.env). as shown in the configuration example.
+1. Set up the config a config file [`.env`](.env). as shown in the configuration example.
 
 2. Run the startup script [`startup.sh`](startup.sh).
 
