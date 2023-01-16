@@ -28,7 +28,7 @@ $ git clone https://github.com/ngugimuchangi/Soko.git
 
 ### Step 2:
 
-The application works uses `MySQL` database and requires several python libraries and plugins. You can install the requirements one by one or run the [installation.sh](installation.sh) script for automatic installation
+The application works uses `MySQL` database and requires several python libraries and plugins. You can install the requirements one by one or run the [`installation.sh`](installation.sh) script for automatic installation
 
 ### _*Option A*_
 
@@ -152,3 +152,15 @@ CHAT_API_PORT="5008"
 ```
 $ startup.sh
 ```
+
+## Demo
+
+**Deployment link**: https://onlinesoko.pythonanywhere.com/
+**Screenshots**:
+![Home Page](/web_app/customer_app/static/images/landing_page/landing-page-carousel.png)
+messenger-messages.png/)
+![Notifications](/web_app/customer_app/static/images/landing_page/notifications.png/)
+![Cart](/web_app/customer_app/static/images/landing_page/cart.png/)
+![Products](/web_app/customer_app/static/images/landing_page/landing-page-products.png/)
+![Chat List](/web_app/customer_app/static/images/landing_page/messenger-chat-list.png)
+![Messages](/web_app/customer_app/static/images/landing_page/
