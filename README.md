@@ -57,6 +57,7 @@ The application works uses `MySQL` database and requires several python librarie
 Run installation script with sudo priveleges
 
 ```
+$ cd Soko
 $ sudo installation.sh
 ```
 
@@ -161,6 +162,7 @@ CHAT_API_PORT="5008"
 2. Run the startup script [`startup.sh`](startup.sh).
 
 ```
+$ cd Soko
 $ startup.sh
 ```
 
