@@ -85,13 +85,15 @@ $ pip install -r requirements.txt
 
 ## Configuration
 
-Configuration file contains a list of variables, including
+An environment configuration file contains a list of variables, including
 
 1. Ports
 2. Hosts
 3. Secret keys
 
-Sample configuration file:
+This allows changing the above secret keys if compromised or changing ports to avoid conflicts when the application is configured to run on port already in use.
+
+A sample environment configuration file:
 
 ```
 # Database settings
