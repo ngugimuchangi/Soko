@@ -1,6 +1,6 @@
-<div style="text-align: center;">
+<p style="text-align: center;">
 <img src="/web_app/customer_app/static/images/site/favicon-big.svg" style="margin: auto; display: block;" alt="soko logo">
-</div>
+</p>
 <img src="/web_app/customer_app/static/images/site/logo-small.svg" 
 style="margin: auto; display: block;" alt="soko text">
 
