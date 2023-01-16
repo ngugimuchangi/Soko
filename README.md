@@ -1,8 +1,11 @@
+[
+
 <p align="center"><img src="/web_app/customer_app/static/images/site/favicon-big.svg" 
 alt="soko logo" width="59" height="66" >
 </p>
 <p align="center"><img src="/web_app/customer_app/static/images/site/logo-small.svg" 
 alt="soko text" width="200" height="51" style="margin: 0 auto; display: block;" ></p>
+](https://onlinesoko.pythonanywhere.com/)
 
 ## About
 
@@ -12,7 +15,7 @@ Soko is an e-commerce platform project. It offers some of the best features of o
 2. Easier cart accessibility
 3. Quick checkouts
 4. Simplified order placement and tracking
-5. In-app and email notification
+5. In-app and email notifications
 
 ## Installation
 
@@ -78,8 +81,8 @@ SOKO_MYSQL_PWD="mysecretpassword"
 SOKO_MYSQL_DB="production_db"
 
 # File storage settings
-PRODUCT_IMAGES="/absolute/path/to/product/images"
-CHAT_FILES="/absolute/path/to/chat/files"
+PRODUCT_IMAGES="/absolute/path/to/product/images/folder"
+CHAT_FILES="/absolute/path/to/chat/files/folder"
 
 # Host settings
 HOST_DOMAIN="host domain"
