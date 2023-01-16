@@ -1,6 +1,6 @@
 # Soko
 
-![Soko Log](/web_app/customer_app/static/images/site/logo-big.svg)
+![Soko Log](/web_app/customer_app/static/images/site/favicon-big.svg.svg)
 
 ## About
 
