@@ -156,11 +156,17 @@ $ startup.sh
 ## Demo
 
 **Deployment link**: https://onlinesoko.pythonanywhere.com/
+
 **Screenshots**:
+
 ![Home Page](/web_app/customer_app/static/images/landing_page/landing-page-carousel.png)
-messenger-messages.png/)
+
 ![Notifications](/web_app/customer_app/static/images/landing_page/notifications.png/)
+
 ![Cart](/web_app/customer_app/static/images/landing_page/cart.png/)
+
 ![Products](/web_app/customer_app/static/images/landing_page/landing-page-products.png/)
+
 ![Chat List](/web_app/customer_app/static/images/landing_page/messenger-chat-list.png)
+
 ![Messages](/web_app/customer_app/static/images/landing_page/
