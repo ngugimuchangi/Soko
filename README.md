@@ -169,4 +169,4 @@ $ startup.sh
 
 ![Chat List](/web_app/customer_app/static/images/landing_page/messenger-chat-list.png)
 
-![Messages](/web_app/customer_app/static/images/landing_page/
+![Messages](/web_app/customer_app/static/images/landing_page/messenger-messages.png)
