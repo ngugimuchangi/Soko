@@ -1,11 +1,10 @@
-[
-
+<a href="https://onlinesoko.pythonanywhere.com/" target="_blank">
 <p align="center"><img src="/web_app/customer_app/static/images/site/favicon-big.svg" 
 alt="soko logo" width="59" height="66" >
 </p>
 <p align="center"><img src="/web_app/customer_app/static/images/site/logo-small.svg" 
 alt="soko text" width="200" height="51" style="margin: 0 auto; display: block;" ></p>
-](https://onlinesoko.pythonanywhere.com/)
+</a>
 
 ## About
 
