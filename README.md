@@ -6,6 +6,10 @@ alt="soko logo" width="59" height="66" >
 alt="soko text" width="200" height="51" style="margin: 0 auto; display: block;" ></p>
 </a>
 
+## Table of Contents
+
+[About](##About)
+
 ## About
 
 Soko is an e-commerce platform project. It offers some of the best features of online shopping, aiming to better customer experience through
@@ -15,6 +19,19 @@ Soko is an e-commerce platform project. It offers some of the best features of o
 3. Quick checkouts
 4. Simplified order placement and tracking
 5. In-app and email notifications
+
+## Requirements
+
+1. flasgger==0.9.5
+2. flask-cors==3.0.10
+3. flask-login==0.6.2
+4. flask-mail==0.9.1
+5. flask-socketio==5.3.2
+6. mysql-client==0.0.1
+7. pip-chill==1.0.1
+8. python-dotenv==0.21.0
+9. requests==2.28.1
+10. sqlalchemy==1.4.45
 
 ## Installation
 
@@ -129,19 +146,6 @@ CHAT_API_SECRET_KEY="shh!donttellanyoneaboutthis"
 CHAT_API_HOST="0.0.0.0"
 CHAT_API_PORT="5008"
 ```
-
-## Requirements
-
-1. flasgger==0.9.5
-2. flask-cors==3.0.10
-3. flask-login==0.6.2
-4. flask-mail==0.9.1
-5. flask-socketio==5.3.2
-6. mysql-client==0.0.1
-7. pip-chill==1.0.1
-8. python-dotenv==0.21.0
-9. requests==2.28.1
-10. sqlalchemy==1.4.45
 
 ## Usage
 
