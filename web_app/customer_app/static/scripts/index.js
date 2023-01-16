@@ -4,6 +4,9 @@
 // 3. Navigation functions including showing side cart
 // 4. Shop now button
 $("document").ready(function () {
+  // Adjust zoom level depending on the screen size
+  document.body.style.zoom = $(window).innerHeight() / $(window).outerHeight();
+
   // START OF CATEGORIES MENU
   $(".product-nav").hover(function () {
     $(".categories a").removeClass("color-on-hover");

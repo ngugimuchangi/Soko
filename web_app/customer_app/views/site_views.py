@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from datetime import datetime
-from flask import make_response, redirect, render_template, request, url_for
+from flask import abort, make_response, redirect, render_template, request, url_for
 from flask_login import login_required
 from models import storage
 from uuid import uuid4
@@ -13,6 +13,7 @@ def home():
         Args: none
         Return: home page
     """
+    print(request.path)
     return render_template("index.html", title="Home", cache_id=uuid4().hex)
 
 
@@ -75,7 +76,8 @@ def search_products():
     """
     response = make_response(render_template("product_search.html",
                              title="Search",cache_id=uuid4().hex))
-
+    if not request.args.get("q"):
+        return response
     response.set_cookie("search", request.args.get("q"))
     return response
 

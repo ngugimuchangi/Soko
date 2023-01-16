@@ -1,4 +1,7 @@
 $("document").ready(function () {
+  // Adjust zoom level depending on the screen size
+  document.body.style.zoom = $(window).innerHeight() / $(window).outerHeight();
+
   // Toggling password viewing
   $(".toggle-password").click(function () {
     $(this).toggleClass("fa-lock fa-lock-open");
