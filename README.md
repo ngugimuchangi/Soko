@@ -94,7 +94,7 @@ Configuration file contains a list of variables, including
 Sample configuration file:
 
 ```
-# Database development settings
+# Database settings
 SOKO_ENV="production"
 SOKO_MYSQL_USER="databse_user"
 SOKO_MYSQL_HOST="host"
@@ -108,17 +108,17 @@ CHAT_FILES="/absolute/path/to/chat/files/folder"
 # Host settings
 HOST_DOMAIN="host domain"
 
-# Soko customer_app setting
+# Soko customer_app settings
 SOKO_CUSTOMER_APP_HOST="localhost"
 SOKO_CUSTOMER_APP_PORT="5000"
 SOKO_CUSTOMER_APP_SECRET_KEY="shh!donttellanyoneaboutthis"
 
-# Soko seller_app setting
+# Soko seller_app settings
 SOKO_SELLER_APP_HOST="localhost"
 SOKO_SELLER_APP_PORT="5001"
 SOKO_SELLER_APP_SECRET_KEY="shh!donttellanyoneaboutthis"
 
-# Soko admin_app setting
+# Soko admin_app settings
 SOKO_ADMIN_APP_HOST="localhost"
 SOKO_ADMIN_APP_PORT="5002"
 SOKO_ADMIN_APP_SECRET_KEY="shh!donttellanyoneaboutthis"
@@ -126,27 +126,27 @@ SOKO_ADMIN_APP_SECRET_KEY="shh!donttellanyoneaboutthis"
 # API origins
 ORIGINS="*"
 
-# Buyer api setting
+# Buyer api settings
 BUYER_API_HOST="0.0.0.0"
 BUYER_API_PORT="5003"
 
-# Seller api setting
+# Seller api settings
 SELLER_API_HOST="0.0.0.0"
 SELLER_API_PORT="5004"
 
-# Notification api setting
+# Notification api settings
 NOTIFICATION_API_HOST="0.0.0.0"
 NOTIFICATION_API_PORT="5005"
 
-# Products api setting
+# Products api settings
 PRODUCT_API_HOST="0.0.0.0"
 PRODUCT_API_PORT="5006"
 
-# Orders api setting
+# Orders api settings
 ORDER_API_HOST="0.0.0.0"
 ORDER_API_PORT="5007"
 
-# Chat api setting
+# Chat api settings
 CHAT_API_SECRET_KEY="shh!donttellanyoneaboutthis"
 CHAT_API_HOST="0.0.0.0"
 CHAT_API_PORT="5008"
