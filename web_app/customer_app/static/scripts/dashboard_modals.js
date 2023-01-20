@@ -200,7 +200,7 @@ $(document).ready(function () {
       "Add New Address",
       modalContent,
       "submit-new-address-details",
-      "Submit"
+      "Add"
     );
   });
   $(document).on("click", ".edit-address", function () {
