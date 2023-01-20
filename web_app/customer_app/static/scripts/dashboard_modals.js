@@ -139,7 +139,7 @@ $(document).ready(function () {
     $("#user-names").attr("l-name", lastName);
     $("#user-names").text(`${firstName} ${lastName}`);
     $("#user-email span").text(email);
-    $("user-phone-number span").text(phoneNumber);
+    $("#user-phone-number span").text(phoneNumber);
     removeModalDetails();
     $(".modal-container").removeClass("show-modal");
   });
