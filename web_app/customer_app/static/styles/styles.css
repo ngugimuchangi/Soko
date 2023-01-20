@@ -635,12 +635,19 @@ footer {
 .socials {
   width: 270px;
 }
+.footer-icon {
+  cursor: pointer;
+}
+.nav {
+  width: 350px;
+}
 .nav > a {
   text-decoration: none;
   color: #fff;
 }
-.nav {
-  width: 350px;
+.nav > a:hover,
+.footer-icon:hover {
+  color: #fc870b;
 }
 
 /* Start of messenger styles*/
@@ -886,11 +893,25 @@ textarea#message:focus {
 /* START OF ORDER CONFIRMED PAGE */
 .order-confirmed-container {
   display: grid;
-  grid-template-columns: 600px 200px;
-  grid-template-rows: 547px;
+  grid-template-columns: 550px 300px;
+  grid-template-rows: 500px;
   justify-content: center;
   align-content: center;
   margin: auto;
+}
+.order-confirmed-container img {
+  width: 550px;
+  height: 500px;
+}
+.order-details {
+  justify-content: center;
+}
+.order-details a {
+  width: fit-content;
+}
+.order-details button {
+  position: relative;
+  left: 35px;
 }
 #order-details {
   font-size: 22px;
@@ -899,11 +920,5 @@ textarea#message:focus {
   color: #26415f;
   margin-bottom: 20px;
 }
-.order-confirmed-container img {
-  width: 600px;
-  height: 547px;
-}
-.order-details {
-  justify-content: center;
-}
+
 /* END OF ORDER CONFIRMED PAGE */

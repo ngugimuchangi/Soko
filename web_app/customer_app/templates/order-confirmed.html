@@ -3,12 +3,11 @@
   <img
     src="{{ url_for('static', filename='images/site/order-confirmation.png') }}"
     alt="order-confirmed"
-    class="order-confirmed flex-column"
   />
   <div class="order-details flex-column">
     <span id="order-details"
-      >Order {{ order_number }} is on its ways. <br />
-      Thanks for shopping with us</span
+      >Order {{ order_number }} <br />is on its ways.Thanks for shopping with
+      us</span
     >
     <a
       href="{{ url_for('customer_views.home') }}"

@@ -1,5 +1,16 @@
 // SCRIPT FOR USER DASHBOARD
 $(document).ready(function () {
+  // START OF PROFILE SECTION
+  // Delete address
+  $(document).on("click", ".delete-address", function () {
+    $(this).parent().parent().remove();
+  });
+  //  Delete card
+  $(document).on("click", ".delete-card", function () {
+    $(this).parent().parent().remove();
+  });
+  // END OF PROFILE SECTION
+
   // START OF SAVED ITEMS
   // Delete Saved Item
   $(".delete-saved-item").click(function () {
@@ -145,6 +156,7 @@ $(document).ready(function () {
     deletePrompt.parent().siblings().children(".delete-chat").hide();
     deletePrompt.toggle();
   });
+
   // Delete message on click trash can
   $(".delete-chat").click(function (event) {
     event.stopPropagation();
