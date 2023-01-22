@@ -637,6 +637,7 @@ div.price-and-name {
   border-bottom: 1px solid #1f0f0f;
   margin-bottom: 20px;
   height: 30px;
+  border-radius: 0;
 }
 
 .modal-input:focus {

@@ -179,13 +179,13 @@
         <div class="user-addresses-div flex-row box-shadow">
           <article class="address user-item flex-column" data-id="123">
             <div class="address-holder flex-row">
-              <p id="address-holder" f-name="Dennis" l-name="Kinyua">
+              <p class="address-holder-names" f-name="Dennis" l-name="Kinyua">
                 Dennis Kinyua
               </p>
               <i class="fa-solid fa-star default dashboard-content-icon"></i>
             </div>
-            <p id="address-phone-number">+254701123345</p>
-            <p id="address-details">Jay's Apartment, Block B</p>
+            <p class="address-phone-number">+254701123345</p>
+            <p class="address-details">Jay's Apartment, Block B</p>
             <div class="delete-edit flex-row">
               <i
                 class="fa-solid fa-trash-can dashboard-content-icon delete-address"
@@ -197,13 +197,13 @@
           </article>
           <article class="address user-item flex-column" data-id="456">
             <div class="address-holder flex-row">
-              <p id="address-holder" f-name="Emmanuel" l-name="Chalo">
+              <p class="address-holder-names" f-name="Emmanuel" l-name="Chalo">
                 Emmanuel Chalo
               </p>
               <i class="fa-regular fa-star dashboard-content-icon"></i>
             </div>
-            <p id="address-phone-number">+254702345789</p>
-            <p id="address-details">KICC Building, Nairobi CBD</p>
+            <p class="address-phone-number">+254702345789</p>
+            <p class="address-details">KICC Building, Nairobi CBD</p>
             <div class="delete-edit flex-row">
               <i
                 class="fa-solid fa-trash-can dashboard-content-icon delete-address"
@@ -224,18 +224,22 @@
       <section class="user-card-details">
         <h3 class="dashboard-section-header">Card Details</h3>
         <div class="card-details-div flex-row box-shadow">
-          <article class="card user-item flex-column">
+          <article class="card user-item flex-column" data-id="83939">
             <div class="card-holder flex-row">
-              <p>Duncan Ngugi</p>
+              <p class="card-holder-names">Duncan Ngugi</p>
               <i class="fa-solid fa-star dashboard-content-icon default"></i>
             </div>
-            <p>XXXX-XXXX-XXXX-1234</p>
-            <p>Expires on: 12/23</p>
+            <p class="card-number" data-name="1234-4567-8901-2345">
+              XXXX-XXXX-XXXX-2345
+            </p>
+            <p class="expiry-date" expiry-date="12/23">Expires on: 12/23</p>
             <div class="delete-edit flex-row">
               <i
                 class="fa-solid fa-trash-can dashboard-content-icon delete-card"
               ></i>
-              <i class="fa-solid fa-pen dashboard-content-icon edit"></i>
+              <i
+                class="fa-solid fa-pen dashboard-content-icon edit-card edit"
+              ></i>
             </div>
           </article>
           <article class="new-card new-user-item flex-column">
