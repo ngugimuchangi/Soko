@@ -669,4 +669,21 @@ div.price-and-name {
   padding-left: 15px;
   margin-bottom: 0;
 }
+/* Card Modal */
+.expiry-date-and-cvv {
+  display: grid;
+  grid-template-columns: 120px 50px;
+  padding-left: 15px;
+  justify-content: start;
+  align-items: start;
+  /* column-gap: 190px; */
+}
+.expiry-date-and-cvv #expiry-date {
+  width: 55px;
+  margin-left: 0;
+}
+.expiry-date-and-cvv #cvv {
+  width: 30px;
+  margin-left: 0;
+}
 /* END OF MODALS */

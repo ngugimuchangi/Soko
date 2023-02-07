@@ -396,6 +396,8 @@ $(document).ready(function () {
         id="card-number"
         class="modal-input"
         value= "${cardNumber}"
+        minlength="19"
+        maxlength="19"
         required
         oninvalid="this.setCustomValidity('Enter the card number')"
       />
@@ -409,30 +411,32 @@ $(document).ready(function () {
         required
         oninvalid="this.setCustomValidity('Enter card holder's names')"
       />
+      <div class="expiry-date-and-cvv">
       <label for="expiry-date" class="modal-label">Expiry date</label>
+      <label for="cvv" class="modal-label">CVV</label>
       <input
         type="text"
         name="expiry-date"
         id="expiry-date"
         class="modal-input"
         value="${expiryDate}"
+        minlength="5"
         max-length="5"
-        min-length="5"
         placeholder="MM/YY"
         required
         oninvalid="this.setCustomValidity('Enter cards expiry date')"
       />
-      <label for="cvv" class="modal-label">CVV</label>
       <input
         type="text"
         name="cvv"
         id="cvv"
-        max-length="3"
-        min-length="3"
+        size="3"
+        minlength="3"
         class="modal-input"
         required
         oninvalid="this.setCustomValidity('Enter correct card verification value')"
       />
+      </div>
       <div class="set-default">
         <input
         type="checkbox"
@@ -482,6 +486,8 @@ $(document).ready(function () {
         name="card-number"
         id="card-number"
         class="modal-input"
+        maxlength="19"
+        minlength="19"
         required
         oninvalid="this.setCustomValidity('Enter the card number')"
       />
@@ -494,29 +500,31 @@ $(document).ready(function () {
         required
         oninvalid="this.setCustomValidity('Enter card holder's names')"
       />
+      <div class="expiry-date-and-cvv">
       <label for="expiry-date" class="modal-label">Expiry date</label>
+      <label for="cvv" class="modal-label">CVV</label>
       <input
         type="text"
         name="expiry-date"
         id="expiry-date"
         class="modal-input"
-        max-length="5"
-        min-length="5"
+        maxlength="5"
+        minlength="5"
         placeholder="MM/YY"
         required
         oninvalid="this.setCustomValidity('Enter cards expiry date')"
       />
-      <label for="cvv" class="modal-label">CVV</label>
       <input
         type="text"
         name="cvv"
         id="cvv"
-        max-length="3"
-        min-length="3"
+        minlength="3"
+        maxlength="3"
         class="modal-input"
         required
         oninvalid="this.setCustomValidity('Enter correct card verification value')"
       />
+      </div>
       <div class="set-default">
         <input
         type="checkbox"
