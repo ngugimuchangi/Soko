@@ -52,17 +52,6 @@ $ git clone https://github.com/ngugimuchangi/Soko.git
 
 The application works uses `MySQL` database and requires several python libraries and plugins. You can install the requirements one by one or run the [`installation.sh`](installation.sh) script for automatic installation
 
-### _*Option A*_
-
-Run installation script with sudo priveleges
-
-```
-$ cd Soko
-$ sudo installation.sh
-```
-
-### _Option B_
-
 Step by step installation of requirements
 Install MySQl
 
